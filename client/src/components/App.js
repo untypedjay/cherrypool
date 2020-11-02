@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Card from 'organisms/Card';
 import SimpleStorageContract from '../contracts/SimpleStorage.json';
 import getWeb3 from '../getWeb3';
 import './App.css';
@@ -48,7 +49,9 @@ function App() {
 
   return (
     <div className="app">
-      <h1>Good to Go!</h1>
+      <Card/>
+      <Card/>
+      <Card/>
     </div>
   );
 }
