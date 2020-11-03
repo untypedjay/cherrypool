@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import Card from 'organisms/Card';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import Home from './layouts/Home';
+import NotFound from './layouts/NotFound';
+import './App.css';
 import SimpleStorageContract from '../contracts/SimpleStorage.json';
 import getWeb3 from '../getWeb3';
-import './App.css';
 
 function App() {
   const [web3, setWeb3] = useState(null);
@@ -48,11 +50,12 @@ function App() {
   }
 
   return (
-    <div className="app">
-      <Card/>
-      <Card/>
-      <Card/>
-    </div>
+    <BrowserRouter>
+      <Switch>
+        <Route exact path="/" component={Home}></Route>
+        <Route component={NotFound}></Route>
+      </Switch>
+    </BrowserRouter>
   );
 }
 

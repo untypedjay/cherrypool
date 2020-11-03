@@ -1,0 +1,9 @@
+:root {
+  --clr-primary: #004643;
+  --rds-card: 20px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}

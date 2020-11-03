@@ -1,0 +1,4 @@
+.home {
+  background-color: var(--clr-primary);
+  border-radius: var(--rds-card);
+}
