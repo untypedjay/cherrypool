@@ -1,13 +1,12 @@
 import React from 'react';
-import Button from '../atoms/Button';
 import './Card.css';
 
-function Card() {
+function Card({ heading, children, button }) {
   return (
     <div className="card">
-      <h3>Card Title</h3>
-      <p>Text text text</p>
-      <Button>Start</Button>
+      <h3>{ heading }</h3>
+      { children }
+      { button }
     </div>
   );
 }

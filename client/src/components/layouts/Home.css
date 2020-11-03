@@ -1,4 +1,8 @@
 .home {
   background-color: var(--clr-primary);
-  border-radius: var(--rds-card);
+  height: 100vh;
+}
+
+.home__cards {
+  display: flex;
 }

@@ -1,3 +1,10 @@
 .button {
-
+  padding: 0.5em;
+  border-radius: var(--rds-button);
+  background-color: var(--clr-accent);
+  border: none;
+  color: var(--clr-secondary);
+  min-width: 100px;
+  width: 100%;
+  font-size: 1.1rem;
 }
