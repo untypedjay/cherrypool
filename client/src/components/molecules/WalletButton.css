@@ -1,0 +1,12 @@
+.wallet-button {
+  border-radius: var(--rds-button);
+  border: none;
+  padding: 2em;
+  display: flex;
+  justify-content: space-between;
+  background-color: var(--clr-secondary);
+}
+
+.wallet-button:hover {
+  box-shadow: 7px 7px 22px #e1e3e0, -7px -7px 22px #ffffff;
+}

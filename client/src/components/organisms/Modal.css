@@ -1,0 +1,23 @@
+.modal {
+  height: 100%;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  position: absolute;
+}
+
+.modal__card {
+  background-color: var(--clr-secondary);
+  width: 40%;
+  left: 30%;
+  top: 30%;
+  position: absolute;
+  padding: 1em;
+  border-radius: var(--rds-card);
+}
+
+.modal__close-button {
+  position: absolute;
+  right: 1em;
+  border: none;
+  background-color: var(--clr-secondary);
+}

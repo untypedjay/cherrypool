@@ -1,0 +1,22 @@
+.wallet-modal__heading {
+  text-align: center;
+  font-size: 1.3rem;
+  font-weight: bold;
+  margin-bottom: 0.5em;
+}
+
+.wallet-modal__subheading {
+  text-align: center;
+  font-size: 1.1rem;
+}
+
+.wallet-modal__buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.wallet-modal__terms {
+  font-size: 0.8rem;
+  text-align: center;
+}

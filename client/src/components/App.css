@@ -2,6 +2,8 @@
   --clr-primary: #011627;
   --clr-secondary: #FDFFFC;
   --clr-accent: #2EC4B6;
+  --clr-accent-hov: #27A599;
+  --clr-gray-light: #CDCDCD;
   --rds-card: 20px;
   --rds-button: 5px;
 }

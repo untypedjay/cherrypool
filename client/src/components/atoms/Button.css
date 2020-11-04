@@ -8,3 +8,8 @@
   width: 100%;
   font-size: 1.1rem;
 }
+
+.button:hover {
+  background-color: var(--clr-accent-hov);
+  transition: 0.3s;
+}
