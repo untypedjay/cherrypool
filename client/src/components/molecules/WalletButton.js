@@ -5,7 +5,7 @@ import './WalletButton.css';
 function WalletButton({ children }) {
   return (
     <button className="wallet-button">
-      {/* logo*/}
+      <img src="../../logo.svg" alt="Logo"/>
       { children }
       <FaArrowRight/>
     </button>
