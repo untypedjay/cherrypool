@@ -1,0 +1,8 @@
+.landing-page {
+  background-color: var(--clr-primary);
+  height: 100vh;
+}
+
+.landing-page__cards {
+  display: flex;
+}
