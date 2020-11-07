@@ -2,10 +2,10 @@ import React from 'react';
 import { FaArrowRight } from 'react-icons/fa';
 import './WalletButton.css';
 
-function WalletButton({ children }) {
+function WalletButton({ imgSrc, onClick, children }) {
   return (
-    <button className="wallet-button">
-      <img src="../../logo.svg" alt="Logo"/>
+    <button className="wallet-button" onClick={onClick}>
+      <img src={imgSrc} alt="Wallet Logo"/>
       { children }
       <FaArrowRight/>
     </button>
