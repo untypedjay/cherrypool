@@ -10,7 +10,7 @@ function LandingPage() {
 
   return (
     <div className="landing-page">
-      { walletModal && <WalletModal closeModal={() => setWalletModal(false)}/> }
+      { walletModal && <WalletModal close={() => setWalletModal(false)}/> }
       <div className="landing-page__cards">
         <Card heading="Borrow Crypto" button={<Button onClick={() => setWalletModal(true)}>Borrow</Button>}>
           <p>Borrow cryptocurrencies and ERC20 tokens without the bureaucracy of a centralized agency.</p>

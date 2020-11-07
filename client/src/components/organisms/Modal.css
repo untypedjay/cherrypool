@@ -21,3 +21,7 @@
   border: none;
   background-color: var(--clr-secondary);
 }
+
+.modal__close-button:hover {
+  cursor: pointer;
+}

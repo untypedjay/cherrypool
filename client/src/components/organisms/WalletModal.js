@@ -4,9 +4,9 @@ import Modal from './Modal';
 import './WalletModal.css';
 import WalletButton from "../molecules/WalletButton";
 
-function WalletModal() {
+function WalletModal({ close }) {
   return (
-    <Modal>
+    <Modal close={close}>
       {/* Logo */}
       <h4 className="wallet-modal__heading">Connect Wallet</h4>
       <p className="wallet-modal__subheading">To start using --appname--</p>
