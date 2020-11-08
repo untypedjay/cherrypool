@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import LandingPage from './layouts/LandingPage';
+import Home from './layouts/Home';
 import NotFound from './layouts/NotFound';
 import './App.css';
 import SimpleStorageContract from '../contracts/SimpleStorage.json';
@@ -52,7 +52,7 @@ function App() {
   return (
     <BrowserRouter>
       <Switch>
-        <Route exact path="/" component={LandingPage}></Route>
+        <Route exact path="/" component={Home}></Route>
         <Route component={NotFound}></Route>
       </Switch>
     </BrowserRouter>
