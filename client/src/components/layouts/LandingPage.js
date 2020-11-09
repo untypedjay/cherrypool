@@ -8,6 +8,7 @@ function LandingPage() {
   const [walletModal, setWalletModal] = useState(false);
 
 
+
   return (
     <div className="landing-page">
       { walletModal && <WalletModal close={() => setWalletModal(false)}/> }
