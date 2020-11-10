@@ -1,6 +1,6 @@
 import React from 'react';
 import { FaTimes } from 'react-icons/fa';
-import './Modal.css';
+import '../../styles/Modal.css';
 
 function Modal({ close, children }) {
   return (

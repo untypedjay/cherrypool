@@ -1,6 +1,6 @@
 import React from 'react';
 import { FaArrowRight } from 'react-icons/fa';
-import './WalletButton.css';
+import '../../styles/WalletButton.css';
 
 function WalletButton({ imgSrc, onClick, children }) {
   return (

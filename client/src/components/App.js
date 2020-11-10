@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Home from './layouts/Home';
 import NotFound from './layouts/NotFound';
-import './App.css';
+import '../styles/App.css';
 import SimpleStorageContract from '../contracts/SimpleStorage.json';
 import getWeb3 from '../getWeb3';
 

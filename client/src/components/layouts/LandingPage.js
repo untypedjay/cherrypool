@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import WalletModal from '../organisms/WalletModal';
 import Button from '../atoms/Button';
 import Card from '../organisms/Card';
-import './LandingPage.css';
+import '../../styles/LandingPage.css';
 
 function LandingPage() {
   const [walletModal, setWalletModal] = useState(false);

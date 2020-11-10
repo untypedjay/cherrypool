@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Navbar from '../organisms/Navbar';
-import './Home.css';
+import '../../styles/Home.css';
 import LandingPage from "./LandingPage";
 
 function Home() {

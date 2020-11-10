@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import Web3 from 'web3';
 import Modal from './Modal';
 import WalletButton from '../molecules/WalletButton';
-import './WalletModal.css';
+import '../../styles/WalletModal.css';
 import coinbaseLogo from '../../images/icn-coinbase-wallet.svg';
 import ledgerLogo from '../../images/icn-ledger.svg';
 import metamaskLogo from '../../images/icn-metamask.svg';
