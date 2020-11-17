@@ -1,6 +1,6 @@
 .card {
   border-radius: var(--rds-card);
-  color: var(--clr-primary);
-  background-color: var(--clr-secondary);
+  color: var(--clr-secondary);
+  background-color: white;
   padding: 1em;
 }

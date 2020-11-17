@@ -1,15 +1,23 @@
 .button {
-  padding: 0.5em;
+  padding: 0.6em 1.2em;
   border-radius: var(--rds-button);
-  background-color: var(--clr-accent);
   border: none;
-  color: var(--clr-secondary);
   min-width: 100px;
   width: 100%;
+  font-weight: bold;
   font-size: 1.1rem;
 }
 
 .button:hover {
+  transition: 0.2s ease;
+  cursor: pointer;
+}
+
+.button--primary {
+  background-color: var(--clr-accent);
+  color: white;
+}
+
+.button--primary:hover {
   background-color: var(--clr-accent-hov);
-  transition: 0.3s;
 }
