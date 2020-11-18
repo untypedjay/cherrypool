@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { useHistory } from 'react-router-dom';
 import Navbar from '../organisms/Navbar';
 import WalletModal from '../organisms/WalletModal';
@@ -9,6 +9,7 @@ import '../../styles/LandingPage.css';
 
 function LandingPage() {
   const [walletModal, setWalletModal] = useState(false);
+  const serviceRef = useRef(null);
   const history = useHistory();
 
   return (
@@ -23,18 +24,18 @@ function LandingPage() {
           <p className="landing-page__paragraph">Stake, lend or exchange tokens on the Ethereum network.</p>
         </div>
         <div className="landing-page__cta">
-          <PrimaryButton onClick={() => history.push('/#services')}>Get Started</PrimaryButton>
+          <PrimaryButton onClick={() => serviceRef.current.scrollIntoView()}>Get Started</PrimaryButton>
         </div>
       </div>
 
-      <div className="landing-page__services" id="services">
-        <Card heading="Borrow Crypto" button={<PrimaryButton onClick={() => setWalletModal(true)}>Borrow</PrimaryButton>}>
+      <div className="landing-page__services" ref={serviceRef}>
+        <Card heading="Borrow Crypto" button={<PrimaryButton onClick={() => history.push('/borrow')}>Borrow</PrimaryButton>}>
           <p className="landing-page__paragraph--card">Borrow cryptocurrencies and ERC20 tokens without the bureaucracy of a centralized agency.</p>
         </Card>
-        <Card heading="Exchange Crypto" button={<PrimaryButton onClick={() => setWalletModal(true)}>Exchange</PrimaryButton>}>
+        <Card heading="Exchange Crypto" button={<PrimaryButton onClick={() => history.push('/exchange')}>Exchange</PrimaryButton>}>
           <p className="landing-page__paragraph--card">Exchange your cryptocurrencies and ERC20 tokens in a decentralized way.</p>
         </Card>
-        <Card heading="Stake Crypto" button={<PrimaryButton onClick={() => setWalletModal(true)}>Stake</PrimaryButton>}>
+        <Card heading="Stake Crypto" button={<PrimaryButton onClick={() => history.push('/stake')}>Stake</PrimaryButton>}>
           <p className="landing-page__paragraph--card">Do more with your crypto assets. Invest them and earn passive income.</p>
         </Card>
       </div>
