@@ -1,3 +1,25 @@
 .navbar {
   display: flex;
+  justify-content: space-between;
+  padding: 1em;
+  background-color: var(--clr-primary);
+}
+
+.navbar__logo {
+  height: 45px;
+  object-fit: contain;
+}
+
+.navbar__menu {
+  width: 20em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+  list-style-type: none;
+  font-size: 1.1rem;
+}
+
+.navbar__icon {
+  fill: white;
 }

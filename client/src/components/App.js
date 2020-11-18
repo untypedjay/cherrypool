@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import Home from './layouts/Home';
-import NotFound from './layouts/NotFound';
+import Home from './pages/Home';
+import TermsOfUse from './pages/TermsOfUse';
+import NotFound from './pages/NotFound';
 import '../styles/App.css';
 import SimpleStorageContract from '../contracts/SimpleStorage.json';
 import getWeb3 from '../getWeb3';
@@ -53,6 +54,7 @@ function App() {
     <BrowserRouter>
       <Switch>
         <Route exact path="/" component={Home}></Route>
+        <Route exact path="/terms-of-use" component={TermsOfUse}></Route>
         <Route component={NotFound}></Route>
       </Switch>
     </BrowserRouter>

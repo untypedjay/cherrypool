@@ -1,0 +1,30 @@
+.footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--clr-primary);
+  padding: 3em 0;
+}
+
+.footer__link {
+  text-decoration: none;
+  color: var(--clr-accent);
+  font-size: 1.2rem;
+  margin-bottom: 0.5em;
+}
+
+.footer__link:hover {
+  text-decoration: underline;
+  transition: 0.3s ease;
+  color: var(--clr-accent-hov);
+}
+
+.footer__paragraph {
+  color: white;
+  font-size: 1.1rem;
+}
+
+.footer__icon {
+  fill: var(--clr-accent);
+}

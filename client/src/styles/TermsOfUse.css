@@ -1,0 +1,25 @@
+.terms-of-use__header {
+  background-color: var(--clr-primary);
+}
+
+.terms-of-use__heading--main {
+  color: var(--clr-accent);
+  font-size: 3rem;
+  padding: 1em;
+  text-align: center;
+}
+
+.terms-of-use__main {
+  width: 70%;
+  margin: auto;
+}
+
+.terms-of-use__heading--text {
+  font-size: 1.8rem;
+  margin-top: 2em;
+}
+
+.terms-of-use__paragraph {
+  margin: 1.5em 0;
+  font-size: 1.3rem;
+}
