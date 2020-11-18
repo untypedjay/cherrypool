@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import Navbar from '../organisms/Navbar';
 import WalletModal from '../organisms/WalletModal';
 import PrimaryButton from '../atoms/PrimaryButton';
@@ -8,6 +9,7 @@ import '../../styles/LandingPage.css';
 
 function LandingPage() {
   const [walletModal, setWalletModal] = useState(false);
+  const history = useHistory();
 
   return (
     <div className="landing-page">
@@ -21,19 +23,19 @@ function LandingPage() {
           <p className="landing-page__paragraph">Stake, lend or exchange tokens on the Ethereum network.</p>
         </div>
         <div className="landing-page__cta">
-          <PrimaryButton onClick={() => setWalletModal(true)}>Get Started</PrimaryButton>
+          <PrimaryButton onClick={() => history.push('/#services')}>Get Started</PrimaryButton>
         </div>
       </div>
 
-      <div className="landing-page__services">
+      <div className="landing-page__services" id="services">
         <Card heading="Borrow Crypto" button={<PrimaryButton onClick={() => setWalletModal(true)}>Borrow</PrimaryButton>}>
-          <p>Borrow cryptocurrencies and ERC20 tokens without the bureaucracy of a centralized agency.</p>
+          <p className="landing-page__paragraph--card">Borrow cryptocurrencies and ERC20 tokens without the bureaucracy of a centralized agency.</p>
         </Card>
         <Card heading="Exchange Crypto" button={<PrimaryButton onClick={() => setWalletModal(true)}>Exchange</PrimaryButton>}>
-          <p>Exchange your cryptocurrencies and ERC20 tokens in a decentralized way.</p>
+          <p className="landing-page__paragraph--card">Exchange your cryptocurrencies and ERC20 tokens in a decentralized way.</p>
         </Card>
         <Card heading="Stake Crypto" button={<PrimaryButton onClick={() => setWalletModal(true)}>Stake</PrimaryButton>}>
-          <p>Do more with your crypto assets. Invest them and earn passive income.</p>
+          <p className="landing-page__paragraph--card">Do more with your crypto assets. Invest them and earn passive income.</p>
         </Card>
       </div>
 

@@ -1,6 +1,17 @@
 .card {
   border-radius: var(--rds-card);
-  color: white;
-  background-color: var(--clr-secondary);
+  color: var(--clr-primary);
+  background-color: white;
   padding: 1em;
+  max-width: 500px;
+}
+
+.card__heading {
+  font-size: 1.6rem;
+  text-align: center;
+}
+
+.card__button-container {
+  position: relative;
+  bottom: 0;
 }

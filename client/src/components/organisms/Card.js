@@ -4,9 +4,11 @@ import '../../styles/Card.css';
 function Card({ heading, children, button }) {
   return (
     <div className="card">
-      <h3>{ heading }</h3>
+      <h3 className="card__heading">{ heading }</h3>
       { children }
-      { button }
+      <div className="card__button-container">
+        { button }
+      </div>
     </div>
   );
 }
