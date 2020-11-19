@@ -1,18 +1,19 @@
-import React, { useState } from 'react';
-import Navbar from '../organisms/Navbar';
+import React, { useState, useEffect } from 'react';
 import '../../styles/Home.css';
-import LandingPage from "./LandingPage";
+import WalletModal from '../organisms/WalletModal';
+import Menu from '../organisms/Menu';
+import NoWallet from "../molecules/NoWallet";
 
 function Home() {
+  const [walletModal, setWalletModal] = useState(false);
   const [account, setAccount] = useState('');
-  if (!account) {
-    return <LandingPage/>;
-  }
+
   return (
     <div className="home">
-      <Navbar/>
+      { walletModal && <WalletModal close={() => setWalletModal(false)}/> }
+      <Menu/>
       <main className="home__main">
-        <h1>Main Page</h1>
+        { !account && <NoWallet onClick={() => setWalletModal(true)}/> }
       </main>
     </div>
   );

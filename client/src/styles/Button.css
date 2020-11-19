@@ -6,6 +6,7 @@
   width: 100%;
   font-weight: bold;
   font-size: 1.1rem;
+  background-color: transparent;
 }
 
 .button:hover {

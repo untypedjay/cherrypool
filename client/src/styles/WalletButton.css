@@ -4,9 +4,15 @@
   padding: 2em;
   display: flex;
   justify-content: space-between;
-  background-color: var(--clr-secondary);
+  height: 70px;
+  background-color: white;
 }
 
 .wallet-button:hover {
   box-shadow: 7px 7px 22px #e1e3e0, -7px -7px 22px #ffffff;
+}
+
+.wallet-button__logo {
+  width: 3em;
+  object-fit: contain;
 }

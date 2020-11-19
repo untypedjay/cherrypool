@@ -7,6 +7,7 @@ import '../../styles/WalletModal.css';
 import coinbaseLogo from '../../images/icn-coinbase-wallet.svg';
 import ledgerLogo from '../../images/icn-ledger.svg';
 import metamaskLogo from '../../images/icn-metamask.svg';
+import Logo from '../../images/logo-small.png';
 
 function WalletModal({ close }) {
   const connectToCoinbase = () => {
@@ -30,15 +31,17 @@ function WalletModal({ close }) {
 
   return (
     <Modal close={close}>
-      {/* Logo */}
-      <h4 className="wallet-modal__heading">Connect Wallet</h4>
-      <p className="wallet-modal__subheading">To start using --appname--</p>
-      <div className="wallet-modal__buttons">
-        <WalletButton imgSrc={coinbaseLogo} onClick={connectToCoinbase}>Coinbase Wallet</WalletButton>
-        <WalletButton imgSrc={ledgerLogo} onClick={connectToLedger}>Ledger</WalletButton>
-        <WalletButton imgSrc={metamaskLogo} onClick={connectToMetamask}>Metamask</WalletButton>
+      <div className="wallet-modal__header">
+        <span className="wallet-modal__mark"></span>
+        <h4 className="wallet-modal__heading">Connect Wallet</h4>
+        <p className="wallet-modal__subheading">To start using Cherry Pool</p>
       </div>
-      <p className="wallet-modal__terms">By connecting, I accept --appname--'s <Link to="/terms">Terms of Service</Link></p>
+      <div className="wallet-modal__buttons">
+        <WalletButton imgSrc={coinbaseLogo} onClick={connectToCoinbase}><p className="wallet-modal__text">Coinbase Wallet</p></WalletButton>
+        <WalletButton imgSrc={ledgerLogo} onClick={connectToLedger}><p className="wallet-modal__text">Ledger</p></WalletButton>
+        <WalletButton imgSrc={metamaskLogo} onClick={connectToMetamask}><p className="wallet-modal__text">Metamask</p></WalletButton>
+      </div>
+      <p className="wallet-modal__terms">By connecting, I accept Cherry Pool's <Link to="/terms-of-use">Terms of Use</Link></p>
     </Modal>
   );
 }

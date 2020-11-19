@@ -6,10 +6,11 @@
 }
 
 .modal__card {
-  background-color: var(--clr-secondary);
+  background-color: white;
   width: 40%;
+  height: 65%;
   left: 30%;
-  top: 30%;
+  top: 20%;
   position: absolute;
   padding: 1em;
   border-radius: var(--rds-card);
@@ -19,7 +20,8 @@
   position: absolute;
   right: 1em;
   border: none;
-  background-color: var(--clr-secondary);
+  background-color: white;
+  height: 3em;
 }
 
 .modal__close-button:hover {

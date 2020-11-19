@@ -1,20 +1,17 @@
-import React, { useState, useRef } from 'react';
+import React, { useRef } from 'react';
 import { useHistory } from 'react-router-dom';
 import Navbar from '../organisms/Navbar';
-import WalletModal from '../organisms/WalletModal';
 import PrimaryButton from '../atoms/PrimaryButton';
 import Card from '../organisms/Card';
 import Footer from '../organisms/Footer';
 import '../../styles/LandingPage.css';
 
 function LandingPage() {
-  const [walletModal, setWalletModal] = useState(false);
   const serviceRef = useRef(null);
   const history = useHistory();
 
   return (
     <div className="landing-page">
-      { walletModal && <WalletModal close={() => setWalletModal(false)}/> }
       <Navbar/>
       <div className="landing-page__hero">
         <h1 className="landing-page__heading">Banking, but</h1>
