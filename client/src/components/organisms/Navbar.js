@@ -9,9 +9,9 @@ function Navbar() {
     <nav className="navbar">
       <Link to="/"><img className="navbar__logo" src={Logo} alt="Cherry Pool"/></Link>
       <ul className="navbar__menu">
-        <li>Borrow</li>
-        <li>Exchange</li>
-        <li>Stake</li>
+        <li><Link className="navbar__link" to="/borrow">Borrow</Link></li>
+        <li><Link className="navbar__link" to="/exchange">Exchange</Link></li>
+        <li><Link className="navbar__link" to="/stake">Stake</Link></li>
       </ul>
       <a target="_blank" href="https://github.com/johannesdominik/cherrypool" rel="noopener noreferrer">
         <FaGithub className="navbar__icon" size="45px"/>

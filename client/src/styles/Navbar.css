@@ -20,6 +20,16 @@
   font-size: 1.1rem;
 }
 
+.navbar__link {
+  text-decoration: none;
+  color: white;
+}
+
+.navbar__link:hover {
+  color: var(--clr-accent);
+  text-decoration: underline;
+}
+
 .navbar__icon {
   fill: white;
 }
