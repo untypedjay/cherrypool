@@ -35,6 +35,17 @@
   cursor: pointer;
 }
 
+.menu__item--selected,
+.menu__item--selected:hover {
+  border-left: 5px solid var(--clr-accent);
+  color: var(--clr-grey);
+  background-color: var(--clr-primary);
+}
+
+.menu__item:focus {
+  outline: none;
+}
+
 .menu__icon {
   height: 50px;
 }
