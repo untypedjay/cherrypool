@@ -7,7 +7,6 @@ import '../../styles/WalletModal.css';
 import coinbaseLogo from '../../images/icn-coinbase-wallet.svg';
 import ledgerLogo from '../../images/icn-ledger.svg';
 import metamaskLogo from '../../images/icn-metamask.svg';
-import Logo from '../../images/logo-small.png';
 
 function WalletModal({ close }) {
   const connectToCoinbase = () => {
