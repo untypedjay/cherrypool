@@ -1,21 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useAccount, useAccountUpdate } from '../../context/AccountContext';
+import { useWeb3, useWeb3Update } from '../../context/Web3Context';
 import '../../styles/Home.css';
-import AccountDetails from '../atoms/AccountDetails';
+import Main from '../organisms/Main';
 import WalletModal from '../organisms/WalletModal';
 import Menu from '../organisms/Menu';
 import NoWallet from '../molecules/NoWallet';
 import getWeb3 from '../../getWeb3';
 import SimpleStorageContract from '../../contracts/SimpleStorage.json';
-import metamaskLogo from '../../images/icn-metamask.svg';
+
 
 function Home() {
   const [walletModal, setWalletModal] = useState(false);
   const location = useLocation();
   const account = useAccount();
   const setAccount = useAccountUpdate();
-  const [web3, setWeb3] = useState(null);
+  const web3 = useWeb3();
+  const setWeb3 = useWeb3Update();
+  const [etherBalance, setEtherBalance] = useState('0');
   const [contract, setContract] = useState(null);
 
   useEffect(() => {
@@ -60,7 +63,7 @@ function Home() {
       <Menu selected={location.pathname}/>
       <main className="home__main">
         { account
-          ? <AccountDetails onClick={() => setWalletModal(true)} providerImg={metamaskLogo} address={account}/>
+          ? <Main onAccountAddressClick={() => setWalletModal(true)}/>
           : <NoWallet onClick={() => setWalletModal(true)}/>
         }
       </main>
