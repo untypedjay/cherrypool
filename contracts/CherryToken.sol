@@ -2,69 +2,81 @@ pragma solidity 0.7.2;
 using SafeMath for uint256;
 
 library SafeMath {
-  function sub(uint256 a, uint256 b) internal pure returns (uint256) {
-    assert(b <= a);
-  return a - b;
-}
+  function sub(uint256 _a, uint256 _b) internal pure returns (uint256) {
+    assert(_b <= _a);
+    return _a - _b;
+  }
 
-function add(uint256 a, uint256 b) internal pure returns (uint256) {
-    uint256 c = a + b;
-    assert(c >= a);
+  function add(uint256 _a, uint256 _b) internal pure returns (uint256) {
+    uint256 c = _a + _b;
+    assert(c >= _a);
     return c;
   }
 }
 
 contract CherryToken {
-  string public constant name = "Cherry Token";
-  string public constant symbol = "CTN";
-  uint8 public constant decimals;
+  string private constant _name = "Cherry Token";
+  string private constant _symbol = "CTN";
+  uint8 private constant _decimals = 18;
+  uint256 private _totalSupply;
+  mapping(address => uint256) private balances;
+  mapping(address => mapping(address => uint256)) private allowed;
 
-  event Approval(address indexed owner, address indexed spender, uint value);
-  event Transfer(address indexed from, address indexed to, uint value);
+  event Transfer(address indexed _from, address indexed _to, uint256 _value);
+  event Approval(address indexed _owner, address indexed _spender, uint256 _value);
 
-  mapping(address => uint256) balances;
-  mapping(address => mapping(address => uint256)) allowed;
-
-  uint _totalSupply;
-
-  constructor(uint256 total) public {
-    _totalSupply = total;
+  constructor(uint256 _total) public {
+    _totalSupply = _total;
     balances[msg.sender] = _totalSupply;
+  }
+
+  function name() public view returns (string) {
+    return _name;
+  }
+
+  function symbol() public view returns (string) {
+    return _symbol;
+  }
+
+  function decimals() public view returns (uint8) {
+    return _decimals;
   }
 
   function totalSupply() public view returns (uint256) {
     return _totalSupply;
   }
 
-  function balanceOf(address tokenOwner) public view returns (uint) {
-    return balances[tokenOwner];
+  function balanceOf(address _owner) public view returns (uint256 balance) {
+    return balances[_owner];
   }
 
-  function transfer(address receiver, uint numTokens) public returns (bool success) {
-    require(numTokens <= balances[msg.sender]);
-    balances[msg.sender] = balances[msg.sender].sub(numTokens);
-    balances[receiver] = balances[receiver].add(numTokens);
-    emit Transfer(msg.sender, receiver, numTokens);
+  function transfer(address _to, uint256 _value) public returns (bool success) {
+    require(_value <= balances[msg.sender]);
+    balances[msg.sender] = balances[msg.sender].sub(_value);
+    balances[_to] = balances[_to].add(_value);
+    emit Transfer(msg.sender, _to, _value);
     return true;
   }
 
-  function approve(address delegate, uint value) public returns (bool) {
-    allowed[msg.sender][delegate] = value;
-    emit Approval(msg.sender, delegate, value);
+  function transferFrom(address _from, address _to, uint256 _value) public returns (bool success) {
+    require(_value <= balances[_from]);
+    require(_value <= allowed[_from][msg.sender]);
+    balances[_from] = balances[_from].sub(_value);
+    allowed[_from][msg.sender] = allowed[_from][msg.sender].sub(_value);
+    balances[_to] = balances[_to].add(_value);
+    emit Transfer(_from, _to, _value);
     return true;
   }
 
-  function allowance(address owner, address delegate) public view returns (uint) {
-    return allowed[owner][delegate];
-  }
-
-  function transferFrom(address from, address to, uint value) public returns (bool success) {
-    require(value <= balances[from]);
-    require(value <= allowed[owner][msg.sender]);
-    balances[from] = balances[from].sub(value);
-    allowed[from][msg.sender] = allowed[from][msg.sender].sub(value);
-    balances[to] = balances[to].add(value);
-    Transfer(from, to, value);
+  function approve(address _spender, uint256 _value) public returns (bool success) {
+    allowed[msg.sender][_spender] = _value;
+    emit Approval(msg.sender, _spender, _value);
     return true;
   }
+
+  function allowance(address _owner, address _spender) public view returns (uint256 remaining) {
+    return allowed[_owner][_spender];
+  }
+
+
 }
