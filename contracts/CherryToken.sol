@@ -1,5 +1,4 @@
 pragma solidity 0.7.2;
-using SafeMath for uint256;
 
 library SafeMath {
   function sub(uint256 _a, uint256 _b) internal pure returns (uint256) {
@@ -15,6 +14,8 @@ library SafeMath {
 }
 
 contract CherryToken {
+  using SafeMath for uint256;
+
   string private constant _name = "Cherry Token";
   string private constant _symbol = "CTN";
   uint8 private constant _decimals = 18;
@@ -77,6 +78,4 @@ contract CherryToken {
   function allowance(address _owner, address _spender) public view returns (uint256 remaining) {
     return allowed[_owner][_spender];
   }
-
-
 }
