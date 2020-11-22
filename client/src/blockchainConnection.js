@@ -10,11 +10,18 @@ const getWeb3 = async () => {
     }
     return web3;
   } else if (window.web3) {
-    const web3 = window.web3;
-    return web3;
+    return window.web3;
   } else {
     alert('Non-Ethereum browser detected. You should consider trying MetaMask!');
   }
 };
+
+export const getExistingWeb3 = () => {
+  if (window.web3) {
+    return window.web3;
+  }
+
+  return null;
+}
 
 export default getWeb3;
