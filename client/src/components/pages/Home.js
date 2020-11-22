@@ -1,19 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import { useAccount, useAccountUpdate } from '../../context/AccountContext';
 import '../../styles/Home.css';
+import AccountDetails from '../atoms/AccountDetails';
 import WalletModal from '../organisms/WalletModal';
 import Menu from '../organisms/Menu';
 import NoWallet from '../molecules/NoWallet';
-import getWeb3 from "../../getWeb3";
-import SimpleStorageContract from "../../contracts/SimpleStorage.json";
+import getWeb3 from '../../getWeb3';
+import SimpleStorageContract from '../../contracts/SimpleStorage.json';
+import metamaskLogo from '../../images/icn-metamask.svg';
 
 function Home() {
   const [walletModal, setWalletModal] = useState(false);
-  const [account, setAccount] = useState('');
   const location = useLocation();
-
+  const account = useAccount();
+  const setAccount = useAccountUpdate();
   const [web3, setWeb3] = useState(null);
-  const [accounts, setAccounts] = useState(null);
   const [contract, setContract] = useState(null);
 
   useEffect(() => {
@@ -24,6 +26,7 @@ function Home() {
     try {
       const web3 = await getWeb3();
       const accounts = await web3.eth.getAccounts();
+      setAccount(accounts[0]);
       const networkId = await web3.eth.net.getId();
 
       //--------------------
@@ -36,7 +39,7 @@ function Home() {
       // Set web3, accounts, and contract to the state, and then proceed with an
       // example of interacting with the contract's methods.
       setWeb3(web3);
-      setAccounts(accounts);
+
       setContract(instance);
     } catch (error) {
       // Catch any errors for any of the above operations.
@@ -56,7 +59,10 @@ function Home() {
       { walletModal && <WalletModal close={() => setWalletModal(false)}/> }
       <Menu selected={location.pathname}/>
       <main className="home__main">
-        { !account && <NoWallet onClick={() => setWalletModal(true)}/> }
+        { account
+          ? <AccountDetails onClick={() => setWalletModal(true)} providerImg={metamaskLogo} address={account}/>
+          : <NoWallet onClick={() => setWalletModal(true)}/>
+        }
       </main>
     </div>
   );

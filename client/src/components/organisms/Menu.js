@@ -9,7 +9,7 @@ function Menu({ selected }) {
   const history = useHistory();
 
   const calculateStyling = section => {
-    if (section == selected) {
+    if (section === selected) {
       return 'menu__item menu__item--selected';
     }
     return 'menu__item';

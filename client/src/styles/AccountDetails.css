@@ -1,0 +1,14 @@
+.account-details {
+  display: flex;
+  align-items: center;
+  padding: 1em;
+}
+
+.account-details__img {
+  width: 1.5em;
+  padding-right: 1em;
+}
+
+.account-details__text {
+  font-size: 1.1rem;
+}

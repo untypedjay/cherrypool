@@ -8,12 +8,12 @@ export function useAccount() {
   return useContext(AccountContext);
 }
 
-export function useUserUpdate() {
+export function useAccountUpdate() {
   return useContext(AccountUpdateContext);
 }
 
 export function AccountProvider({ children }) {
-  const [account, setAccount] = useState(null);
+  const [account, setAccount] = useState('');
 
   const updateAccount = newAccount => {
     setAccount(newAccount);

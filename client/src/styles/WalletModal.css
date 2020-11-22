@@ -44,3 +44,7 @@
   font-size: 0.8rem;
   text-align: center;
 }
+
+.wallet-modal__text {
+  font-size: 1.4em;
+}
