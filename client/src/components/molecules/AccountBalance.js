@@ -4,12 +4,10 @@ import { useWeb3 } from '../../context/Web3Context';
 import { useAccount } from '../../context/AccountContext';
 import '../../styles/AccountBalance.css';
 
-
 function AccountBalance() {
   const web3 = useWeb3();
   const account = useAccount();
   const [etherBalance, setEtherBalance] = useState(0);
-  console.log(web3)
 
   useEffect(() => {
     web3.eth.getBalance(account, (err, balance) => {

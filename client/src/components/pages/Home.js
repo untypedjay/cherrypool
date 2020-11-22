@@ -1,35 +1,33 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import { useAccount, useAccountUpdate } from '../../context/AccountContext';
-import { useWeb3, useWeb3Update } from '../../context/Web3Context';
+import { useWeb3Update } from '../../context/Web3Context';
+import {useAccount, useAccountUpdate} from '../../context/AccountContext';
 import '../../styles/Home.css';
 import Main from '../organisms/Main';
 import WalletModal from '../organisms/WalletModal';
 import Menu from '../organisms/Menu';
 import NoWallet from '../molecules/NoWallet';
-import getWeb3 from '../../getWeb3';
+import { connectWeb3 } from '../../blockchainConnection';
 import SimpleStorageContract from '../../contracts/SimpleStorage.json';
-
 
 function Home() {
   const [walletModal, setWalletModal] = useState(false);
   const location = useLocation();
   const account = useAccount();
-  const setAccount = useAccountUpdate();
-  const web3 = useWeb3();
   const setWeb3 = useWeb3Update();
-  const [etherBalance, setEtherBalance] = useState('0');
-  const [contract, setContract] = useState(null);
+  const setAccount = useAccountUpdate();
 
   useEffect(() => {
-    getBlockchaindata();
+    getBlockchainData();
   }, []);
 
-  const getBlockchaindata = async () => {
+  const getBlockchainData = async () => {
     try {
-      const web3 = await getWeb3();
+      const web3 = await connectWeb3();
       const accounts = await web3.eth.getAccounts();
       setAccount(accounts[0]);
+      setWeb3(web3);
+
       const networkId = await web3.eth.net.getId();
 
       //--------------------
@@ -39,11 +37,7 @@ function Home() {
         deployedNetwork && deployedNetwork.address,
       );
 
-      // Set web3, accounts, and contract to the state, and then proceed with an
-      // example of interacting with the contract's methods.
-      setWeb3(web3);
-
-      setContract(instance);
+      //setContract(instance);
     } catch (error) {
       // Catch any errors for any of the above operations.
       alert(
@@ -53,13 +47,9 @@ function Home() {
     }
   };
 
-  if (!web3) {
-    return <div>Loading Web3, accounts, and contract...</div>;
-  }
-
   return (
     <div className="home">
-      { walletModal && <WalletModal close={() => setWalletModal(false)}/> }
+      { walletModal && <WalletModal closeModal={() => setWalletModal(false)}/> }
       <Menu selected={location.pathname}/>
       <main className="home__main">
         { account

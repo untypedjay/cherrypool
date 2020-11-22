@@ -1,6 +1,6 @@
 import Web3 from 'web3';
 
-const getWeb3 = async () => {
+export async function connectWeb3() {
   if (window.ethereum) {
     const web3 = new Web3(window.ethereum);
     try {
@@ -16,12 +16,11 @@ const getWeb3 = async () => {
   }
 };
 
-export const getExistingWeb3 = () => {
+export function tryReconnectWeb3() {
   if (window.web3) {
     return window.web3;
   }
 
   return null;
-}
+};
 
-export default getWeb3;

@@ -1,14 +1,21 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Web3 from 'web3';
+import PropTypes from 'prop-types';
 import Modal from './Modal';
 import WalletButton from '../molecules/WalletButton';
-import '../../styles/WalletModal.css';
+import { connectWeb3 } from '../../blockchainConnection';
+import SimpleStorageContract from '../../contracts/SimpleStorage.json';
+import { useAccountUpdate } from '../../context/AccountContext';
+import { useWeb3Update } from '../../context/Web3Context';
 import coinbaseLogo from '../../images/icn-coinbase-wallet.svg';
 import ledgerLogo from '../../images/icn-ledger.svg';
 import metamaskLogo from '../../images/icn-metamask.svg';
+import '../../styles/WalletModal.css';
 
-function WalletModal({ close }) {
+function WalletModal({ closeModal }) {
+  const setAccount = useAccountUpdate();
+  const setWeb3 = useWeb3Update();
+
   const connectToCoinbase = () => {
     alert('Not yet implemented!');
   };
@@ -17,19 +24,13 @@ function WalletModal({ close }) {
     alert('Not yet implemented!');
   };
 
-  const connectToMetamask = async () => {
-    if (window.ethereum) {
-      window.web3 = new Web3(window.etherem);
-      await window.ethereum.enable();
-    } else if (window.web3) {
-      window.web3 = new Web3(window.web3.currentProvider);
-    } else {
-      alert('Metamask browser extension is not installed.')
-    }
+  const connectToMetamask = () => {
+
   };
 
+
   return (
-    <Modal close={close}>
+    <Modal close={closeModal}>
       <div className="wallet-modal__header">
         <span className="wallet-modal__mark"></span>
         <h4 className="wallet-modal__heading">Connect Wallet</h4>
@@ -44,5 +45,9 @@ function WalletModal({ close }) {
     </Modal>
   );
 }
+
+WalletModal.propTypes = {
+  closeModal: PropTypes.func
+};
 
 export default WalletModal;
