@@ -1,0 +1,126 @@
+{
+  "contractName": "CherryBorrow",
+  "abi": [],
+  "metadata": "{\"compiler\":{\"version\":\"0.5.16+commit.9c3226ce\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/Users/johannes/Documents/Projects/web-projects/cherrypool/contracts/CherryBorrow.sol\":\"CherryBorrow\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/johannes/Documents/Projects/web-projects/cherrypool/contracts/CherryBorrow.sol\":{\"keccak256\":\"0xddd46c6bc581f3e7d1ade52b1d7aa4bc0972940eb8e3339f798a882b710beecb\",\"urls\":[\"bzz-raw://f3bbe2d03a15758454beb57cf1127e8d69271e123d6bb26bc667d75e034e4b20\",\"dweb:/ipfs/QmPd6gEKCcdvQ82DBbxg3agNojZjcR5sWoFGV58XwNMKz9\"]},\"/Users/johannes/Documents/Projects/web-projects/cherrypool/contracts/CherryToken.sol\":{\"keccak256\":\"0xf50d3dc2c93bbe2e6adf20c3392a99566661725f9888dac8c1c1041da6448dab\",\"urls\":[\"bzz-raw://44fb7e46b3c716c45cadba62d09f728eeb9feec042c06d2b7abd0dc3fcf6015e\",\"dweb:/ipfs/QmRBxkwvZdFyktptJtnHvdXWdBfWYpw8HZYwp9LC76GB8s\"]}},\"version\":1}",
+  "bytecode": "0x6080604052348015600f57600080fd5b50603e80601d6000396000f3fe6080604052600080fdfea265627a7a72315820c6435bc7ca356f8b491b94f40ab943cf5b538fe86f7afed90b38ab5b6b67497364736f6c63430005100032",
+  "deployedBytecode": "0x6080604052600080fdfea265627a7a72315820c6435bc7ca356f8b491b94f40ab943cf5b538fe86f7afed90b38ab5b6b67497364736f6c63430005100032",
+  "sourceMap": "54:25:0:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;54:25:0;;;;;;;",
+  "deployedSourceMap": "54:25:0:-;;;;;",
+  "source": "pragma solidity ^0.5.0;\n\nimport \"./CherryToken.sol\";\n\ncontract CherryBorrow {\n}",
+  "sourcePath": "/Users/johannes/Documents/Projects/web-projects/cherrypool/contracts/CherryBorrow.sol",
+  "ast": {
+    "absolutePath": "/Users/johannes/Documents/Projects/web-projects/cherrypool/contracts/CherryBorrow.sol",
+    "exportedSymbols": {
+      "CherryBorrow": [
+        3
+      ]
+    },
+    "id": 4,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 1,
+        "literals": [
+          "solidity",
+          "^",
+          "0.5",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:23:0"
+      },
+      {
+        "absolutePath": "/Users/johannes/Documents/Projects/web-projects/cherrypool/contracts/CherryToken.sol",
+        "file": "./CherryToken.sol",
+        "id": 2,
+        "nodeType": "ImportDirective",
+        "scope": 4,
+        "sourceUnit": 436,
+        "src": "25:27:0",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 3,
+        "linearizedBaseContracts": [
+          3
+        ],
+        "name": "CherryBorrow",
+        "nodeType": "ContractDefinition",
+        "nodes": [],
+        "scope": 4,
+        "src": "54:25:0"
+      }
+    ],
+    "src": "0:79:0"
+  },
+  "legacyAST": {
+    "absolutePath": "/Users/johannes/Documents/Projects/web-projects/cherrypool/contracts/CherryBorrow.sol",
+    "exportedSymbols": {
+      "CherryBorrow": [
+        3
+      ]
+    },
+    "id": 4,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 1,
+        "literals": [
+          "solidity",
+          "^",
+          "0.5",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:23:0"
+      },
+      {
+        "absolutePath": "/Users/johannes/Documents/Projects/web-projects/cherrypool/contracts/CherryToken.sol",
+        "file": "./CherryToken.sol",
+        "id": 2,
+        "nodeType": "ImportDirective",
+        "scope": 4,
+        "sourceUnit": 436,
+        "src": "25:27:0",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 3,
+        "linearizedBaseContracts": [
+          3
+        ],
+        "name": "CherryBorrow",
+        "nodeType": "ContractDefinition",
+        "nodes": [],
+        "scope": 4,
+        "src": "54:25:0"
+      }
+    ],
+    "src": "0:79:0"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.5.16+commit.9c3226ce.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.2.3",
+  "updatedAt": "2020-11-22T18:23:07.459Z",
+  "devdoc": {
+    "methods": {}
+  },
+  "userdoc": {
+    "methods": {}
+  }
+}

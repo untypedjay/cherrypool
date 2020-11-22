@@ -12,6 +12,10 @@ contract CherryExchange {
     owner = msg.sender;
   }
 
+  function () external payable {
+    ethToCtn();
+  }
+
   function ethToCtn() public payable {
     require(msg.value > 0, "amount cannot be 0");
     require(msg.value <= cherryToken.balanceOf(address(this)), "not enough contract funds");
@@ -19,7 +23,7 @@ contract CherryExchange {
     cherryToken.transferFrom(address(this), msg.sender, msg.value);
   }
 
-  function ctnToEth(uint _amount) {
+  function ctnToEth(uint _amount) public {
     require(_amount > 0, "amount cannot be 0");
     require(_amount <= address(this).balance, "not enough contract funds");
 

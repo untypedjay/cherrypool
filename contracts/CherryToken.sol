@@ -1,4 +1,4 @@
-pragma solidity 0.7.2;
+pragma solidity ^0.5.0;
 
 library SafeMath {
   function sub(uint256 _a, uint256 _b) internal pure returns (uint256) {
@@ -31,15 +31,15 @@ contract CherryToken {
     balances[msg.sender] = _totalSupply;
   }
 
-  function name() public view returns (string) {
+  function name() public pure returns (string memory) {
     return _name;
   }
 
-  function symbol() public view returns (string) {
+  function symbol() public pure returns (string memory) {
     return _symbol;
   }
 
-  function decimals() public view returns (uint8) {
+  function decimals() public pure returns (uint8) {
     return _decimals;
   }
 
