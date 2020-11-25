@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import '../../styles/Main.css';
-import AccountAddress from '../atoms/AccountAddress';
+import AccountAddress from '../molecules/AccountAddress';
 import metamaskLogo from '../../images/icn-metamask.svg';
 import AccountBalance from '../molecules/AccountBalance';
 import {useWeb3} from '../../context/Web3Context';
