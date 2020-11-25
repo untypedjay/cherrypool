@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { FaTimes } from 'react-icons/fa';
 import '../../styles/Modal.css';
 
@@ -12,5 +13,10 @@ function Modal({ close, children }) {
     </div>
   );
 }
+
+Modal.propTypes = {
+  close: PropTypes.func.isRequired,
+  children: PropTypes.element
+};
 
 export default Modal;
