@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { FaHandHoldingUsd, FaExchangeAlt, FaPiggyBank } from 'react-icons/fa';
 import Logo from '../../images/logo-small.png';
 import '../../styles/Menu.css';
@@ -33,5 +34,9 @@ function Menu({ selected }) {
     </div>
   );
 }
+
+Menu.propTypes = {
+  selected: PropTypes.string.isRequired
+};
 
 export default Menu;
