@@ -3,8 +3,6 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Modal from './Modal';
 import WalletButton from '../molecules/WalletButton';
-import { connectWeb3 } from '../../blockchainConnection';
-import SimpleStorageContract from '../../contracts/SimpleStorage.json';
 import { useAccountUpdate } from '../../context/AccountContext';
 import { useWeb3Update } from '../../context/Web3Context';
 import coinbaseLogo from '../../images/icn-coinbase-wallet.svg';
@@ -28,7 +26,6 @@ function WalletModal({ closeModal }) {
 
   };
 
-
   return (
     <Modal close={closeModal}>
       <div className="wallet-modal__header">
@@ -47,7 +44,7 @@ function WalletModal({ closeModal }) {
 }
 
 WalletModal.propTypes = {
-  closeModal: PropTypes.func
+  closeModal: PropTypes.func.isRequired
 };
 
 export default WalletModal;
