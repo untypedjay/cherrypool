@@ -18,6 +18,6 @@ Card.propTypes = {
   heading: PropTypes.string,
   children: PropTypes.element,
   button: PropTypes.element
-}
+};
 
 export default Card;

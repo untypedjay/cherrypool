@@ -4,7 +4,7 @@ import '../../styles/Main.css';
 import AccountAddress from '../molecules/AccountAddress';
 import metamaskLogo from '../../images/icn-metamask.svg';
 import AccountBalance from '../molecules/AccountBalance';
-import {useWeb3} from '../../context/Web3Context';
+import { useWeb3 } from '../../context/Web3Context';
 
 function Main({ onAccountAddressClick }) {
   const web3 = useWeb3();

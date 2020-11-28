@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
 import { useWeb3 } from '../../context/Web3Context';
 import { useAccount } from '../../context/AccountContext';
 import '../../styles/AccountBalance.css';
