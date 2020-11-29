@@ -8,7 +8,9 @@ function AccountAddress({ onClick, providerImg }) {
   return (
     <button className="account-details" onClick={onClick}>
       <img className="account-details__img" src={providerImg} alt="Wallet Provider"/>
-      <p className="account-details__text">{ account }</p>
+      <p className="account-details__text">
+        { `${account.substring(0, 8)}...${account.substring(account.length - 8, account.length)}` }
+      </p>
     </button>
   );
 }
