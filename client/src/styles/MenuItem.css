@@ -4,8 +4,9 @@
   border-left: 5px solid transparent;
   width: 100%;
   height: 7em;
-  padding: 0 0 1em 0;
   color: var(--clr-primary);
+  display: flex;
+  align-items: center;
 }
 
 .menu-item:hover {
@@ -26,6 +27,6 @@
 }
 
 .menu-item__text {
-  height: 10px;
   font-size: 1.1rem;
+  margin-left: 1em;
 }

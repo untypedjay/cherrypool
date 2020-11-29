@@ -1,6 +1,6 @@
 .account-balance {
   background-color: var(--clr-secondary);
-  border-radius: var(--rds-card);
+  border-radius: var(--rds-button);
   padding: 1em;
   color: white;
 }

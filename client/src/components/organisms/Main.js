@@ -14,10 +14,10 @@ function Main({ onAccountAddressClick }) {
   }
 
   return (
-    <div className="main">
+    <main className="main">
       <AccountAddress onClick={onAccountAddressClick} providerImg={metamaskLogo}/>
       <AccountBalance/>
-    </div>
+    </main>
   );
 }
 

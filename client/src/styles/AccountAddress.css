@@ -5,7 +5,7 @@
   color: white;
   background-color: var(--clr-secondary);
   border: none;
-  border-radius: var(--rds-card);
+  border-radius: var(--rds-button);
 }
 
 .account-details:hover {

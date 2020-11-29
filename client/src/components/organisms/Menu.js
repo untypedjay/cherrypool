@@ -7,7 +7,7 @@ import Logo from '../../images/logo-small.png';
 import '../../styles/Menu.css';
 
 function Menu({ selected }) {
-  const iconSize = '35px';
+  const iconSize = '30px';
 
   return (
     <div className="menu">

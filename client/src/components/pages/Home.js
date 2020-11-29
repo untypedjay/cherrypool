@@ -51,12 +51,10 @@ function Home() {
     <div className="home">
       { walletModal && <WalletModal closeModal={() => setWalletModal(false)}/> }
       <Menu selected={location.pathname}/>
-      <main className="home__main">
-        { account
-          ? <Main onAccountAddressClick={() => setWalletModal(true)}/>
-          : <NoWallet onClick={() => setWalletModal(true)}/>
-        }
-      </main>
+      { account
+        ? <Main onAccountAddressClick={() => setWalletModal(true)}/>
+        : <main className="home__main"><NoWallet onClick={() => setWalletModal(true)}/></main>
+      }
     </div>
   );
 }
