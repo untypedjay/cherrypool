@@ -1,3 +1,2 @@
 # Cherry Pool
-## Steps to Build This App
-1. `npx truffle unbox react`
+A decentralized exchange, lending and staking platform. Banking as sweet as cherries.
