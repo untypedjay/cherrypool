@@ -1,19 +1,19 @@
 import React from 'react';
-import PropTypes from 'react';
+import PropTypes from 'prop-types';
 import '../../styles/Button.css';
 
-function Button({ className, onClick, children }) {
+function Button({ classSelector, onClick, children }) {
   return (
-    <button className={`button ${className}`} onClick={onClick}>
+    <button className={`button ${classSelector}`} onClick={onClick}>
       { children }
     </button>
   );
 }
 
 Button.propTypes = {
-  className: PropTypes.string,
+  classSelector: PropTypes.string,
   onClick: PropTypes.func,
-  children: PropTypes.object
+  children: PropTypes.node
 };
 
 export default Button;

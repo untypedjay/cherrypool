@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useWeb3Update } from '../../context/Web3Context';
-import {useAccount, useAccountUpdate} from '../../context/AccountContext';
-import '../../styles/Home.css';
+import { useAccount, useAccountUpdate } from '../../context/AccountContext';
 import Main from '../organisms/Main';
 import WalletModal from '../organisms/WalletModal';
 import Menu from '../organisms/Menu';
 import NoWallet from '../molecules/NoWallet';
 import { connectWeb3 } from '../../blockchainConnection';
 import SimpleStorageContract from '../../contracts/SimpleStorage.json';
+import '../../styles/Home.css';
 
 function Home() {
   const [walletModal, setWalletModal] = useState(false);

@@ -12,7 +12,7 @@ function PrimaryButton({ onClick, children }) {
 
 PrimaryButton.propTypes = {
   onClick: PropTypes.func,
-  children: PropTypes.string
+  children: PropTypes.node
 };
 
 export default PrimaryButton;
