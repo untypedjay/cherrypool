@@ -4,7 +4,7 @@ import Button from './Button';
 
 function PrimaryButton({ onClick, children }) {
   return (
-    <Button className="button--primary" onClick={onClick}>
+    <Button classSelector="button--primary" onClick={onClick}>
       { children }
     </Button>
   );

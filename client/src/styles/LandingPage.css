@@ -1,6 +1,6 @@
 .landing-page {
   background-color: var(--clr-primary);
-  width: 100%;
+  width: 100vw;
 }
 
 .landing-page__hero {
