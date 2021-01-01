@@ -14,8 +14,8 @@ function Home() {
   const [walletModal, setWalletModal] = useState(false);
   const location = useLocation();
   const account = useAccount();
-  const setWeb3 = useWeb3Update();
-  const setAccount = useAccountUpdate();
+  const setWeb3: any = useWeb3Update();
+  const setAccount: any = useAccountUpdate();
 
   useEffect(() => {
     getBlockchainData();
@@ -31,7 +31,7 @@ function Home() {
       const networkId = await web3.eth.net.getId();
 
       //--------------------
-      const deployedNetwork = SimpleStorageContract.networks[networkId];
+      const deployedNetwork = (SimpleStorageContract as any).networks[networkId];
       const instance = new web3.eth.Contract(
         SimpleStorageContract.abi,
         deployedNetwork && deployedNetwork.address,
@@ -57,6 +57,6 @@ function Home() {
       }
     </div>
   );
-}
+};
 
 export default Home;

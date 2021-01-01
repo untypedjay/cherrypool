@@ -1,8 +1,13 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { ReactNode } from 'react';
 import '../../styles/Card.css';
 
-function Card({ heading, children, button }) {
+interface Props {
+  heading: string;
+  children: ReactNode;
+  button: ReactNode;
+};
+
+function Card({ heading, children, button }: Props) {
   return (
     <div className="card">
       <h3 className="card__heading">{ heading }</h3>
@@ -12,12 +17,6 @@ function Card({ heading, children, button }) {
       </div>
     </div>
   );
-}
-
-Card.propTypes = {
-  heading: PropTypes.string,
-  children: PropTypes.element,
-  button: PropTypes.element
 };
 
 export default Card;

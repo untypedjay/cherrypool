@@ -1,9 +1,12 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import PrimaryButton from '../atoms/PrimaryButton';
 import '../../styles/NoWallet.css';
 
-function NoWallet({ onClick }) {
+interface Props {
+  onClick: () => any;
+};
+
+function NoWallet({ onClick }: Props) {
   return (
     <div className="no-wallet">
       <p className="no-wallet__text">Please connect a wallet to use Cherry Pool</p>
@@ -12,10 +15,6 @@ function NoWallet({ onClick }) {
       </div>
     </div>
   );
-}
-
-NoWallet.propTypes = {
-  onClick: PropTypes.func.isRequired
 };
 
 export default NoWallet;

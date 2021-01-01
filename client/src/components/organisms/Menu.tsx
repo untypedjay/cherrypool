@@ -1,12 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import { FaHandHoldingUsd, FaExchangeAlt, FaPiggyBank } from 'react-icons/fa';
 import MenuItem from '../molecules/MenuItem';
 import Logo from '../../images/logo-small.png';
 import '../../styles/Menu.css';
 
-function Menu({ selected }) {
+interface Props {
+  selected: string;
+};
+
+function Menu({ selected }: Props) {
   const iconSize = '30px';
 
   return (
@@ -31,10 +34,6 @@ function Menu({ selected }) {
       />
     </div>
   );
-}
-
-Menu.propTypes = {
-  selected: PropTypes.string.isRequired
 };
 
 export default Menu;

@@ -7,10 +7,10 @@ import Footer from '../organisms/Footer';
 import '../../styles/LandingPage.css';
 
 function LandingPage() {
-  const serviceRef = useRef(null);
+  const serviceRef = useRef<any>(null);
   const history = useHistory();
 
-  return (
+    return (
     <div className="landing-page">
       <Navbar/>
       <div className="landing-page__hero">

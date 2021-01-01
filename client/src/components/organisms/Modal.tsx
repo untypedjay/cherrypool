@@ -1,9 +1,13 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { ReactNode } from 'react';
 import { FaTimes } from 'react-icons/fa';
 import '../../styles/Modal.css';
 
-function Modal({ close, children }) {
+interface Props {
+  close: () => any;
+  children: ReactNode;
+};
+
+function Modal({ close, children }: Props) {
   return (
     <div className="modal">
       <div className="modal__card">
@@ -12,11 +16,6 @@ function Modal({ close, children }) {
       </div>
     </div>
   );
-}
-
-Modal.propTypes = {
-  close: PropTypes.func.isRequired,
-  children: PropTypes.element
 };
 
 export default Modal;

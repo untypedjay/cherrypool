@@ -4,12 +4,12 @@ import { useAccount } from '../../context/AccountContext';
 import '../../styles/AccountBalance.css';
 
 function AccountBalance() {
-  const web3 = useWeb3();
+  const web3: any = useWeb3();
   const account = useAccount();
   const [etherBalance, setEtherBalance] = useState(0);
 
   useEffect(() => {
-    web3.eth.getBalance(account, (err, balance) => {
+    web3.eth.getBalance(account, (err: any, balance: any) => {
       setEtherBalance(web3.utils.fromWei(balance, 'ether'));
     });
   }, []);
@@ -19,6 +19,6 @@ function AccountBalance() {
       <p>{ etherBalance } ETH</p>
     </div>
   );
-}
+};
 
 export default AccountBalance;

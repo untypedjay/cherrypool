@@ -1,9 +1,14 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { useHistory } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import '../../styles/MenuItem.css';
 
-function MenuItem({ selected, route, icon }) {
+interface Props {
+  selected: boolean;
+  route: string;
+  icon: ReactNode;
+}
+
+function MenuItem({ selected, route, icon }: Props) {
   const history = useHistory();
 
   const calculateStyling = () => {
@@ -19,16 +24,6 @@ function MenuItem({ selected, route, icon }) {
       <p className="menu-item__text">{ `${route.charAt(1).toUpperCase()}${route.substring(2, route.length)}` }</p>
     </button>
   );
-}
-
-MenuItem.propTypes = {
-  selected: PropTypes.bool,
-  route: PropTypes.string.isRequired,
-  icon: PropTypes.node.isRequired
-};
-
-MenuItem.defaultProps = {
-  selected: false
 };
 
 export default MenuItem;

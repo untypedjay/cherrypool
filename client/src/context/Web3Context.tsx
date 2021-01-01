@@ -1,8 +1,11 @@
-import React, { useContext, useState } from 'react';
-import PropTypes from 'prop-types';
+import React, {ReactNode, useContext, useState} from 'react';
 
-const Web3Context = React.createContext();
-const Web3UpdateContext = React.createContext();
+type Props = {
+  children: ReactNode
+};
+
+const Web3Context = React.createContext({});
+const Web3UpdateContext = React.createContext({});
 
 export function useWeb3() {
   return useContext(Web3Context);
@@ -12,10 +15,10 @@ export function useWeb3Update() {
   return useContext(Web3UpdateContext);
 }
 
-export function Web3Provider({ children }) {
-  const [web3, setWeb3] = useState(null);
+export function Web3Provider({ children }: Props) {
+  const [web3, setWeb3] = useState<any>(null);
 
-  const updateWeb3 = newWeb3 => {
+  const updateWeb3 = (newWeb3: any) => {
     setWeb3(newWeb3);
   };
 
@@ -26,8 +29,4 @@ export function Web3Provider({ children }) {
       </Web3UpdateContext.Provider>
     </Web3Context.Provider>
   );
-}
-
-Web3Provider.propTypes = {
-  children: PropTypes.object
 }

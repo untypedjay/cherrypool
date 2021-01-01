@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import Modal from './Modal';
 import WalletButton from '../molecules/WalletButton';
 import { useAccountUpdate } from '../../context/AccountContext';
@@ -10,7 +9,11 @@ import ledgerLogo from '../../images/icn-ledger.svg';
 import metamaskLogo from '../../images/icn-metamask.svg';
 import '../../styles/WalletModal.css';
 
-function WalletModal({ closeModal }) {
+interface Props {
+  closeModal: () => void;
+};
+
+function WalletModal({ closeModal }: Props) {
   const setAccount = useAccountUpdate();
   const setWeb3 = useWeb3Update();
 
@@ -41,10 +44,6 @@ function WalletModal({ closeModal }) {
       <p className="wallet-modal__terms">By connecting, I accept Cherry Pool's <Link to="/terms-of-use">Terms of Use</Link></p>
     </Modal>
   );
-}
-
-WalletModal.propTypes = {
-  closeModal: PropTypes.func.isRequired
 };
 
 export default WalletModal;

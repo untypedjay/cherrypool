@@ -1,21 +1,24 @@
-import React, { useContext, useState } from 'react';
-import PropTypes from 'prop-types';
+import React, { useContext, useState, ReactNode } from 'react';
 
-const AccountContext = React.createContext();
-const AccountUpdateContext = React.createContext();
+type Props = {
+  children: ReactNode
+};
+
+const AccountContext = React.createContext({});
+const AccountUpdateContext = React.createContext({});
 
 export function useAccount() {
   return useContext(AccountContext);
-}
+};
 
 export function useAccountUpdate() {
   return useContext(AccountUpdateContext);
-}
+};
 
-export function AccountProvider({ children }) {
-  const [account, setAccount] = useState('');
+export function AccountProvider({ children }: Props) {
+  const [account, setAccount] = useState<any>('');
 
-  const updateAccount = newAccount => {
+  const updateAccount = (newAccount: string) => {
     setAccount(newAccount);
   };
 
@@ -26,8 +29,4 @@ export function AccountProvider({ children }) {
       </AccountUpdateContext.Provider>
     </AccountContext.Provider>
   );
-}
-
-AccountProvider.propTypes = {
-  children: PropTypes.object
-}
+};

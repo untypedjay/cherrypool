@@ -1,10 +1,14 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { useAccount } from '../../context/AccountContext';
 import '../../styles/AccountAddress.css';
 
-function AccountAddress({ onClick, providerImg }) {
-  const account = useAccount();
+interface Props {
+    onClick: () => any;
+    providerImg: string;
+};
+
+function AccountAddress({ onClick, providerImg }: Props) {
+  const account: any = useAccount();
   return (
     <button className="account-details" onClick={onClick}>
       <img className="account-details__img" src={providerImg} alt="Wallet Provider"/>
@@ -13,11 +17,6 @@ function AccountAddress({ onClick, providerImg }) {
       </p>
     </button>
   );
-}
-
-AccountAddress.propTypes = {
-  onClick: PropTypes.func,
-  providerImg: PropTypes.string
 };
 
 export default AccountAddress;
