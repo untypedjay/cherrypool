@@ -1,5 +1,9 @@
-var SimpleStorage = artifacts.require("./SimpleStorage.sol");
+const CherryToken = artifacts.require('CherryToken')
+const CherryExchange = artifacts.require('CherryExchange');
 
-module.exports = function(deployer) {
-  deployer.deploy(SimpleStorage);
+module.exports = async function(deployer, network, accounts) {
+  await deployer.deploy(CherryToken);
+  const cherryToken = await CherryToken.deployed();
+
+  await deployer.deploy(CherryExchange, cherryToken.address);
 };
