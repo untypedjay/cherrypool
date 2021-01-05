@@ -6,4 +6,7 @@ module.exports = async function(deployer, network, accounts) {
   const cherryToken = await CherryToken.deployed();
 
   await deployer.deploy(CherryExchange, cherryToken.address);
+  const cherryExchange = await CherryExchange.deployed();
+
+  await cherryToken.transfer(cherryExchange.address, '1000000000000000000000000');
 };
