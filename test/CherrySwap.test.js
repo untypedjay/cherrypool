@@ -1,5 +1,5 @@
 const CherryToken = artifacts.require('CherryToken');
-const CherryExchange = artifacts.require('CherryExchange');
+const CherrySwap = artifacts.require('CherrySwap');
 
 require('chai')
   .use(require('chai-as-promised'))
@@ -9,15 +9,15 @@ function tokens(n) {
   return web3.utils.toWei(n, 'ether');
 }
 
-contract('CherryExchange', ([owner, user]) => {
-  let cherryToken, cherryExchange;
+contract('CherrySwap', ([owner, user]) => {
+  let cherryToken, cherrySwap;
   before(async () => {
     // load contracts
     cherryToken = await CherryToken.new('1000000000000000000000000'); // 1 million tokens
-    cherryExchange = await CherryExchange.new(cherryToken.address);
+    cherrySwap = await CherrySwap.new(cherryToken.address);
 
     // send all CTN to exchange
-    await cherryToken.transfer(cherryExchange.address, tokens('1000000'));
+    await cherryToken.transfer(cherrySwap.address, tokens('1000000'));
   });
 
   describe('CherryToken deployment', async () => {
@@ -27,14 +27,14 @@ contract('CherryExchange', ([owner, user]) => {
     });
   });
 
-  describe('CherryExchange deployment', async () => {
+  describe('CherrySwap deployment', async () => {
     it('has a name', async () => {
-      const name = await cherryExchange.name();
-      assert.equal(name, 'CherryExchange');
+      const name = await cherrySwap.name();
+      assert.equal(name, 'CherrySwap');
     });
 
     it('has tokens', async () => {
-      const balance = await cherryToken.balanceOf(cherryExchange.address);
+      const balance = await cherryToken.balanceOf(cherrySwap.address);
       assert.equal(balance.toString(), tokens('1000000'));
     });
   });
@@ -42,14 +42,14 @@ contract('CherryExchange', ([owner, user]) => {
   describe('Exchange ETH for CTN', async () => {
     /*it('swaps ETH to CTN', async () => {
       const userCtnBalanceBefore = await cherryToken.balanceOf(user);
-      const exchangeCtnBalanceBefore = await cherryToken.balanceOf(cherryExchange.address);
+      const exchangeCtnBalanceBefore = await cherryToken.balanceOf(cherrySwap.address);
       assert.equal(userCtnBalanceBefore.toString() , '0', 'user CTN balance correct before swapping');
       assert.equal(exchangeCtnBalanceBefore.toString(), tokens('1000000'), 'exchange CTN balance correct before swapping');
 
-      await cherryExchange.ethToCtn({ from: user, value: web3.utils.toWei('50', 'ether')});
+      await cherrySwap.ethToCtn({ from: user, value: web3.utils.toWei('50', 'ether')});
 
       const userCtnBalanceAfter = await cherryToken.balanceOf(user);
-      const exchangeCtnBalanceAfter = await cherryToken.balanceOf(cherryExchange.address);
+      const exchangeCtnBalanceAfter = await cherryToken.balanceOf(cherrySwap.address);
       assert.equal(userCtnBalanceAfter.toString(), tokens('50'), 'user CTN balance correct after swapping');
       assert.equal(exchangeCtnBalanceAfter.toString(), tokens('99950'), 'exchange CTN balance correct after swapping');
     });*/

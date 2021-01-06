@@ -2,8 +2,8 @@ pragma solidity ^0.5.0;
 
 import "./CherryToken.sol";
 
-contract CherryExchange {
-  string public name = "CherryExchange";
+contract CherrySwap {
+  string public name = "CherrySwap";
   address public owner;
   CherryToken public cherryToken;
 
