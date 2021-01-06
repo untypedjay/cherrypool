@@ -2,8 +2,8 @@
   display: flex;
   align-items: center;
   padding: 1em;
-  color: white;
-  background-color: var(--clr-secondary);
+  color: var(--clr-text);
+  background-color: var(--clr-primary);
   border: none;
   border-radius: var(--rds-button);
 }

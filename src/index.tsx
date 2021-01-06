@@ -18,13 +18,13 @@ function App() {
         <BrowserRouter>
           <Switch>
             <Route exact path="/" component={LandingPage}></Route>
-            <Route exact path="/borrow">
+            <Route exact path="/portfolio">
               <Home/>
             </Route>
-            <Route exact path="/exchange">
+            <Route exact path="/swap">
               <Home/>
             </Route>
-            <Route exact path="/stake">
+            <Route exact path="/liquidity">
               <Home/>
             </Route>
             <Route exact path="/terms-of-use" component={TermsOfUse}></Route>

@@ -7,6 +7,7 @@ function AccountBalance() {
   const web3: any = useWeb3();
   const account = useAccount();
   const [etherBalance, setEtherBalance] = useState(0);
+  const [cherryTokenBalance, setCherryTokenBalance] = useState(0);
 
   useEffect(() => {
     web3.eth.getBalance(account, (err: any, balance: any) => {
@@ -16,7 +17,9 @@ function AccountBalance() {
 
   return (
     <div className="account-balance">
+      <h3>Assets</h3>
       <p>{ etherBalance } ETH</p>
+      <p>{ cherryTokenBalance } CTN</p>
     </div>
   );
 };

@@ -1,15 +1,16 @@
 import React from 'react';
-import './Main.css';
-import AccountAddress from '../molecules/AccountAddress';
-import metamaskLogo from '../../images/icn-metamask.svg';
-import AccountBalance from '../molecules/AccountBalance';
 import { useWeb3 } from '../../context/Web3Context';
+import Portfolio from './Portfolio';
+import Swap from './Swap';
+import Liquidity from './Liquidity';
+import './Main.css';
 
 interface Props {
   onAccountAddressClick: () => any;
-};
+  section: string;
+}
 
-function Main({ onAccountAddressClick }: Props) {
+function Main({ onAccountAddressClick, section }: Props) {
   const web3 = useWeb3();
 
   if (!web3) {
@@ -18,8 +19,9 @@ function Main({ onAccountAddressClick }: Props) {
 
   return (
     <main className="main">
-      <AccountAddress onClick={onAccountAddressClick} providerImg={metamaskLogo}/>
-      <AccountBalance/>
+      { section === '/portfolio' && <Portfolio onAccountAddressClick={onAccountAddressClick}/> }
+      { section === '/swap' && <Swap/> }
+      { section === '/liquidity' && <Liquidity/> }
     </main>
   );
 };
