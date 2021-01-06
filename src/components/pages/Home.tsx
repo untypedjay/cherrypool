@@ -8,7 +8,7 @@ import Menu from '../organisms/Menu';
 import NoWallet from '../molecules/NoWallet';
 import { connectWeb3 } from '../../blockchainConnection';
 import SimpleStorageContract from '../../contracts/SimpleStorage.json';
-import '../../styles/Home.css';
+import './Home.css';
 
 function Home() {
   const [walletModal, setWalletModal] = useState(false);

@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import '../../styles/Button.css';
+import './Button.css';
 
 type Props = {
   classSelector: string;

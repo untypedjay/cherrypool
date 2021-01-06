@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAccount } from '../../context/AccountContext';
-import '../../styles/AccountAddress.css';
+import './AccountAddress.css';
 
 interface Props {
     onClick: () => any;

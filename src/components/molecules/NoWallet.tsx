@@ -1,6 +1,6 @@
 import React from 'react';
 import PrimaryButton from '../atoms/PrimaryButton';
-import '../../styles/NoWallet.css';
+import './NoWallet.css';
 
 interface Props {
   onClick: () => any;

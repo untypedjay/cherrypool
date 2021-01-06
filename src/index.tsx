@@ -6,7 +6,7 @@ import LandingPage from './components/pages/LandingPage';
 import Home from './components/pages/Home';
 import TermsOfUse from './components/pages/TermsOfUse';
 import NotFound from './components/pages/NotFound';
-import './styles/index.css';
+import './index.css';
 import { Web3Provider } from './context/Web3Context';
 
 ReactDOM.render(<App/>, document.querySelector('#root'));

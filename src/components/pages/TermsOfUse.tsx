@@ -1,5 +1,5 @@
 import React from 'react';
-import '../../styles/TermsOfUse.css';
+import './TermsOfUse.css';
 import Navbar from '../organisms/Navbar';
 import Footer from '../organisms/Footer';
 

@@ -1,6 +1,6 @@
 import React, {ReactNode} from 'react';
 import { FaArrowRight } from 'react-icons/fa';
-import '../../styles/WalletButton.css';
+import './WalletButton.css';
 
 interface Props {
   imgSrc: string;

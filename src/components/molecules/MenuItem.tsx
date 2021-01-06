@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react';
 import { useHistory } from 'react-router-dom';
-import '../../styles/MenuItem.css';
+import './MenuItem.css';
 
 interface Props {
   selected: boolean;

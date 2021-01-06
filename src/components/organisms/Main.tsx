@@ -1,5 +1,5 @@
 import React from 'react';
-import '../../styles/Main.css';
+import './Main.css';
 import AccountAddress from '../molecules/AccountAddress';
 import metamaskLogo from '../../images/icn-metamask.svg';
 import AccountBalance from '../molecules/AccountBalance';

@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react';
 import { FaTimes } from 'react-icons/fa';
-import '../../styles/Modal.css';
+import './Modal.css';
 
 interface Props {
   close: () => any;

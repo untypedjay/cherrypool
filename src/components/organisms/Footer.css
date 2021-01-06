@@ -21,7 +21,7 @@
 }
 
 .footer__paragraph {
-  color: white;
+  color: var(--clr-text);
   font-size: 1.1rem;
 }
 

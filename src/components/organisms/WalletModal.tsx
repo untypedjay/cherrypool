@@ -7,7 +7,7 @@ import { useWeb3Update } from '../../context/Web3Context';
 import coinbaseLogo from '../../images/icn-coinbase-wallet.svg';
 import ledgerLogo from '../../images/icn-ledger.svg';
 import metamaskLogo from '../../images/icn-metamask.svg';
-import '../../styles/WalletModal.css';
+import './WalletModal.css';
 
 interface Props {
   closeModal: () => void;

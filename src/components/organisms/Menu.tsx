@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { FaHandHoldingUsd, FaExchangeAlt, FaPiggyBank } from 'react-icons/fa';
 import MenuItem from '../molecules/MenuItem';
 import Logo from '../../images/logo-small.png';
-import '../../styles/Menu.css';
+import './Menu.css';
 
 interface Props {
   selected: string;

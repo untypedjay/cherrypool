@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Logo from '../../images/logo.png';
 import { FaGithub } from 'react-icons/fa';
-import '../../styles/Navbar.css';
+import './Navbar.css';
 
 function Navbar() {
   return (

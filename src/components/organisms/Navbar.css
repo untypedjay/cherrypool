@@ -15,21 +15,21 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  color: white;
+  color: var(--clr-text);
   list-style-type: none;
   font-size: 1.1rem;
 }
 
 .navbar__link {
   text-decoration: none;
-  color: white;
+  color: var(--clr-text);
 }
 
 .navbar__link:hover {
-  color: var(--clr-accent);
+  color: var(--clr-text-hov);
   text-decoration: underline;
 }
 
 .navbar__icon {
-  fill: white;
+  fill: var(--clr-accent);
 }

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useWeb3 } from '../../context/Web3Context';
 import { useAccount } from '../../context/AccountContext';
-import '../../styles/AccountBalance.css';
+import './AccountBalance.css';
 
 function AccountBalance() {
   const web3: any = useWeb3();

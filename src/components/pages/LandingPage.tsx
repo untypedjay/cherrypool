@@ -4,7 +4,7 @@ import Navbar from '../organisms/Navbar';
 import PrimaryButton from '../atoms/PrimaryButton';
 import Card from '../organisms/Card';
 import Footer from '../organisms/Footer';
-import '../../styles/LandingPage.css';
+import './LandingPage.css';
 
 function LandingPage() {
   const serviceRef = useRef<any>(null);
@@ -14,11 +14,11 @@ function LandingPage() {
     <div className="landing-page">
       <Navbar/>
       <div className="landing-page__hero">
-        <h1 className="landing-page__heading">Banking, but</h1>
+        <h1 className="landing-page__heading">Finance, but</h1>
         <h1 className="landing-page__heading">sweet as cherries</h1>
         <div className="landing-page__paragraph-container">
           <p className="landing-page__paragraph">A decentralized, open source DeFi platform.</p>
-          <p className="landing-page__paragraph">Stake, lend or exchange tokens on the Ethereum network.</p>
+          <p className="landing-page__paragraph">Exchange ETH for CTN or start earning passive income by providing liquidity.</p>
         </div>
         <div className="landing-page__cta">
           <PrimaryButton onClick={() => serviceRef.current.scrollIntoView()}>Get Started</PrimaryButton>

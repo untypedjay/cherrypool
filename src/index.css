@@ -1,9 +1,11 @@
 :root {
-  --clr-primary: #262A2E;/*#E6EEEF;*/
-  --clr-secondary: #313B44;/*#231636;*/
+  --clr-primary: #FFFFFF;
+  --clr-secondary: #F4F3F6;
   --clr-accent: #A0013D;
   --clr-accent-hov: #850337;
   --clr-grey: #C2C2C2;
+  --clr-text: #000000;
+  --clr-text-hov: #7F7F7F;
   --rds-card: 20px;
   --rds-button: 5px;
 }
