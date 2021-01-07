@@ -43,17 +43,13 @@ contract('CherryToken', ([owner, user]) => {
       const balance = await cherryToken.balanceOf(owner);
       assert.equal(balance.toString(), tokens('1000000'));
     });
+  });
 
+  describe('CherryToken transfer', async () => {
     it('transfers tokens', async () => {
       await cherryToken.transfer(user, tokens('50'), { from: owner});
       const userBalance = await cherryToken.balanceOf(user);
       assert.equal(userBalance.toString(), tokens('50'));
-    });
-
-    it('transfers tokens from', async () => {
-      await cherryToken.transferFrom(owner, user, tokens('50'));
-      const userBalance = await cherryToken.balanceOf(user);
-      assert.equal(userBalance.toString(), tokens('100'));
     });
   });
 });

@@ -16,10 +16,10 @@ library SafeMath {
 contract CherryToken {
   using SafeMath for uint256;
 
-  string private constant _name = "Cherry Token";
-  string private constant _symbol = "CTN";
-  uint8 private constant _decimals = 18;
-  uint256 private _totalSupply;
+  string private constant tokenName = "Cherry Token";
+  string private constant tokenSymbols = "CTN";
+  uint8 private constant tokenDecimals = 18;
+  uint256 private totalTokenSupply;
   mapping(address => uint256) private balances;
   mapping(address => mapping(address => uint256)) private allowed;
 
@@ -27,24 +27,24 @@ contract CherryToken {
   event Approval(address indexed _owner, address indexed _spender, uint256 _value);
 
   constructor(uint256 _total) public {
-    _totalSupply = _total;
-    balances[msg.sender] = _totalSupply;
+    totalTokenSupply = _total;
+    balances[msg.sender] = totalTokenSupply;
   }
 
   function name() public pure returns (string memory) {
-    return _name;
+    return tokenName;
   }
 
   function symbol() public pure returns (string memory) {
-    return _symbol;
+    return tokenSymbols;
   }
 
   function decimals() public pure returns (uint8) {
-    return _decimals;
+    return tokenDecimals;
   }
 
   function totalSupply() public view returns (uint256) {
-    return _totalSupply;
+    return totalTokenSupply;
   }
 
   function balanceOf(address _owner) public view returns (uint256 balance) {
