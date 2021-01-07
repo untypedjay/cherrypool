@@ -8,6 +8,9 @@ import coinbaseLogo from '../../images/icn-coinbase-wallet.svg';
 import ledgerLogo from '../../images/icn-ledger.svg';
 import metamaskLogo from '../../images/icn-metamask.svg';
 import './WalletModal.css';
+import Web3 from 'web3';
+import CherryToken from '../../abis/CherryToken.json';
+import CherrySwap from '../../abis/CherrrySwap.json';
 
 interface Props {
   closeModal: () => void;
@@ -27,6 +30,34 @@ function WalletModal({ closeModal }: Props) {
 
   const connectToMetamask = () => {
 
+  };
+
+  const loadBlockchainData = async () => {
+    const web3 = (window as any).web3;
+
+    const accounts = await web3.eth.getAccounts();
+    if (setAccount) {
+      setAccount(accounts[0]);
+    }
+
+    const networkId = await web3.eth.net.getId();
+
+    // load CherryToken
+    const cherryTokenData = CherryToken.networks[networkId];
+    if (cherryTokenData) {
+
+    }
+  }
+
+  const loadWeb3 = async () => {
+    if ((window as any).ethereum) {
+      (window as any).web3 = new Web3((window as any).ethereum)
+      await (window as any).ethereum.enable()
+    } else if ((window as any).web3) {
+      (window as any).web3 = new Web3((window as any).web3.currentProvider)
+    } else {
+      window.alert('Non-Ethereum browser detected. You should consider trying MetaMask!')
+    }
   };
 
   return (

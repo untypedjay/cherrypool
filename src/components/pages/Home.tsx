@@ -7,8 +7,9 @@ import WalletModal from '../organisms/WalletModal';
 import Menu from '../organisms/Menu';
 import NoWallet from '../molecules/NoWallet';
 import { connectWeb3 } from '../../blockchainConnection';
-import SimpleStorageContract from '../../contracts/SimpleStorage.json';
+import SimpleStorageContract from '../../abis/SimpleStorage.json';
 import './Home.css';
+import Web3 from 'web3';
 
 function Home() {
   const [walletModal, setWalletModal] = useState(false);
@@ -18,7 +19,7 @@ function Home() {
   const setAccount: any = useAccountUpdate();
 
   useEffect(() => {
-    getBlockchainData();
+    //loadWeb3();
   }, []);
 
   const getBlockchainData = async () => {

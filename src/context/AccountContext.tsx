@@ -4,8 +4,10 @@ type Props = {
   children: ReactNode
 };
 
-const AccountContext = React.createContext({});
-const AccountUpdateContext = React.createContext({});
+type AccountUpdate = (newAccount: string) => void;
+
+const AccountContext = React.createContext('');
+const AccountUpdateContext = React.createContext<AccountUpdate | null>(null);
 
 export function useAccount() {
   return useContext(AccountContext);
@@ -16,7 +18,7 @@ export function useAccountUpdate() {
 };
 
 export function AccountProvider({ children }: Props) {
-  const [account, setAccount] = useState<any>('');
+  const [account, setAccount] = useState<string>('0x0');
 
   const updateAccount = (newAccount: string) => {
     setAccount(newAccount);

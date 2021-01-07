@@ -1,25 +1,25 @@
 {
   "contractName": "CherryStake",
   "abi": [],
-  "metadata": "{\"compiler\":{\"version\":\"0.5.16+commit.9c3226ce\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/Users/johannes/Documents/Projects/web-projects/cherrypool/contracts/CherryStake.sol\":\"CherryStake\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/johannes/Documents/Projects/web-projects/cherrypool/contracts/CherryStake.sol\":{\"keccak256\":\"0x141e6b3925f94c3687fdae5089937fdb5cf20ae6a7d0d3e7bcdfa3b984e87574\",\"urls\":[\"bzz-raw://fcfc2f47e89933797d9f5565b3a6ed800438409f4eabaa6e7381c54968d1d160\",\"dweb:/ipfs/QmTttCkBxnR7ecP4nSMaEY92eKo57YJHswcnkGV66kDNMo\"]},\"/Users/johannes/Documents/Projects/web-projects/cherrypool/contracts/CherryToken.sol\":{\"keccak256\":\"0xf50d3dc2c93bbe2e6adf20c3392a99566661725f9888dac8c1c1041da6448dab\",\"urls\":[\"bzz-raw://44fb7e46b3c716c45cadba62d09f728eeb9feec042c06d2b7abd0dc3fcf6015e\",\"dweb:/ipfs/QmRBxkwvZdFyktptJtnHvdXWdBfWYpw8HZYwp9LC76GB8s\"]}},\"version\":1}",
-  "bytecode": "0x6080604052348015600f57600080fd5b50603e80601d6000396000f3fe6080604052600080fdfea265627a7a72315820be614b3f01db0a1da0fa0e6f0947eecee72e2a395c10a569cc87653a71b5b9cc64736f6c63430005100032",
-  "deployedBytecode": "0x6080604052600080fdfea265627a7a72315820be614b3f01db0a1da0fa0e6f0947eecee72e2a395c10a569cc87653a71b5b9cc64736f6c63430005100032",
-  "sourceMap": "54:24:2:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;54:24:2;;;;;;;",
-  "deployedSourceMap": "54:24:2:-;;;;;",
-  "source": "pragma solidity ^0.5.0;\n\nimport \"./CherryToken.sol\";\n\ncontract CherryStake {\n}",
+  "metadata": "{\"compiler\":{\"version\":\"0.5.16+commit.9c3226ce\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/Users/johannes/Documents/Projects/web-projects/cherrypool/contracts/CherryStake.sol\":\"CherryStake\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/johannes/Documents/Projects/web-projects/cherrypool/contracts/CherryStake.sol\":{\"keccak256\":\"0x4f7cb2c6da39b0fbdf633fccf31607b2c422f9a23572c619696698c9f06923da\",\"urls\":[\"bzz-raw://b7041962e06fc2292e727103c89b1cb8537d2910009d5da2c42d370f3fd1c806\",\"dweb:/ipfs/QmYn9GvPsizF5S9GMj1m2UTKUSxSmD8AfWC2vyKw72pnRD\"]},\"/Users/johannes/Documents/Projects/web-projects/cherrypool/contracts/CherryToken.sol\":{\"keccak256\":\"0x823ecd9886edd25bf6b953e885b4eabe7e5b3d86a84dfc9ccb088da8f4cba5f8\",\"urls\":[\"bzz-raw://e776344544f81e0a51184ada88a060913d0a76174316e1e3c73038d5d390c132\",\"dweb:/ipfs/QmNyoJYLdtEvpgiAM9469X48bxmcR8PU4TrbtUKvv6oEcN\"]}},\"version\":1}",
+  "bytecode": "0x6080604052348015600f57600080fd5b50603e80601d6000396000f3fe6080604052600080fdfea265627a7a72315820bc819bf427ad4e5e5926df56205a0825e1ec81d205a159f20af33b8964d3375964736f6c63430005100032",
+  "deployedBytecode": "0x6080604052600080fdfea265627a7a72315820bc819bf427ad4e5e5926df56205a0825e1ec81d205a159f20af33b8964d3375964736f6c63430005100032",
+  "sourceMap": "54:25:1:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;54:25:1;;;;;;;",
+  "deployedSourceMap": "54:25:1:-;;;;;",
+  "source": "pragma solidity ^0.5.0;\n\nimport \"./CherryToken.sol\";\n\ncontract CherryStake {\n\n}",
   "sourcePath": "/Users/johannes/Documents/Projects/web-projects/cherrypool/contracts/CherryStake.sol",
   "ast": {
     "absolutePath": "/Users/johannes/Documents/Projects/web-projects/cherrypool/contracts/CherryStake.sol",
     "exportedSymbols": {
       "CherryStake": [
-        112
+        77
       ]
     },
-    "id": 113,
+    "id": 78,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 110,
+        "id": 75,
         "literals": [
           "solidity",
           "^",
@@ -27,16 +27,16 @@
           ".0"
         ],
         "nodeType": "PragmaDirective",
-        "src": "0:23:2"
+        "src": "0:23:1"
       },
       {
         "absolutePath": "/Users/johannes/Documents/Projects/web-projects/cherrypool/contracts/CherryToken.sol",
         "file": "./CherryToken.sol",
-        "id": 111,
+        "id": 76,
         "nodeType": "ImportDirective",
-        "scope": 113,
-        "sourceUnit": 436,
-        "src": "25:27:2",
+        "scope": 78,
+        "sourceUnit": 513,
+        "src": "25:27:1",
         "symbolAliases": [],
         "unitAlias": ""
       },
@@ -46,31 +46,31 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 112,
+        "id": 77,
         "linearizedBaseContracts": [
-          112
+          77
         ],
         "name": "CherryStake",
         "nodeType": "ContractDefinition",
         "nodes": [],
-        "scope": 113,
-        "src": "54:24:2"
+        "scope": 78,
+        "src": "54:25:1"
       }
     ],
-    "src": "0:78:2"
+    "src": "0:79:1"
   },
   "legacyAST": {
     "absolutePath": "/Users/johannes/Documents/Projects/web-projects/cherrypool/contracts/CherryStake.sol",
     "exportedSymbols": {
       "CherryStake": [
-        112
+        77
       ]
     },
-    "id": 113,
+    "id": 78,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 110,
+        "id": 75,
         "literals": [
           "solidity",
           "^",
@@ -78,16 +78,16 @@
           ".0"
         ],
         "nodeType": "PragmaDirective",
-        "src": "0:23:2"
+        "src": "0:23:1"
       },
       {
         "absolutePath": "/Users/johannes/Documents/Projects/web-projects/cherrypool/contracts/CherryToken.sol",
         "file": "./CherryToken.sol",
-        "id": 111,
+        "id": 76,
         "nodeType": "ImportDirective",
-        "scope": 113,
-        "sourceUnit": 436,
-        "src": "25:27:2",
+        "scope": 78,
+        "sourceUnit": 513,
+        "src": "25:27:1",
         "symbolAliases": [],
         "unitAlias": ""
       },
@@ -97,18 +97,18 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 112,
+        "id": 77,
         "linearizedBaseContracts": [
-          112
+          77
         ],
         "name": "CherryStake",
         "nodeType": "ContractDefinition",
         "nodes": [],
-        "scope": 113,
-        "src": "54:24:2"
+        "scope": 78,
+        "src": "54:25:1"
       }
     ],
-    "src": "0:78:2"
+    "src": "0:79:1"
   },
   "compiler": {
     "name": "solc",
@@ -116,7 +116,7 @@
   },
   "networks": {},
   "schemaVersion": "3.2.3",
-  "updatedAt": "2020-11-22T18:23:07.462Z",
+  "updatedAt": "2021-01-07T22:15:49.649Z",
   "devdoc": {
     "methods": {}
   },

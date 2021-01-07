@@ -7,10 +7,12 @@
   align-items: center;
   height: 70px;
   background-color: white;
+  box-shadow: 0 4px 16px 0 rgba(0,0,0,.08),0 8px 32px 0 rgba(0,0,0,.08);
 }
 
 .wallet-button:hover {
   box-shadow: 7px 7px 22px #e1e3e0, -7px -7px 22px #ffffff;
+  cursor: pointer;
 }
 
 .wallet-button__logo {
