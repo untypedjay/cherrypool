@@ -1,12 +1,12 @@
 const CherryToken = artifacts.require('CherryToken')
-const CherryExchange = artifacts.require('CherryExchange');
+const CherrySwap = artifacts.require('CherrySwap');
 
 module.exports = async function(deployer, network, accounts) {
-  await deployer.deploy(CherryToken);
+  await deployer.deploy(CherryToken, '1000000000000000000000000');
   const cherryToken = await CherryToken.deployed();
 
-  await deployer.deploy(CherryExchange, cherryToken.address);
-  const cherryExchange = await CherryExchange.deployed();
+  await deployer.deploy(CherrySwap, cherryToken.address);
+  const cherrySwap = await CherrySwap.deployed();
 
-  await cherryToken.transfer(cherryExchange.address, '1000000000000000000000000');
+  await cherryToken.transfer(cherrySwap.address, '1000000000000000000000000');
 };
