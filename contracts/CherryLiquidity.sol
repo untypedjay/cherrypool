@@ -1,11 +1,13 @@
 pragma solidity ^0.5.0;
 
 import "./CherryToken.sol";
+import "./CherrySwap.sol";
 
 contract CherryLiquidity {
   string public name = "CherryLiquidity";
   address public owner;
   CherryToken public cherryToken;
+  CherrySwap public cherrySwap;
   uint256 private ethBalance;
   uint256 private ctnBalance;
   uint256 private collectedFees = 0;
@@ -13,8 +15,9 @@ contract CherryLiquidity {
   mapping(address => uint256) private balancesInCtn;
   mapping(address => uint256) private unresolvedEth;
 
-  constructor(CherryToken _cherryToken, uint256 _initialEthSupply, uint256 _initialCtnSupply) public {
+  constructor(CherryToken _cherryToken, CherrySwap _cherrySwap, uint256 _initialEthSupply, uint256 _initialCtnSupply) public {
     cherryToken = _cherryToken;
+    cherrySwap = _cherrySwap;
     ethBalance = _initialEthSupply;
     ctnBalance = _initialCtnSupply;
     cherryToken.transferFrom(msg.sender, address(this), _initialCtnSupply);
@@ -31,12 +34,6 @@ contract CherryLiquidity {
 
   function getCollectedFees() public view returns (uint256 fees) {
     return collectedFees;
-  }
-
-  function addFees(uint256 _amount) public {
-    require(cherryToken.balanceOf(msg.sender) > _amount, "not enough CTN funds");
-    cherryToken.transferFrom(msg.sender, address(this), _amount);
-    collectedFees = collectedFees + _amount;
   }
 
   function addEthLiquidity() payable {
@@ -75,5 +72,21 @@ contract CherryLiquidity {
 
   function getPooledCtnFunds(address _owner) public returns (uint256 funds) {
     return balancesInCtn[_owner];
+  }
+
+  function processEthToCtn(address recipient, uint256 ctnAmount, uint256 fees) {
+    require(msg.sender == address(cherrySwap), "address not authorized");
+    addFees(fees);
+    cherryToken.transfer(recipient, ctnAmount);
+  }
+
+  function processCtnToEth(address recipient, uint256 ethAmount, uint256 fees) {
+    require(msg.sender == address(cherrySwap), "address not authorized");
+    addFees(fees);
+    recipient.transfer(ethAmount);
+  }
+
+  function addFees(uint256 _amount) private {
+    collectedFees = collectedFees + _amount;
   }
 }
