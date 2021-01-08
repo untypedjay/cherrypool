@@ -8,6 +8,8 @@ import TermsOfUse from './components/pages/TermsOfUse';
 import NotFound from './components/pages/NotFound';
 import './index.css';
 import { Web3Provider } from './context/Web3Context';
+import {CherryTokenProvider} from './context/CherryTokenContext';
+import {CherryLiquidityProvider} from './context/CherryLiquidityContext';
 
 ReactDOM.render(<App/>, document.querySelector('#root'));
 
@@ -15,22 +17,26 @@ function App() {
   return (
     <Web3Provider>
       <AccountProvider>
-        <BrowserRouter>
-          <Switch>
-            <Route exact path="/" component={LandingPage}></Route>
-            <Route exact path="/portfolio">
-              <Home/>
-            </Route>
-            <Route exact path="/swap">
-              <Home/>
-            </Route>
-            <Route exact path="/liquidity">
-              <Home/>
-            </Route>
-            <Route exact path="/terms-of-use" component={TermsOfUse}></Route>
-            <Route component={NotFound}></Route>
-          </Switch>
-        </BrowserRouter>
+        <CherryTokenProvider>
+          <CherryLiquidityProvider>
+            <BrowserRouter>
+              <Switch>
+                <Route exact path="/" component={LandingPage}></Route>
+                <Route exact path="/portfolio">
+                  <Home/>
+                </Route>
+                <Route exact path="/swap">
+                  <Home/>
+                </Route>
+                <Route exact path="/liquidity">
+                  <Home/>
+                </Route>
+                <Route exact path="/terms-of-use" component={TermsOfUse}></Route>
+                <Route component={NotFound}></Route>
+              </Switch>
+            </BrowserRouter>
+          </CherryLiquidityProvider>
+        </CherryTokenProvider>
       </AccountProvider>
     </Web3Provider>
   );

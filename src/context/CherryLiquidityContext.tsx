@@ -4,9 +4,9 @@ type Props = {
   children: ReactNode
 };
 
-type CherryLiquidityUpdate = (newLiquidity: object) => void;
+type CherryLiquidityUpdate = (newLiquidity: any) => void;
 
-const CherryLiquidityContext = React.createContext<object>({});
+const CherryLiquidityContext = React.createContext<any>({});
 const CherryLiquidityUpdateContext = React.createContext<CherryLiquidityUpdate | null>(null);
 
 export function useCherryLiquidity() {
@@ -18,9 +18,9 @@ export function useCherryLiquidityUpdate() {
 };
 
 export function CherryLiquidityProvider({ children }: Props) {
-  const [cherryLiquidity, setCherryLiquidity] = useState<object>({});
+  const [cherryLiquidity, setCherryLiquidity] = useState<any>({});
 
-  const updateCherryLiquidity = (newCherryLiquidity: object) => {
+  const updateCherryLiquidity = (newCherryLiquidity: any) => {
     setCherryLiquidity(newCherryLiquidity);
   };
 

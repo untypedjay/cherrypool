@@ -3161,12 +3161,12 @@
     "5777": {
       "events": {},
       "links": {},
-      "address": "0x05aa6a993802a74b8943048Ecf559FE6Cc19491d",
-      "transactionHash": "0x2fba7332673ecb9ca7b57ebc08c96d986f249ebc36cd8d082e57d006ba6cfae0"
+      "address": "0x00d5254753a09c4A78820f453C0DfB21411b52ed",
+      "transactionHash": "0xe9565fa3c76e332fbd1caa1c708b012b1fa41fc9df3f3449df124282f3f505cb"
     }
   },
   "schemaVersion": "3.2.3",
-  "updatedAt": "2021-01-07T22:16:08.413Z",
+  "updatedAt": "2021-01-08T00:36:33.033Z",
   "networkType": "ethereum",
   "devdoc": {
     "methods": {}

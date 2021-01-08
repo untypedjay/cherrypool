@@ -60,6 +60,7 @@ function WalletModal({ closeModal }: Props) {
       console.error('CherryToken contract not deployed to detected network!');
     }
 
+
     // load CherryLiquidity
     const cherryLiquidityData = (CherryLiquidity as any).networks[networkId];
     if (cherryLiquidityData) {
@@ -67,7 +68,6 @@ function WalletModal({ closeModal }: Props) {
       if (setCherryLiquidity) {
         setCherryLiquidity(cherryLiquidity);
       }
-      //const cherryTokenBalance = await cherryToken.methods.balanceOf().call();
     } else {
       console.error('CherryLiquidity contract not deployed to detected network!');
     }

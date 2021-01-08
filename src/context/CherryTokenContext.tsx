@@ -6,7 +6,7 @@ type Props = {
 
 type CherryTokenUpdate = (newToken: object) => void;
 
-const CherryTokenContext = React.createContext<object>({});
+const CherryTokenContext = React.createContext<any>({});
 const CherryTokenUpdateContext = React.createContext<CherryTokenUpdate | null>(null);
 
 export function useCherryToken() {
@@ -18,9 +18,9 @@ export function useCherryTokenUpdate() {
 };
 
 export function CherryTokenProvider({ children }: Props) {
-  const [cherryToken, setCherryToken] = useState<object>({});
+  const [cherryToken, setCherryToken] = useState<any>({});
 
-  const updateCherryToken = (newCherryToken: object) => {
+  const updateCherryToken = (newCherryToken: any) => {
     setCherryToken(newCherryToken);
   };
 
