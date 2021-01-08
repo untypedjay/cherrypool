@@ -55,6 +55,7 @@ function WalletModal({ closeModal }: Props) {
       const cherryToken = new web3.eth.Contract(CherryToken.abi, cherryTokenData.address);
       if (setCherryToken) {
         setCherryToken(cherryToken);
+        console.log(cherryToken)
       }
     } else {
       console.error('CherryToken contract not deployed to detected network!');

@@ -2,24 +2,28 @@ import React, { useState, useEffect } from 'react';
 import { useWeb3 } from '../../context/Web3Context';
 import { useAccount } from '../../context/AccountContext';
 import './AccountBalance.css';
-import {useCherryLiquidity} from '../../context/CherryLiquidityContext';
+import {useCherryToken} from '../../context/CherryTokenContext';
 
 function AccountBalance() {
   const web3: any = useWeb3();
   const account = useAccount();
   const [etherBalance, setEtherBalance] = useState(0);
   const [cherryTokenBalance, setCherryTokenBalance] = useState(0);
-  const cherryLiquidity = useCherryLiquidity();
+  const cherryToken = useCherryToken();
 
   useEffect(() => {
     web3.eth.getBalance(account, (err: any, balance: any) => {
       setEtherBalance(web3.utils.fromWei(balance, 'ether'));
     });
-    console.log(cherryLiquidity)
-    cherryLiquidity.methods.getCtnBalance().call().then((data: number) => {
+
+    /*cherryLiquidity.methods.getCtnBalance().call().then((data: number) => {
       setCherryTokenBalance(data);
+    });*/
+
+    console.log(cherryToken);
+    cherryToken.methods.balanceOf(account).call().then((ctnBalance: number) => {
+      setCherryTokenBalance(ctnBalance);
     });
-    //const cherryTokenBalance = await cherryToken.methods.balanceOf().call();
   }, []);
 
   return (

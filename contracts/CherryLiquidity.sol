@@ -8,27 +8,72 @@ contract CherryLiquidity {
   CherryToken public cherryToken;
   uint256 private ethBalance;
   uint256 private ctnBalance;
+  uint256 private collectedFees = 0;
+  mapping(address => uint256) private balancesInEth;
+  mapping(address => uint256) private balancesInCtn;
+  mapping(address => uint256) private unresolvedEth;
 
   constructor(CherryToken _cherryToken, uint256 _initialEthSupply, uint256 _initialCtnSupply) public {
     cherryToken = _cherryToken;
     ethBalance = _initialEthSupply;
     ctnBalance = _initialCtnSupply;
+    cherryToken.transferFrom(msg.sender, address(this), _initialCtnSupply);
     owner = msg.sender;
   }
 
-  function getEthBalance() public view returns (uint balance) {
-    return ethBalance;
+  function getEthBalance() public view returns (uint256 balance) {
+    return address(this).balance;
   }
 
-  function getCtnBalance() public view returns (uint balance) {
-    return ctnBalance;
+  function getCtnBalance() public view returns (uint256 balance) {
+    return cherryToken.balanceOf(address(this)) - collectedFees;
   }
 
-  function addLiquidity(uint _ethAmount, uint _ctnAmount) public {
-
+  function getCollectedFees() public view returns (uint256 fees) {
+    return collectedFees;
   }
 
-  function removeLiquidity(uint _ethAmount, uint _ctnAmount) public {
+  function addFees(uint256 _amount) public {
+    require(cherryToken.balanceOf(msg.sender) > _amount, "not enough CTN funds");
+    cherryToken.transferFrom(msg.sender, address(this), _amount);
+    collectedFees = collectedFees + _amount;
+  }
 
+  function addEthLiquidity() payable {
+    require(msg.value > 0, "ETH amount cannot be 0");
+    unresolvedEth[msg.sender] = unresolvedEth[msg.sender] + msg.value;
+  }
+
+  function addLiquidity(uint256 _ethAmount, uint256 _ctnAmount) public {
+    require(unresolvedEth[msg.sender] >= _ethAmount, "ETH not sent yet");
+    require(_ctnAmount > 0, "CTN amount cannot be 0");
+    require(cherryToken.balanceOf(msg.sender) > _ctnAmount, "not enough CTN funds");
+    unresolvedEth[msg.sender] = unresolvedEth[msg.sender] - _ethAmount;
+    cherryToken.transferFrom(msg.sender, address(this), _ctnAmount);
+    balancesInEth[msg.sender] = balancesInEth[msg.sender] + _ethAmount;
+    balancesInCtn[msg.sender] = balancesInCtn[msg.sender] + _ctnAmount;
+  }
+
+  function removeLiquidity(uint256 _ethAmount, uint256 _ctnAmount, uint256 reward) public {
+    require(_ethAmount > 0, "eth amount cannot be 0");
+    require(_ctnAmount > 0, "ctn amount cannot be 0");
+    require(getEthBalance() >= _ethAmount, "not enough ETH in pool");
+    require(getCtnBalance() >= _ctnAmount, "not enough CTN in pool");
+    require(balancesInEth[msg.sender] > _ethAmount, "not enough ETH deposited");
+    require(balancesInCtn[msg.sender] > _ctnAmount, "not enough CTN deposited");
+    require(collectedFees >= reward, "invalid reward");
+    uint256 ctnPayout = _ctnAmount + reward;
+    cherryToken.transferFrom(address(this), msg.sender, ctnPayout);
+    msg.sender.transfer(_ethAmount);
+    balancesInEth[msg.sender] = balancesInEth[msg.sender] - _ethAmount;
+    balancesInCtn[msg.sender] = balancesInCtn[msg.sender] - _ctnAmount;
+  }
+
+  function getPooledEthFunds(address _owner) public returns (uint256 funds) {
+    return balancesInEth[_owner];
+  }
+
+  function getPooledCtnFunds(address _owner) public returns (uint256 funds) {
+    return balancesInCtn[_owner];
   }
 }
