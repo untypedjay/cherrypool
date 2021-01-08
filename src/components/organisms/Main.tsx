@@ -11,11 +11,6 @@ interface Props {
 }
 
 function Main({ onAccountAddressClick, section }: Props) {
-  const web3 = useWeb3();
-
-  if (!web3) {
-    return <div>Loading Web3, accounts, and contract...</div>;
-  }
 
   return (
     <main className="main">

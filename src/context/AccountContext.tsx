@@ -18,7 +18,7 @@ export function useAccountUpdate() {
 };
 
 export function AccountProvider({ children }: Props) {
-  const [account, setAccount] = useState<string>('0x0');
+  const [account, setAccount] = useState<string>('');
 
   const updateAccount = (newAccount: string) => {
     setAccount(newAccount);

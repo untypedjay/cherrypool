@@ -5,7 +5,7 @@ type Props = {
 };
 
 const Web3Context = React.createContext({});
-const Web3UpdateContext = React.createContext({});
+const Web3UpdateContext = React.createContext<any | null>(null);
 
 export function useWeb3() {
   return useContext(Web3Context);
