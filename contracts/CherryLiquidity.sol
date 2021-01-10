@@ -74,13 +74,13 @@ contract CherryLiquidity {
     return balancesInCtn[_owner];
   }
 
-  function processEthToCtn(address recipient, uint256 ctnAmount, uint256 fees) {
+  function processEthToCtn(address recipient, uint256 ctnAmount, uint256 fees) public  {
     require(msg.sender == address(cherrySwap), "address not authorized");
     addFees(fees);
     cherryToken.transfer(recipient, ctnAmount);
   }
 
-  function processCtnToEth(address recipient, uint256 ethAmount, uint256 fees) {
+  function processCtnToEth(address recipient, uint256 ethAmount, uint256 fees) public {
     require(msg.sender == address(cherrySwap), "address not authorized");
     addFees(fees);
     recipient.transfer(ethAmount);
