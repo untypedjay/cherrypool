@@ -44,6 +44,9 @@ contract CherryToken {
   string private constant _symbol = "CTN";
   uint8 private constant _decimals = 18;
 
+  event Transfer(address indexed from, address indexed to, uint256 value);
+  event Approval(address indexed owner, address indexed spender, uint256 value);
+
   function name() public view returns (string memory) {
     return _name;
   }
@@ -131,12 +134,4 @@ contract CherryToken {
     _burn(account, amount);
     _approve(account, msg.sender, _allowances[account][msg.sender].sub(amount));
   }
-
-  //---------------------------------------------------
-
-
-
-
-  event Transfer(address indexed from, address indexed to, uint256 value);
-  event Approval(address indexed owner, address indexed spender, uint256 value);
 }

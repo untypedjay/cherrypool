@@ -4,24 +4,23 @@ import "./CherryToken.sol";
 import "./CherrySwap.sol";
 
 contract CherryLiquidity {
-  string public name = "CherryLiquidity";
-  address public owner;
-  CherryToken public cherryToken;
-  CherrySwap public cherrySwap;
-  uint256 private ethBalance;
-  uint256 private ctnBalance;
-  uint256 private collectedFees = 0;
-  mapping(address => uint256) private balancesInEth;
-  mapping(address => uint256) private balancesInCtn;
-  mapping(address => uint256) private unresolvedEth;
+  address private _owner;
+  CherryToken private _cherryToken;
+  CherrySwap private _cherrySwap;
+  uint256 private _ethBalance;
+  uint256 private _ctnBalance;
+  uint256 private _collectedFees = 0;
+  mapping(address => uint256) private _balancesInEth;
+  mapping(address => uint256) private _balancesInCtn;
+  mapping(address => uint256) private _unresolvedEth;
 
-  constructor(CherryToken _cherryToken, CherrySwap _cherrySwap, uint256 _initialEthSupply, uint256 _initialCtnSupply) public {
-    cherryToken = _cherryToken;
-    cherrySwap = _cherrySwap;
-    ethBalance = _initialEthSupply;
-    ctnBalance = _initialCtnSupply;
-    cherryToken.transferFrom(msg.sender, address(this), _initialCtnSupply);
-    owner = msg.sender;
+  constructor(CherryToken cherryToken, CherrySwap cherrySwap, uint256 initialEthSupply, uint256 initialCtnSupply) public {
+    _cherryToken = cherryToken;
+    _cherrySwap = cherrySwap;
+    _ethBalance = initialEthSupply;
+    _ctnBalance = initialCtnSupply;
+    _cherryToken.transferFrom(msg.sender, address(this), initialCtnSupply);
+    _owner = msg.sender;
   }
 
   function getEthBalance() public view returns (uint256 balance) {
@@ -29,54 +28,54 @@ contract CherryLiquidity {
   }
 
   function getCtnBalance() public view returns (uint256 balance) {
-    return cherryToken.balanceOf(address(this)) - collectedFees;
+    return _cherryToken.balanceOf(address(this)) - collectedFees;
   }
 
   function getCollectedFees() public view returns (uint256 fees) {
-    return collectedFees;
+    return _collectedFees;
   }
 
   function addEthLiquidity() payable {
     require(msg.value > 0, "ETH amount cannot be 0");
-    unresolvedEth[msg.sender] = unresolvedEth[msg.sender] + msg.value;
+    _unresolvedEth[msg.sender] = _unresolvedEth[msg.sender] + msg.value;
   }
 
-  function addLiquidity(uint256 _ethAmount, uint256 _ctnAmount) public {
-    require(unresolvedEth[msg.sender] >= _ethAmount, "ETH not sent yet");
-    require(_ctnAmount > 0, "CTN amount cannot be 0");
-    require(cherryToken.balanceOf(msg.sender) > _ctnAmount, "not enough CTN funds");
-    unresolvedEth[msg.sender] = unresolvedEth[msg.sender] - _ethAmount;
-    cherryToken.transferFrom(msg.sender, address(this), _ctnAmount);
-    balancesInEth[msg.sender] = balancesInEth[msg.sender] + _ethAmount;
-    balancesInCtn[msg.sender] = balancesInCtn[msg.sender] + _ctnAmount;
+  function addLiquidity(uint256 ethAmount, uint256 ctnAmount) public {
+    require(_unresolvedEth[msg.sender] >= ethAmount, "ETH not sent yet");
+    require(ctnAmount > 0, "CTN amount cannot be 0");
+    require(_cherryToken.balanceOf(msg.sender) > ctnAmount, "not enough CTN funds");
+    _unresolvedEth[msg.sender] = _unresolvedEth[msg.sender] - ethAmount;
+    _cherryToken.transferFrom(msg.sender, address(this), ctnAmount);
+    _balancesInEth[msg.sender] = _balancesInEth[msg.sender] + ethAmount;
+    _balancesInCtn[msg.sender] = _balancesInCtn[msg.sender] + ctnAmount;
   }
 
-  function removeLiquidity(uint256 _ethAmount, uint256 _ctnAmount, uint256 reward) public {
-    require(_ethAmount > 0, "eth amount cannot be 0");
-    require(_ctnAmount > 0, "ctn amount cannot be 0");
-    require(getEthBalance() >= _ethAmount, "not enough ETH in pool");
-    require(getCtnBalance() >= _ctnAmount, "not enough CTN in pool");
-    require(balancesInEth[msg.sender] > _ethAmount, "not enough ETH deposited");
-    require(balancesInCtn[msg.sender] > _ctnAmount, "not enough CTN deposited");
-    require(collectedFees >= reward, "invalid reward");
-    uint256 ctnPayout = _ctnAmount + reward;
-    cherryToken.transferFrom(address(this), msg.sender, ctnPayout);
-    msg.sender.transfer(_ethAmount);
-    balancesInEth[msg.sender] = balancesInEth[msg.sender] - _ethAmount;
-    balancesInCtn[msg.sender] = balancesInCtn[msg.sender] - _ctnAmount;
+  function removeLiquidity(uint256 ethAmount, uint256 ctnAmount, uint256 reward) public {
+    require(ethAmount > 0, "eth amount cannot be 0");
+    require(ctnAmount > 0, "ctn amount cannot be 0");
+    require(getEthBalance() >= ethAmount, "not enough ETH in pool");
+    require(getCtnBalance() >= ctnAmount, "not enough CTN in pool");
+    require(_balancesInEth[msg.sender] > ethAmount, "not enough ETH deposited");
+    require(_balancesInCtn[msg.sender] > ctnAmount, "not enough CTN deposited");
+    require(_collectedFees >= reward, "invalid reward");
+    uint256 ctnPayout = ctnAmount + reward;
+    _cherryToken.transferFrom(address(this), msg.sender, ctnPayout);
+    msg.sender.transfer(ethAmount);
+    _balancesInEth[msg.sender] = _balancesInEth[msg.sender] - ethAmount;
+    _balancesInCtn[msg.sender] = _balancesInCtn[msg.sender] - ctnAmount;
   }
 
-  function getPooledEthFunds(address _owner) public returns (uint256 funds) {
-    return balancesInEth[_owner];
+  function getPooledEthFunds(address owner) public returns (uint256 funds) {
+    return _balancesInEth[owner];
   }
 
-  function getPooledCtnFunds(address _owner) public returns (uint256 funds) {
-    return balancesInCtn[_owner];
+  function getPooledCtnFunds(address owner) public returns (uint256 funds) {
+    return _balancesInCtn[owner];
   }
 
   function processEthToCtn(address recipient, uint256 ctnAmount, uint256 fees) public onlyExchange  {
-    addFees(fees);
-    cherryToken.transfer(recipient, ctnAmount);
+    _addFees(fees);
+    _cherryToken.transfer(recipient, ctnAmount);
   }
 
   function processCtnToEth(address recipient, uint256 ethAmount, uint256 fees) public onlyExchange {
@@ -85,7 +84,7 @@ contract CherryLiquidity {
   }
 
   function addFees(uint256 _amount) private {
-    collectedFees = collectedFees + _amount;
+    _collectedFees = _collectedFees + amount;
   }
 
   modifier onlyExchange {
