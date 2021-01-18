@@ -7,7 +7,7 @@ contract CherryToken {
 
   mapping(address => uint256) private _balances;
   mapping(address => mapping(address => uint256)) private _allowances;
-  uint256 private _totalSupply;
+  uint256 private _totalSupply = 1000000000000000000000000; // 1 million
   string private constant _name = "Cherry Token";
   string private constant _symbol = "CTN";
   uint8 private constant _decimals = 18;
@@ -15,8 +15,8 @@ contract CherryToken {
   event Transfer(address indexed from, address indexed to, uint256 value);
   event Approval(address indexed owner, address indexed spender, uint256 value);
 
-  constructor(uint256 initialSupply) public {
-    _totalSupply = initialSupply;
+  constructor() public {
+    _balances[msg.sender] = _totalSupply;
   }
 
   function name() public pure returns (string memory) {

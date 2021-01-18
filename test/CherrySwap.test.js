@@ -1,4 +1,4 @@
-const CherryToken = artifacts.require('CherryToken');
+/*const CherryToken = artifacts.require('CherryToken');
 const CherrySwap = artifacts.require('CherrySwap');
 
 require('chai')
@@ -53,9 +53,9 @@ contract('CherrySwap', ([owner, user]) => {
       assert.equal(userCtnBalanceAfter.toString(), tokens('50'), 'user CTN balance correct after swapping');
       assert.equal(exchangeCtnBalanceAfter.toString(), tokens('99950'), 'exchange CTN balance correct after swapping');
     });*/
-  });
+ /* });
 
   describe('Exchange CTN for ETH', async () => {
 
   });
-});
+});*/

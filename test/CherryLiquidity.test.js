@@ -1,4 +1,4 @@
-const CherryLiquidity = artifacts.require('CherryLiquidity');
+/*const CherryLiquidity = artifacts.require('CherryLiquidity');
 const CherryToken = artifacts.require('CherryToken');
 
 require('chai')
@@ -38,4 +38,4 @@ contract('CherryLiquidity', ([owner, user]) => {
       assert.equal(ctnBalance.toString(), tokens('100000'));
     });
   });
-});
+});*/

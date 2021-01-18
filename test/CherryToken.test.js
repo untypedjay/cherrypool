@@ -11,11 +11,8 @@ function tokens(n) {
 contract('CherryToken', ([owner, user]) => {
   let cherryToken;
   before(async () => {
-    // load contracts
-    cherryToken = await CherryToken.new('1000000000000000000000000'); // 1 million tokens
-
-    // send all CTN to exchange
-    await cherryToken.transfer(owner, tokens('1000000'));
+    // load contract
+    cherryToken = await CherryToken.new();
   });
 
   describe('CherryToken deployment', async () => {
@@ -50,6 +47,38 @@ contract('CherryToken', ([owner, user]) => {
       await cherryToken.transfer(user, tokens('50'), { from: owner});
       const userBalance = await cherryToken.balanceOf(user);
       assert.equal(userBalance.toString(), tokens('50'));
+    });
+
+    it('transfers tokens from different account', async () => {
+
+    });
+  });
+
+  describe('CherryToken allowance', async () => {
+    it('adds allowance', async () => {
+      let ownerAllowsUser = await cherryToken.allowance(owner, user);
+      assert.equal(ownerAllowsUser.toString(), tokens('0'));
+      await cherryToken.approve(user, tokens('100'), { from: owner });
+      ownerAllowsUser = await cherryToken.allowance(owner, user);
+      assert.equal(ownerAllowsUser.toString(), tokens('100'));
+    });
+
+    it('increases allowance', async () => {
+      await cherryToken.approve(user, tokens('100'), { from: owner });
+      let ownerAllowsUser = await cherryToken.allowance(owner, user);
+      assert.equal(ownerAllowsUser.toString(), tokens('100'));
+      await cherryToken.increaseAllowance(user, tokens('20'), { from: owner });
+      ownerAllowsUser = await cherryToken.allowance(owner, user);
+      assert.equal(ownerAllowsUser.toString(), tokens('120'));
+    });
+
+    it('decreases allowance', async () => {
+      await cherryToken.approve(user, tokens('100'), { from: owner });
+      let ownerAllowsUser = await cherryToken.allowance(owner, user);
+      assert.equal(ownerAllowsUser.toString(), tokens('100'));
+      await cherryToken.decreaseAllowance(user, tokens('30'), { from: owner });
+      ownerAllowsUser = await cherryToken.allowance(owner, user);
+      assert.equal(ownerAllowsUser.toString(), tokens('70'));
     });
   });
 });
