@@ -37,66 +37,106 @@ library SafeMath {
 contract CherryToken {
   using SafeMath for uint256;
 
-  string private constant tokenName = "Cherry Token";
-  string private constant tokenSymbols = "CTN";
-  uint8 private constant tokenDecimals = 18;
-  uint256 private totalTokenSupply;
-  mapping(address => uint256) private balances;
-  mapping(address => mapping(address => uint256)) private allowed;
+  mapping(address => uint256) private _balances;
+  mapping(address => mapping(address => uint256)) private _allowances;
+  uint256 private _totalSupply;
+  string private constant _name = "Cherry Token";
+  string private constant _symbol = "CTN";
+  uint8 private constant _decimals = 18;
 
-  event Transfer(address indexed from, address indexed to, uint256 value);
-  event Approval(address indexed owner, address indexed spender, uint256 value);
-
-  constructor(uint256 total) public {
-    totalTokenSupply = total;
-    balances[msg.sender] = totalTokenSupply;
+  function name() public view returns (string memory) {
+    return _name;
   }
 
-  function name() public pure returns (string memory) {
-    return tokenName;
+  function symbol() public view returns (string memory) {
+    return _symbol;
   }
 
-  function symbol() public pure returns (string memory) {
-    return tokenSymbols;
-  }
-
-  function decimals() public pure returns (uint8) {
-    return tokenDecimals;
+  function decimals() public view returns (uint8) {
+    return _decimals;
   }
 
   function totalSupply() public view returns (uint256) {
-    return totalTokenSupply;
+    return _totalSupply;
   }
 
-  function balanceOf(address owner) public view returns (uint256 balance) {
-    return balances[owner];
+  function balanceOf(address account) public view returns (uint256) {
+    return _balances[account];
   }
 
-  function transfer(address to, uint256 value) public returns (bool success) {
-    require(value <= balances[msg.sender]);
-    balances[msg.sender] = balances[msg.sender].sub(value);
-    balances[to] = balances[to].add(value);
-    emit Transfer(msg.sender, to, value);
+  function transfer(address recipient, uint256 amount) public returns (bool) {
+    _transfer(msg.sender, recipient, amount);
     return true;
   }
 
-  function transferFrom(address from, address to, uint256 value) public returns (bool success) {
-    require(value <= balances[from]);
-    require(value <= allowed[from][msg.sender]);
-    balances[from] = balances[from].sub(value);
-    allowed[from][msg.sender] = allowed[from][msg.sender].sub(value);
-    balances[to] = balances[to].add(value);
-    emit Transfer(from, to, value);
+  function allowance(address owner, address spender) public view returns (uint256) {
+    return _allowances[owner][spender];
+  }
+
+  function approve(address spender, uint256 value) public returns (bool) {
+    _approve(msg.sender, spender, value);
     return true;
   }
 
-  function approve(address spender, uint256 value) public returns (bool success) {
-    allowed[msg.sender][spender] = value;
-    emit Approval(msg.sender, spender, value);
+  function transferFrom(address sender, address recipient, uint256 amount) public returns (bool) {
+    _transfer(sender, recipient, amount);
+    _approve(sender, msg.sender, _allowances[sender][msg.sender].sub(amount));
     return true;
   }
 
-  function allowance(address owner, address spender) public view returns (uint256 remaining) {
-    return allowed[owner][spender];
+  function increaseAllowance(address spender, uint256 addedValue) public returns (bool) {
+    _approve(msg.sender, spender, _allowances[msg.sender][spender].add(addedValue));
+    return true;
   }
+
+  function decreaseAllowance(address spender, uint256 subtractedValue) public returns (bool) {
+    _approve(msg.sender, spender, _allowances[msg.sender][spender].sub(subtractedValue));
+    return true;
+  }
+
+  function _transfer(address sender, address recipient, uint256 amount) internal {
+    require(sender != address(0), "CherryToken: transfer from the zero address");
+    require(recipient != address(0), "CherryToken: transfer to the zero address");
+
+    _balances[sender] = _balances[sender].sub(amount);
+    _balances[recipient] = _balances[recipient].add(amount);
+    emit Transfer(sender, recipient, amount);
+  }
+
+  function _mint(address account, uint256 amount) internal {
+    require(account != address(0), "CherryToken: mint to the zero address");
+
+    _totalSupply = _totalSupply.add(amount);
+    _balances[account] = _balances[account].add(amount);
+    emit Transfer(address(0), account, amount);
+  }
+
+  function _burn(address account, uint256 value) internal {
+    require(account != address(0), "CherryToken: burn from the zero address");
+
+    _totalSupply = _totalSupply.sub(value);
+    _balances[account] = _balances[account].sub(value);
+    emit Transfer(account, address(0), value);
+  }
+
+  function _approve(address owner, address spender, uint256 value) internal {
+    require(owner != address(0), "CherryToken: approve from the zero address");
+    require(spender != address(0), "CherryToken: approve to the zero address");
+
+    _allowances[owner][spender] = value;
+    emit Approval(owner, spender, value);
+  }
+
+  function _burnFrom(address account, uint256 amount) internal {
+    _burn(account, amount);
+    _approve(account, msg.sender, _allowances[account][msg.sender].sub(amount));
+  }
+
+  //---------------------------------------------------
+
+
+
+
+  event Transfer(address indexed from, address indexed to, uint256 value);
+  event Approval(address indexed owner, address indexed spender, uint256 value);
 }
