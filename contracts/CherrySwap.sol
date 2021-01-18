@@ -1,8 +1,8 @@
 pragma solidity ^0.5.0;
 
+import "./SafeMath.sol";
 import "./CherryToken.sol";
 import "./CherryLiquidity.sol";
-import "./SafeMath.sol";
 
 contract CherrySwap {
   using SafeMath for uint256;

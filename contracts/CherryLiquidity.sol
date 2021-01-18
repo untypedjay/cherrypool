@@ -1,9 +1,12 @@
 pragma solidity ^0.5.0;
 
+import "./SafeMath.sol";
 import "./CherryToken.sol";
 import "./CherrySwap.sol";
 
 contract CherryLiquidity {
+  using SafeMath for uint256;
+
   address private _owner;
   CherryToken private _cherryToken;
   CherrySwap private _cherrySwap;
@@ -30,7 +33,7 @@ contract CherryLiquidity {
   }
 
   function getCtnBalance() public view returns (uint256 balance) {
-    return _cherryToken.balanceOf(address(this)) - _collectedFees;
+    return _cherryToken.balanceOf(address(this)).sub(_collectedFees);
   }
 
   function getCollectedFees() public view returns (uint256 fees) {
@@ -39,17 +42,17 @@ contract CherryLiquidity {
 
   function addEthLiquidity() public payable {
     require(msg.value > 0, "ETH amount cannot be 0");
-    _unresolvedEth[msg.sender] = _unresolvedEth[msg.sender] + msg.value;
+    _unresolvedEth[msg.sender] = _unresolvedEth[msg.sender].add(msg.value);
   }
 
   function addLiquidity(uint256 ethAmount, uint256 ctnAmount) public {
     require(_unresolvedEth[msg.sender] >= ethAmount, "ETH not sent yet");
     require(ctnAmount > 0, "CTN amount cannot be 0");
     require(_cherryToken.balanceOf(msg.sender) > ctnAmount, "not enough CTN funds");
-    _unresolvedEth[msg.sender] = _unresolvedEth[msg.sender] - ethAmount;
+    _unresolvedEth[msg.sender] = _unresolvedEth[msg.sender].sub(ethAmount);
     _cherryToken.transferFrom(msg.sender, address(this), ctnAmount);
-    _balancesInEth[msg.sender] = _balancesInEth[msg.sender] + ethAmount;
-    _balancesInCtn[msg.sender] = _balancesInCtn[msg.sender] + ctnAmount;
+    _balancesInEth[msg.sender] = _balancesInEth[msg.sender].add(ethAmount);
+    _balancesInCtn[msg.sender] = _balancesInCtn[msg.sender].add(ctnAmount);
   }
 
   function removeLiquidity(uint256 ethAmount, uint256 ctnAmount, uint256 reward) public {
@@ -60,11 +63,11 @@ contract CherryLiquidity {
     require(_balancesInEth[msg.sender] > ethAmount, "not enough ETH deposited");
     require(_balancesInCtn[msg.sender] > ctnAmount, "not enough CTN deposited");
     require(_collectedFees >= reward, "invalid reward");
-    uint256 ctnPayout = ctnAmount + reward;
+    uint256 ctnPayout = ctnAmount.add(reward);
     _cherryToken.transferFrom(address(this), msg.sender, ctnPayout);
     msg.sender.transfer(ethAmount);
-    _balancesInEth[msg.sender] = _balancesInEth[msg.sender] - ethAmount;
-    _balancesInCtn[msg.sender] = _balancesInCtn[msg.sender] - ctnAmount;
+    _balancesInEth[msg.sender] = _balancesInEth[msg.sender].sub(ethAmount);
+    _balancesInCtn[msg.sender] = _balancesInCtn[msg.sender].sub(ctnAmount);
   }
 
   function getPooledEthFunds(address owner) public view returns (uint256 funds) {
@@ -86,7 +89,7 @@ contract CherryLiquidity {
   }
 
   function _addFees(uint256 amount) private {
-    _collectedFees = _collectedFees + amount;
+    _collectedFees = _collectedFees.add(amount);
   }
 
   modifier onlyExchange {
