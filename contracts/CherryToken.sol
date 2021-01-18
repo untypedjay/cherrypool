@@ -47,15 +47,15 @@ contract CherryToken {
   event Transfer(address indexed from, address indexed to, uint256 value);
   event Approval(address indexed owner, address indexed spender, uint256 value);
 
-  function name() public view returns (string memory) {
+  function name() public pure returns (string memory) {
     return _name;
   }
 
-  function symbol() public view returns (string memory) {
+  function symbol() public pure returns (string memory) {
     return _symbol;
   }
 
-  function decimals() public view returns (uint8) {
+  function decimals() public pure returns (uint8) {
     return _decimals;
   }
 

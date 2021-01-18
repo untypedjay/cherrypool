@@ -20,7 +20,7 @@ contract CherrySwap {
 
   function ethToCtn() public payable {
     require(msg.value > 0, "amount cannot be 0");
-    uint256 fees = msg.value * 0.02;
+    uint256 fees = msg.value * 2 / 10000; // 2%
     uint256 ctnAmount = (msg.value * 1000) - fees; // TODO: refactor
     require(_cherryLiquidity.getCtnBalance() >= ctnAmount, "not enough funds available");
     address(_cherryLiquidity).transfer(msg.value);
@@ -29,10 +29,10 @@ contract CherrySwap {
 
   function ctnToEth(uint256 amount) public {
     require(amount > 0, "amount cannot be 0");
-    uint256 fees = amount * 0.02;
+    uint256 fees = amount * 2 / 10000; // 2%
     uint256 ethAmount = (amount - fees) / 1000; // TODO: refactor
-    require(cherryLiquidity.getEthBalance() >= ethAmount, "not enough funds available");
-    _cherryToken.transferFrom(msg.sender, address(cherryLiquidity), amount);
+    require(_cherryLiquidity.getEthBalance() >= ethAmount, "not enough funds available");
+    _cherryToken.transferFrom(msg.sender, address(_cherryLiquidity), amount);
     _cherryLiquidity.processCtnToEth(msg.sender, ethAmount, fees);
   }
 }

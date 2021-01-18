@@ -23,19 +23,21 @@ contract CherryLiquidity {
     _owner = msg.sender;
   }
 
+  function() external payable { }
+
   function getEthBalance() public view returns (uint256 balance) {
     return address(this).balance;
   }
 
   function getCtnBalance() public view returns (uint256 balance) {
-    return _cherryToken.balanceOf(address(this)) - collectedFees;
+    return _cherryToken.balanceOf(address(this)) - _collectedFees;
   }
 
   function getCollectedFees() public view returns (uint256 fees) {
     return _collectedFees;
   }
 
-  function addEthLiquidity() payable {
+  function addEthLiquidity() public payable {
     require(msg.value > 0, "ETH amount cannot be 0");
     _unresolvedEth[msg.sender] = _unresolvedEth[msg.sender] + msg.value;
   }
@@ -78,17 +80,17 @@ contract CherryLiquidity {
     _cherryToken.transfer(recipient, ctnAmount);
   }
 
-  function processCtnToEth(address recipient, uint256 ethAmount, uint256 fees) public onlyExchange {
-    addFees(fees);
+  function processCtnToEth(address payable recipient, uint256 ethAmount, uint256 fees) public onlyExchange {
+    _addFees(fees);
     recipient.transfer(ethAmount);
   }
 
-  function addFees(uint256 _amount) private {
+  function _addFees(uint256 amount) private {
     _collectedFees = _collectedFees + amount;
   }
 
   modifier onlyExchange {
-    require(msg.sender == address(cherrySwap), "The caller must be an exchange contract");
+    require(msg.sender == address(_cherrySwap), "The caller must be an exchange contract");
     _;
   }
 }
