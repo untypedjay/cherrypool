@@ -15,6 +15,10 @@ contract CherryToken {
   event Transfer(address indexed from, address indexed to, uint256 value);
   event Approval(address indexed owner, address indexed spender, uint256 value);
 
+  constructor(uint256 initialSupply) public {
+    _totalSupply = initialSupply;
+  }
+
   function name() public pure returns (string memory) {
     return _name;
   }
