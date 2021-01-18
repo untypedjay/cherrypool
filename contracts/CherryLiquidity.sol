@@ -67,11 +67,11 @@ contract CherryLiquidity {
     _balancesInCtn[msg.sender] = _balancesInCtn[msg.sender] - ctnAmount;
   }
 
-  function getPooledEthFunds(address owner) public returns (uint256 funds) {
+  function getPooledEthFunds(address owner) public view returns (uint256 funds) {
     return _balancesInEth[owner];
   }
 
-  function getPooledCtnFunds(address owner) public returns (uint256 funds) {
+  function getPooledCtnFunds(address owner) public view returns (uint256 funds) {
     return _balancesInCtn[owner];
   }
 
