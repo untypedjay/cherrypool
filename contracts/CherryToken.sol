@@ -1,14 +1,14 @@
 pragma solidity ^0.5.0;
 
 library SafeMath {
-  function sub(uint256 _a, uint256 _b) internal pure returns (uint256) {
-    assert(_b <= _a);
-    return _a - _b;
+  function sub(uint256 a, uint256 b) internal pure returns (uint256) {
+    require(b <= a);
+    return a - b;
   }
 
-  function add(uint256 _a, uint256 _b) internal pure returns (uint256) {
-    uint256 c = _a + _b;
-    assert(c >= _a);
+  function add(uint256 a, uint256 b) internal pure returns (uint256) {
+    uint256 c = a + b;
+    require(c >= a);
     return c;
   }
 }
@@ -23,11 +23,11 @@ contract CherryToken {
   mapping(address => uint256) private balances;
   mapping(address => mapping(address => uint256)) private allowed;
 
-  event Transfer(address indexed _from, address indexed _to, uint256 _value);
-  event Approval(address indexed _owner, address indexed _spender, uint256 _value);
+  event Transfer(address indexed from, address indexed to, uint256 value);
+  event Approval(address indexed owner, address indexed spender, uint256 value);
 
-  constructor(uint256 _total) public {
-    totalTokenSupply = _total;
+  constructor(uint256 total) public {
+    totalTokenSupply = total;
     balances[msg.sender] = totalTokenSupply;
   }
 
@@ -47,35 +47,35 @@ contract CherryToken {
     return totalTokenSupply;
   }
 
-  function balanceOf(address _owner) public view returns (uint256 balance) {
-    return balances[_owner];
+  function balanceOf(address owner) public view returns (uint256 balance) {
+    return balances[owner];
   }
 
-  function transfer(address _to, uint256 _value) public returns (bool success) {
-    require(_value <= balances[msg.sender]);
-    balances[msg.sender] = balances[msg.sender].sub(_value);
-    balances[_to] = balances[_to].add(_value);
-    emit Transfer(msg.sender, _to, _value);
+  function transfer(address to, uint256 value) public returns (bool success) {
+    require(value <= balances[msg.sender]);
+    balances[msg.sender] = balances[msg.sender].sub(value);
+    balances[to] = balances[to].add(value);
+    emit Transfer(msg.sender, to, value);
     return true;
   }
 
-  function transferFrom(address _from, address _to, uint256 _value) public returns (bool success) {
-    require(_value <= balances[_from]);
-    require(_value <= allowed[_from][msg.sender]);
-    balances[_from] = balances[_from].sub(_value);
-    allowed[_from][msg.sender] = allowed[_from][msg.sender].sub(_value);
-    balances[_to] = balances[_to].add(_value);
-    emit Transfer(_from, _to, _value);
+  function transferFrom(address from, address to, uint256 value) public returns (bool success) {
+    require(value <= balances[from]);
+    require(value <= allowed[from][msg.sender]);
+    balances[from] = balances[from].sub(value);
+    allowed[from][msg.sender] = allowed[from][msg.sender].sub(value);
+    balances[to] = balances[to].add(value);
+    emit Transfer(from, to, value);
     return true;
   }
 
-  function approve(address _spender, uint256 _value) public returns (bool success) {
-    allowed[msg.sender][_spender] = _value;
-    emit Approval(msg.sender, _spender, _value);
+  function approve(address spender, uint256 value) public returns (bool success) {
+    allowed[msg.sender][spender] = value;
+    emit Approval(msg.sender, spender, value);
     return true;
   }
 
-  function allowance(address _owner, address _spender) public view returns (uint256 remaining) {
-    return allowed[_owner][_spender];
+  function allowance(address owner, address spender) public view returns (uint256 remaining) {
+    return allowed[owner][spender];
   }
 }
