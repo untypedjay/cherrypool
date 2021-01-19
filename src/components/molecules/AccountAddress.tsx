@@ -1,7 +1,8 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
+import { loadBlockchainData} from '../../helper/web3Helper';
+import { useLoggedIn, useLoggedInUpdate } from '../../context/LoggedInContext';
+import PrimaryButton from '../atoms/PrimaryButton';
 import './AccountAddress.css';
-import {loadBlockchainData} from '../../helper/web3Helper';
-import {useLoggedIn} from '../../context/LoggedInContext';
 
 interface Account {
   address: string,
@@ -16,6 +17,7 @@ interface Props {
 
 function AccountAddress({ onClick, providerImg }: Props) {
   const isLoggedIn = useLoggedIn();
+  const setIsLoggedIn = useLoggedInUpdate();
   const [address, setAddress] = useState('');
 
   useEffect(() => {
@@ -26,13 +28,20 @@ function AccountAddress({ onClick, providerImg }: Props) {
     }
   }, []);
 
+  const disconnectWallet = () => {
+    if (setIsLoggedIn) {
+      setIsLoggedIn(false);
+    }
+  };
+
   return (
-    <button className="account-details" onClick={onClick}>
+    <div className="account-details">
       <img className="account-details__img" src={providerImg} alt="Wallet Provider"/>
       <p className="account-details__text">
         { address }
       </p>
-    </button>
+      <PrimaryButton onClick={disconnectWallet}>Disconnect</PrimaryButton>
+    </div>
   );
 };
 
