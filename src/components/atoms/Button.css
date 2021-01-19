@@ -1,11 +1,10 @@
 .button {
-  padding: 0.6em 1.2em;
+  padding: 10px 16px;
+  line-height: 20px;
   border-radius: var(--rds-button);
   border: none;
-  min-width: 100px;
-  width: 100%;
-  font-weight: bold;
-  font-size: 1.1rem;
+  min-width: 80px;
+  font-size: 1.4rem;
   background-color: transparent;
 }
 

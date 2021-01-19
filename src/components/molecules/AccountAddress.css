@@ -1,5 +1,6 @@
 .account-details {
   display: flex;
+  justify-content: space-between;
   align-items: center;
   padding: 1em;
   color: var(--clr-text);

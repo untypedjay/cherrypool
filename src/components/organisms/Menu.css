@@ -8,16 +8,9 @@
   padding: 1em;
 }
 
-.menu > a {
-  height: 6.5em;
-}
-
 .menu__logo {
-  width: 3em;
-  height: 3em;
+  width: 100%;
   object-fit: contain;
-  flex-shrink: 3;
-  padding: 1em 0;
 }
 
 .menu__icon {
@@ -25,10 +18,7 @@
   margin-left: 1em;
 }
 
-.menu__header {
-  display: flex;
+.menu__network {
   padding: 1em;
   width: 100%;
-  align-items: center;
-  justify-content: space-between;
 }

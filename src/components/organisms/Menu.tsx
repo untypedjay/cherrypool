@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { FaChartLine, FaExchangeAlt, FaChartPie } from 'react-icons/fa';
 import MenuItem from '../molecules/MenuItem';
-import Logo from '../../images/logo-small.png';
+import Logo from '../../images/logo.png';
 import './Menu.css';
 
 interface Props {
@@ -14,13 +14,8 @@ function Menu({ selected }: Props) {
 
   return (
     <div className="menu">
-      <div className="menu__header">
-        <Link to="/"><img className="menu__logo" src={Logo} alt="Cherry Pool"/></Link>
-        <div className="menu__network">
-          <p>Network</p>
-          <p>Main</p>
-        </div>
-      </div>
+      <Link to="/"><img className="menu__logo" src={Logo} alt="Cherry Pool"/></Link>
+      <p className="menu__network">Network: Main</p>
 
       <MenuItem
         selected={selected === '/portfolio'}
