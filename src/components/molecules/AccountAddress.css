@@ -2,11 +2,11 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1em;
+  padding: 2em;
   color: var(--clr-text);
   background-color: var(--clr-primary);
   border: none;
-  border-radius: var(--rds-button);
+  border-radius: var(--rds-card);
 }
 
 .account-details:hover {
@@ -14,7 +14,7 @@
 }
 
 .account-details__img {
-  width: 1.5em;
+  width: 2.5em;
   padding-right: 1em;
 }
 

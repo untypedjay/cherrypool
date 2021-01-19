@@ -1,0 +1,41 @@
+.asset-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--clr-primary);
+  border-radius: var(--rds-card);
+  padding: 2em;
+}
+
+.asset-card__container {
+  display: flex;
+  height: 45px;
+}
+
+.asset-card__icon,
+.asset-card__icon--alt {
+  width: 2.5em;
+  height: 2.5em;
+  object-fit: contain;
+}
+
+.asset-card__icon--alt {
+  background-color: var(--clr-accent);
+  color: var(--clr-primary);
+  font-weight: bold;
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.asset-card__name-container {
+  padding-left: 2em;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.asset-card__text--bold {
+  font-weight: bold;
+}

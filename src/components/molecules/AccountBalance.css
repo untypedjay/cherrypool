@@ -1,6 +1,5 @@
 .account-balance {
-  background-color: var(--clr-primary);
-  border-radius: var(--rds-button);
-  padding: 1em;
-  color: var(--clr-text);
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
 }

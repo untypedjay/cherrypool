@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useLoggedIn } from '../../context/LoggedInContext';
-import './AccountBalance.css';
+import AssetCard from './AssetCard';
 import { loadBlockchainData } from '../../helper/web3Helper';
+import './AccountBalance.css';
+import EthLogo from '../../images/icn-eth.png';
+import CtnLogo from '../../images/logo-small.png';
 
 interface Account {
   address: string,
@@ -16,6 +19,8 @@ function AccountBalance() {
 
   useEffect(() => {
     const web3 = (window as any).web3;
+
+    web3.eth.net.getNetworkType().then(console.log);
 
     if (isLoggedIn) {
       loadBlockchainData().then((account) => {
@@ -34,8 +39,9 @@ function AccountBalance() {
 
   return (
     <div className="account-balance">
-      <p>Ether: { etherBalance } ETH</p>
-      <p>CherryToken: { cherryTokenBalance } CTN</p>
+      <AssetCard icon={EthLogo} abbreviation="ETH" name="Ether" balance={etherBalance}/>
+      <AssetCard icon={CtnLogo} abbreviation="CTN" name="CherryToken" balance={cherryTokenBalance}/>
+      <AssetCard abbreviation="ETH-CTN" name="Liquidity Token for ETH-CTN" balance={0}/>
     </div>
   );
 };
