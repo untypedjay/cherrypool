@@ -96,7 +96,15 @@ contract('CherryToken', ([owner, user]) => {
     });
 
     it('burns coins', async () => {
-
+      let totalSupply = await cherryToken.totalSupply();
+      assert.equal(totalSupply, tokens('1000100'));
+      let userBalance = await cherryToken.balanceOf(user);
+      assert.equal(userBalance.toString(), tokens('150'));
+      await cherryToken.burn(user, tokens('50'));
+      totalSupply = await cherryToken.totalSupply();
+      assert.equal(totalSupply, tokens('1000050'));
+      userBalance = await cherryToken.balanceOf(user);
+      assert.equal(userBalance.toString(), tokens('100'));
     });
   });
 });
