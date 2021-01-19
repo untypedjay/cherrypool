@@ -12,12 +12,10 @@ function AccountBalance() {
   const [cherryTokenBalance, setCherryTokenBalance] = useState(0);
 
   useEffect(() => {
-    const web3 = (window as any).web3;
-
-    web3.eth.net.getNetworkType().then(console.log);
-
     if (isLoggedIn) {
       loadBlockchainData().then((account) => {
+        const web3 = (window as any).web3;
+
         if (account) {
           web3.eth.getBalance(account.address, (err: any, balance: any) => {
             setEtherBalance(web3.utils.fromWei(balance, 'ether'));
@@ -27,7 +25,7 @@ function AccountBalance() {
             setCherryTokenBalance(ctnBalance);
           });
         }
-      })
+      });
     }
   }, []);
 
