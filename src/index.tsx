@@ -31,6 +31,9 @@ function App() {
                 <Route exact path="/liquidity">
                   <Home/>
                 </Route>
+                <Route exact path="/faucet">
+                  <Home/>
+                </Route>
                 <Route exact path="/terms-of-use" component={TermsOfUse}></Route>
                 <Route component={NotFound}></Route>
               </Switch>

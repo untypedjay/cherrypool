@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import { Link } from 'react-router-dom';
-import { FaChartLine, FaExchangeAlt, FaChartPie } from 'react-icons/fa';
+import { FaChartLine, FaExchangeAlt, FaChartPie, FaShower } from 'react-icons/fa';
 import MenuItem from '../molecules/MenuItem';
 import Logo from '../../images/logo.png';
 import './Menu.css';
@@ -51,6 +51,12 @@ function Menu({ selected }: Props) {
         selected={selected === '/liquidity'}
         route="/liquidity"
         icon={<FaChartPie className="menu__icon" size={iconSize}/>}
+      />
+
+      <MenuItem
+        selected={selected === '/faucet'}
+        route="/faucet"
+        icon={<FaShower className="menu__icon" size={iconSize}/>}
       />
     </div>
   );
