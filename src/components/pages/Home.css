@@ -5,7 +5,7 @@
 }
 
 .home__main {
-  background-color: var(--clr-primary);
+  background-color: var(--clr-secondary);
   width: 100%;
   display: flex;
   justify-content: center;

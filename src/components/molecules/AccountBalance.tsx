@@ -6,12 +6,6 @@ import './AccountBalance.css';
 import EthLogo from '../../images/icn-eth.png';
 import CtnLogo from '../../images/logo-small.png';
 
-interface Account {
-  address: string,
-  cherryToken: any,
-  cherryLiquidity: any
-}
-
 function AccountBalance() {
   const isLoggedIn = useLoggedIn();
   const [etherBalance, setEtherBalance] = useState(0);
@@ -39,9 +33,9 @@ function AccountBalance() {
 
   return (
     <div className="account-balance">
-      <AssetCard icon={EthLogo} abbreviation="ETH" name="Ether" balance={etherBalance}/>
-      <AssetCard icon={CtnLogo} abbreviation="CTN" name="CherryToken" balance={cherryTokenBalance}/>
-      <AssetCard abbreviation="ETH-CTN" name="Liquidity Token for ETH-CTN" balance={0}/>
+      { etherBalance != 0 && <AssetCard icon={EthLogo} abbreviation="ETH" name="Ether" balance={etherBalance}/> }
+      { cherryTokenBalance != 0 && <AssetCard icon={CtnLogo} abbreviation="CTN" name="CherryToken" balance={cherryTokenBalance}/> }
+      { 0 !== 0 && <AssetCard abbreviation="ETH-CTN" name="Liquidity Token for ETH-CTN" balance={0}/> }
     </div>
   );
 };
