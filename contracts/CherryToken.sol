@@ -78,19 +78,16 @@ contract CherryToken {
     return true;
   }
 
-  function burn(address account, uint256 value) public returns (bool) {
+  function burn(address account, uint256 amount) public returns (bool) {
     require(account != address(0), "CherryToken: burn from the zero address");
 
-    _totalSupply = _totalSupply.sub(value);
-    _balances[account] = _balances[account].sub(value);
-    emit Transfer(account, address(0), value);
+    _totalSupply = _totalSupply.sub(amount);
+    _balances[account] = _balances[account].sub(amount);
+    emit Transfer(account, address(0), amount);
     return true;
   }
 
   function _transfer(address sender, address recipient, uint256 amount) internal {
-    require(sender != address(0), "CherryToken: transfer from the zero address");
-    require(recipient != address(0), "CherryToken: transfer to the zero address");
-
     _balances[sender] = _balances[sender].sub(amount);
     _balances[recipient] = _balances[recipient].add(amount);
     emit Transfer(sender, recipient, amount);
