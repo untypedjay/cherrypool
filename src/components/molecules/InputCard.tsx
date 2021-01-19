@@ -4,20 +4,24 @@ import PrimaryButton from '../atoms/PrimaryButton';
 
 interface Props {
   action: (inputValue: number) => any
-  actionText: string
+  buttonText: string
 }
 
-function InputCard({ action, actionText }: Props) {
+function InputCard({ action, buttonText }: Props) {
   const [inputValue, setInputValue] = useState(0);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setInputValue((event as any).target.value);
+    if ((event as any).target.value <= 10000) {
+      setInputValue((event as any).target.value);
+    }
   };
 
   return (
     <div className="input-card">
-      <input type="number" value={inputValue} onChange={handleChange}/>
-      <PrimaryButton onClick={() => action(inputValue)}>{ actionText } { inputValue } CTN</PrimaryButton>
+      <input className="input-card__input" type="number" value={inputValue} onChange={handleChange}/>
+      <PrimaryButton onClick={() => action(inputValue)}>{ buttonText }</PrimaryButton>
     </div>
-  )
+  );
 }
+
+export default InputCard;

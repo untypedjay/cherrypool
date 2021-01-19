@@ -3,7 +3,7 @@
   line-height: 20px;
   border-radius: var(--rds-button);
   border: none;
-  min-width: 80px;
+  min-width: 125px;
   font-size: 1.4rem;
   background-color: transparent;
 }

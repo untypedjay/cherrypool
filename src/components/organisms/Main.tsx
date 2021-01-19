@@ -1,8 +1,8 @@
 import React from 'react';
-import { useWeb3 } from '../../context/Web3Context';
 import Portfolio from './Portfolio';
 import Swap from './Swap';
 import Liquidity from './Liquidity';
+import Faucet from './Faucet';
 import './Main.css';
 
 interface Props {
@@ -17,6 +17,7 @@ function Main({ onAccountAddressClick, section }: Props) {
       { section === '/portfolio' && <Portfolio onAccountAddressClick={onAccountAddressClick}/> }
       { section === '/swap' && <Swap/> }
       { section === '/liquidity' && <Liquidity/> }
+      { section === '/faucet' && <Faucet/> }
     </main>
   );
 };
