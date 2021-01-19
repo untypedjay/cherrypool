@@ -34,7 +34,6 @@ function AccountBalance() {
 
   return (
     <div className="account-balance">
-      <h3>Assets</h3>
       <p>Ether: { etherBalance } ETH</p>
       <p>CherryToken: { cherryTokenBalance } CTN</p>
     </div>
