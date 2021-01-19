@@ -1,29 +1,35 @@
 import React, { useState, useEffect } from 'react';
-import { useWeb3 } from '../../context/Web3Context';
-import { useAccount } from '../../context/AccountContext';
+import { useLoggedIn } from '../../context/LoggedInContext';
 import './AccountBalance.css';
-import {useCherryToken} from '../../context/CherryTokenContext';
+import { loadBlockchainData } from '../../helper/web3Helper';
+
+interface Account {
+  address: string,
+  cherryToken: any,
+  cherryLiquidity: any
+}
 
 function AccountBalance() {
-  const web3: any = useWeb3();
-  const account = useAccount();
+  const isLoggedIn = useLoggedIn();
   const [etherBalance, setEtherBalance] = useState(0);
   const [cherryTokenBalance, setCherryTokenBalance] = useState(0);
-  const cherryToken = useCherryToken();
 
   useEffect(() => {
-    web3.eth.getBalance(account, (err: any, balance: any) => {
-      setEtherBalance(web3.utils.fromWei(balance, 'ether'));
-    });
+    const web3 = (window as any).web3;
 
-    /*cherryLiquidity.methods.getCtnBalance().call().then((data: number) => {
-      setCherryTokenBalance(data);
-    });*/
+    if (isLoggedIn) {
+      loadBlockchainData().then((account) => {
+        if (account) {
+          web3.eth.getBalance(account.address, (err: any, balance: any) => {
+            setEtherBalance(web3.utils.fromWei(balance, 'ether'));
+          });
 
-    console.log(cherryToken);
-    cherryToken.methods.balanceOf(account).call().then((ctnBalance: number) => {
-      setCherryTokenBalance(ctnBalance);
-    });
+          account.cherryToken.methods.balanceOf(account.address).call().then((ctnBalance: number) => {
+            setCherryTokenBalance(ctnBalance);
+          });
+        }
+      })
+    }
   }, []);
 
   return (

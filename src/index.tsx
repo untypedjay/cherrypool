@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { AccountProvider } from './context/AccountContext';
+import { AccountProvider } from './context/LoggedInContext';
 import LandingPage from './components/pages/LandingPage';
 import Home from './components/pages/Home';
 import TermsOfUse from './components/pages/TermsOfUse';
