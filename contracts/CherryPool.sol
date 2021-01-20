@@ -1,4 +1,4 @@
-pragma solidity >=0.4.21 <0.6.0;
+pragma solidity ^0.5.16;
 
 import "./SafeMath.sol";
 import "./CherryToken.sol";
@@ -48,8 +48,7 @@ contract CherryPool {
 
   function addLiquidity(uint256 ctnAmount) public payable {
     require(msg.value > 0, "ETH amount cannot be 0");
-    require(ctnAmount > 0, "CTN amount cannot be 0");
-    require(_cherryToken.balanceOf(msg.sender) > ctnAmount, "not enough CTN funds");
+    require(_cherryToken.balanceOf(msg.sender) >= ctnAmount, "not enough CTN funds");
     _cherryToken.transferFrom(msg.sender, address(this), ctnAmount);
     _balancesInEth[msg.sender] = _balancesInEth[msg.sender].add(msg.value);
     _balancesInCtn[msg.sender] = _balancesInCtn[msg.sender].add(ctnAmount);

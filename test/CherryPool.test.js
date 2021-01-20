@@ -23,6 +23,42 @@ contract('CherryPool', ([owner, user]) => {
       const collectedFees = await cherryPool.getCollectedFees();
       assert.equal(collectedFees, 0);
     });
+
+    it('has no Ether balance yet', async () => {
+      const ethBalance = await cherryPool.getEthBalance();
+      assert.equal(ethBalance, 0);
+    });
+
+    it('has no CherryToken balance yet', async () => {
+      const ctnBalance = await cherryPool.getCtnBalance();
+      assert.equal(ctnBalance, 0);
+    });
+  });
+
+  describe('CherryPool addLiquidity', async () => {
+    it('adds liquidity', async () => {
+      await cherryToken.transfer(user, tokens('20000'), { from: owner });
+      let ctnBalance = await cherryToken.balanceOf(user);
+      assert.equal(ctnBalance, tokens('20000'));
+      let ethBalance = await web3.eth.getBalance(user);
+      assert.equal(ethBalance, tokens('100'));
+
+      let pooledEth = await cherryPool.getPooledEthFunds(user);
+      let pooledCtn = await cherryPool.getPooledCtnFunds(user);
+      assert.equal(pooledEth, 0);
+      assert.equal(pooledCtn, 0);
+
+      await cherryToken.approve(cherryPool.address, tokens('1000'), { from: user });
+      await cherryPool.addLiquidity.sendTransaction(tokens('1000'), { from: user, gas: 4000000, value: tokens('1')});
+
+      pooledEth = await cherryPool.getPooledEthFunds(user);
+      pooledCtn = await cherryPool.getPooledCtnFunds(user);
+      assert.equal(pooledEth, tokens('1'));
+      assert.equal(pooledCtn, tokens('1000'));
+
+      ctnBalance = await cherryToken.balanceOf(user);
+      assert.equal(ctnBalance, tokens('19000'));
+    });
   });
 
   /*describe('CherryLiquidity getEthBalance', async () => {
