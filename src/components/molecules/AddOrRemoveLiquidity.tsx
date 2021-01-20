@@ -23,7 +23,7 @@ function AddOrRemoveLiquidity({ action, buttonText }: Props) {
 
       <img className="add-or-remove-liquidity__image" src={CtnLogo}/>
       <input className="add-or-remove-liquidity__input" type="number" value={inputValue * 1000} disabled/>
-      <PrimaryButton onClick={() => action(inputValue)}>{ buttonText }</PrimaryButton>
+      <PrimaryButton onClick={() => { action(inputValue); setInputValue(0); }}>{ buttonText }</PrimaryButton>
     </div>
   );
 }

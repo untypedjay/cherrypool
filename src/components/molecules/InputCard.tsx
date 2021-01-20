@@ -19,7 +19,7 @@ function InputCard({ action, buttonText }: Props) {
   return (
     <div className="input-card">
       <input className="input-card__input" type="number" value={inputValue} onChange={handleChange}/>
-      <PrimaryButton onClick={() => action(inputValue)}>{ buttonText }</PrimaryButton>
+      <PrimaryButton onClick={() => { action(inputValue); setInputValue(0); }}>{ buttonText }</PrimaryButton>
     </div>
   );
 }
