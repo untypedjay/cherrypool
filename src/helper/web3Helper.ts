@@ -1,6 +1,6 @@
 import Web3 from 'web3';
 import CherryToken from '../abis/CherryToken.json';
-import CherryLiquidity from '../abis/CherryLiquidity.json';
+import CherryPool from '../abis/CherryPool.json';
 
 export async function loadBlockchainData() {
   if (!loadWeb3()) return null;
@@ -10,7 +10,7 @@ export async function loadBlockchainData() {
   const networkId = await web3.eth.net.getId();
 
   let cherryToken;
-  let cherryLiquidity;
+  let cherryPool;
 
   // load CherryToken
   const cherryTokenData = (CherryToken as any).networks[networkId];
@@ -21,16 +21,16 @@ export async function loadBlockchainData() {
     return null;
   }
 
-  // load CherryLiquidity
-  const cherryLiquidityData = (CherryLiquidity as any).networks[networkId];
-  if (cherryLiquidityData) {
-    cherryLiquidity = new web3.eth.Contract((CherryLiquidity as any).abi, cherryLiquidityData.address);
+  // load CherryPool
+  const cherryPoolData = (CherryPool as any).networks[networkId];
+  if (cherryPoolData) {
+    cherryPool = new web3.eth.Contract((CherryPool as any).abi, cherryPoolData.address);
   } else {
-    alert('CherryLiquidity contract not deployed to detected network!');
+    alert('CherryPool contract not deployed to detected network!');
     return null;
   }
 
-  return { address: accounts[0], cherryToken: cherryToken, cherryLiquidity: cherryLiquidity };
+  return { address: accounts[0], cherryToken: cherryToken, cherryPool: cherryPool };
 };
 
 function loadWeb3() {

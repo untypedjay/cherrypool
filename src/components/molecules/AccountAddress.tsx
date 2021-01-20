@@ -7,7 +7,7 @@ import './AccountAddress.css';
 interface Account {
   address: string,
   cherryToken: any,
-  cherryLiquidity: any
+  cherryPool: any
 }
 
 interface Props {
