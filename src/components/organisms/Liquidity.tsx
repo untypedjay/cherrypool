@@ -25,7 +25,7 @@ function Liquidity() {
           });
 
           account.cherryPool.methods.getPooledCtnFunds(account.address).call().then((value: number) => {
-            setPooledCtnBalance(value);
+            setPooledCtnBalance(parseFloat(web3.utils.fromWei(value.toString())));
           });
 
           account.cherryPool.methods.getEthBalance().call().then((value: number) => {
@@ -33,7 +33,7 @@ function Liquidity() {
           });
 
           account.cherryPool.methods.getCtnBalance().call().then((value: number) => {
-            setTotalCherryTokenPool(value);
+            setTotalCherryTokenPool(parseFloat(web3.utils.fromWei(value.toString())));
           });
         }
       });
@@ -48,9 +48,10 @@ function Liquidity() {
         const web3 = (window as any).web3;
 
         if (account) {
-          account.cherryToken.methods.approve(account.cherryPool._address, ethToSupply * 1000).send({ from: account.address }).then();
+          const ctnToSupply = ethToSupply * 1000;
+          account.cherryToken.methods.approve(account.cherryPool._address, web3.utils.toWei(ctnToSupply.toString())).send({ from: account.address }).then();
 
-          account.cherryPool.methods.addLiquidity(ethToSupply * 1000)
+          account.cherryPool.methods.addLiquidity(web3.utils.toWei(ctnToSupply.toString()))
             .send({ from: account.address, value: web3.utils.toWei(ethToSupply.toString()) })
             .then();
         }
@@ -59,7 +60,24 @@ function Liquidity() {
   };
 
   const removeLiquidity = (ethToRemove: number) => {
+    if (ethToRemove == 0) alert('ERROR: Amount cannot be 0!');
+    if (ethToRemove > pooledEthBalance) alert('ERROR: Amount is higher than pooled funds!');
 
+    if (isLoggedIn) {
+      loadBlockchainData().then((account) => {
+
+        const web3 = (window as any).web3;
+
+        if (account) {
+          const ctnToRemove = ethToRemove * 1000;
+          account.cherryPool.methods.removeLiquidity(
+            web3.utils.toWei(ethToRemove.toString()),
+            web3.utils.toWei(ctnToRemove.toString()),
+            web3.utils.toWei('0'))
+            .send({ from: account.address }).then();
+        }
+      });
+    }
   };
 
   return (
