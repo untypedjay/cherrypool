@@ -18,14 +18,11 @@ function Faucet() {
         const web3 = (window as any).web3;
 
         if (account) {
-          console.log(account.address);
           account.cherryToken.methods.mint(
             account.address,
-            web3.utils.toWei(amount.toString(), 'ether')
+            web3.utils.toWei(amount.toString())
           ).send({ from: account.address }).then((success: boolean) => {
-            success ?
-              alert(`Successfully added ${amount} CTN to your account.`) :
-              alert('ERROR: Something went wrong on our side.');
+            if (!success) alert('ERROR: Something went wrong.');
           });
         }
       });
@@ -33,7 +30,27 @@ function Faucet() {
   };
 
   const donateCTN = (amount: number) => {
-    // check if amount is lower than balance
+    if (amount == 0) alert('ERROR: Amount cannot be 0!');
+    if (isLoggedIn) {
+      loadBlockchainData().then((account) => {
+        const web3 = (window as any).web3;
+
+        if (account) {
+          account.cherryToken.methods.balanceOf(account.address).call().then((ctnBalance: number) => {
+            if (web3.utils.fromWei(ctnBalance) < amount) {
+              alert('ERROR: Account balance is lower than input value!');
+            } else {
+              account.cherryToken.methods.burn(
+                account.address,
+                web3.utils.toWei(amount.toString())
+              ).send({ from: account.address }).then((success: boolean) => {
+                if (!success) alert('ERROR: Something went wrong.');
+              });
+            }
+          });
+        }
+      });
+    }
   };
 
   return (

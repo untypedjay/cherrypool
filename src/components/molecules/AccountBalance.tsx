@@ -22,8 +22,7 @@ function AccountBalance() {
           });
 
           account.cherryToken.methods.balanceOf(account.address).call().then((ctnBalance: number) => {
-            console.log(ctnBalance);
-            setCherryTokenBalance(ctnBalance);
+            setCherryTokenBalance(web3.utils.fromWei(ctnBalance.toString()));
           });
         }
       });
@@ -33,8 +32,7 @@ function AccountBalance() {
   return (
     <div className="account-balance">
       { etherBalance != 0 && <AssetCard icon={EthLogo} abbreviation="ETH" name="Ether" balance={etherBalance}/> }
-      {/* cherryTokenBalance != 0 && <AssetCard icon={CtnLogo} abbreviation="CTN" name="CherryToken" balance={cherryTokenBalance}/> */}
-      <AssetCard icon={CtnLogo} abbreviation="CTN" name="CherryToken" balance={cherryTokenBalance}/>
+      { cherryTokenBalance != 0 && <AssetCard icon={CtnLogo} abbreviation="CTN" name="CherryToken" balance={cherryTokenBalance}/> }
       { 0 !== 0 && <AssetCard abbreviation="ETH-CTN" name="Liquidity Token for ETH-CTN" balance={0}/> }
     </div>
   );
