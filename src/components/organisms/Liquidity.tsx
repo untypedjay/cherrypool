@@ -25,7 +25,7 @@ function Liquidity() {
           });
 
           account.cherryPool.methods.getPooledCtnFunds(account.address).call().then((value: number) => {
-            setPooledCtnBalance(parseFloat(web3.utils.fromWei(value.toString())));
+            setPooledCtnBalance(value);
           });
 
           account.cherryPool.methods.getEthBalance().call().then((value: number) => {
@@ -33,7 +33,7 @@ function Liquidity() {
           });
 
           account.cherryPool.methods.getCtnBalance().call().then((value: number) => {
-            setTotalCherryTokenPool(parseFloat(web3.utils.fromWei(value.toString())));
+            setTotalCherryTokenPool(value);
           });
         }
       });
@@ -44,15 +44,15 @@ function Liquidity() {
     if (ethToSupply == 0) alert('ERROR: Amount cannot be 0!');
     if (isLoggedIn) {
       loadBlockchainData().then((account) => {
-        console.log(account)
+
         const web3 = (window as any).web3;
 
         if (account) {
+          account.cherryToken.methods.approve(account.cherryPool._address, ethToSupply * 1000).send({ from: account.address }).then();
+
           account.cherryPool.methods.addLiquidity(ethToSupply * 1000)
             .send({ from: account.address, value: web3.utils.toWei(ethToSupply.toString()) })
-            .then(() => {
-            console.log('done');
-          });
+            .then();
         }
       });
     }
@@ -73,7 +73,7 @@ function Liquidity() {
           apy={-99.99}
           poolValue1={pooledEthBalance}
           poolValue2={pooledCtnBalance}
-          poolShare={ pooledEthBalance / totalEtherPool }
+          poolShare={ pooledEthBalance / totalEtherPool * 100 }
         />
       </Section>
       <Section title="Total Liquidity">
