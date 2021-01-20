@@ -1,4 +1,4 @@
-/*const CherryLiquidity = artifacts.require('CherryLiquidity');
+const CherryPool = artifacts.require('CherryPool');
 const CherryToken = artifacts.require('CherryToken');
 
 require('chai')
@@ -9,23 +9,23 @@ function tokens(n) {
   return web3.utils.toWei(n, 'ether');
 }
 
-contract('CherryLiquidity', ([owner, user]) => {
+contract('CherryPool', ([owner, user]) => {
   let cherryToken;
-  let cherryLiquidity;
+  let cherryPool;
   before(async () => {
     // load contracts
-    cherryToken = await CherryToken.new('1000000000000000000000000'); // 1 million tokens
-    cherryLiquidity = await CherryLiquidity.new(cherryToken.address, '100000000000000000000', '100000000000000000000000') // 100 ETH, 100000 CTN
+    cherryToken = await CherryToken.new();
+    cherryPool = await CherryPool.new(cherryToken.address);
   });
 
-  describe('CherryLiquidity deployment', async () => {
-    it('has a name', async () => {
-      const name = await cherryLiquidity.name();
-      assert.equal(name, 'CherryLiquidity');
+  describe('CherryPool deployment', async () => {
+    it('has no collected fees yet', async () => {
+      const collectedFees = await cherryPool.getCollectedFees();
+      assert.equal(collectedFees, 0);
     });
   });
 
-  describe('CherryLiquidity getEthBalance', async () => {
+  /*describe('CherryLiquidity getEthBalance', async () => {
     it('displays ETH balance', async () => {
       const ethBalance = await cherryLiquidity.getEthBalance();
       assert.equal(ethBalance.toString(), tokens('100'));
@@ -37,5 +37,5 @@ contract('CherryLiquidity', ([owner, user]) => {
       const ctnBalance = await cherryLiquidity.getCtnBalance();
       assert.equal(ctnBalance.toString(), tokens('100000'));
     });
-  });
-});*/
+  });*/
+});
