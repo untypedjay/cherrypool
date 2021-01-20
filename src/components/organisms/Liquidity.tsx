@@ -40,8 +40,22 @@ function Liquidity() {
     }
   }, []);
 
-  const addLiquidity = (ethToSupply: number) => {
+  const addLiquidity = async (ethToSupply: number) => {
+    if (ethToSupply == 0) alert('ERROR: Amount cannot be 0!');
+    if (isLoggedIn) {
+      loadBlockchainData().then((account) => {
+        console.log(account)
+        const web3 = (window as any).web3;
 
+        if (account) {
+          account.cherryPool.methods.addLiquidity(ethToSupply * 1000)
+            .send({ from: account.address, value: web3.utils.toWei(ethToSupply.toString()) })
+            .then(() => {
+            console.log('done');
+          });
+        }
+      });
+    }
   };
 
   const removeLiquidity = (ethToRemove: number) => {
