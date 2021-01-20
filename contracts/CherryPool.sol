@@ -78,10 +78,10 @@ contract CherryPool {
 
   function swapCtnToEth(uint256 amount) public {
     require(amount > 0, "amount cannot be 0");
-    uint256 fees = amount.mul(100).div(1); // 10%
-    uint256 ethAmount = amount.sub(fees).div(1000); // TODO: refactor
+    uint256 ethAmount = amount.div(1000); // TODO: refactor
+    uint256 fees = ethAmount.mul(1).div(10); // 10%
     _addFees(fees);
-    require(getEthBalance() >= ethAmount, "not enough funds available");
+    require(getEthBalance() >= ethAmount.sub(fees), "not enough funds available");
     _cherryToken.transferFrom(msg.sender, address(this), amount);
     msg.sender.transfer(ethAmount);
   }
