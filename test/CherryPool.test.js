@@ -61,17 +61,29 @@ contract('CherryPool', ([owner, user]) => {
     });
   });
 
-  /*describe('CherryLiquidity getEthBalance', async () => {
-    it('displays ETH balance', async () => {
-      const ethBalance = await cherryLiquidity.getEthBalance();
-      assert.equal(ethBalance.toString(), tokens('100'));
+  describe('CherryPool removeLiquidity', async () => {
+    it('rejects removal due to invalid reward', async () => {
+      await cherryPool.removeLiquidity(tokens('1'), tokens('1000'), tokens('1'), { from: user }).should.be.rejected;
+    });
+
+    it('removes liquidity', async () => {
+      let ctnBalance = await cherryToken.balanceOf(user);
+      assert.equal(ctnBalance, tokens('19000'));
+
+      let pooledEth = await cherryPool.getPooledEthFunds(user);
+      let pooledCtn = await cherryPool.getPooledCtnFunds(user);
+      assert.equal(pooledEth, tokens('1'));
+      assert.equal(pooledCtn, tokens('1000'));
+
+      await cherryPool.removeLiquidity(tokens('0.5'), tokens('500'), 0, { from: user });
+
+      pooledEth = await cherryPool.getPooledEthFunds(user);
+      pooledCtn = await cherryPool.getPooledCtnFunds(user);
+      assert.equal(pooledEth, tokens('0.5'));
+      assert.equal(pooledCtn, tokens('500'));
+
+      ctnBalance = await cherryToken.balanceOf(user);
+      assert.equal(ctnBalance, tokens('19500'));
     });
   });
-
-  describe('CherryLiquidity getCtnBalance', async () => {
-    it('displays CTN balance', async () => {
-      const ctnBalance = await cherryLiquidity.getCtnBalance();
-      assert.equal(ctnBalance.toString(), tokens('100000'));
-    });
-  });*/
 });

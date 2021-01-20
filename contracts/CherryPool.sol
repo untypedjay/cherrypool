@@ -61,9 +61,9 @@ contract CherryPool {
     require(getCtnBalance() >= ctnAmount, "not enough CTN in pool");
     require(_balancesInEth[msg.sender] > ethAmount, "not enough ETH deposited");
     require(_balancesInCtn[msg.sender] > ctnAmount, "not enough CTN deposited");
-    require(_collectedFees < reward, "invalid reward");
+    require(_collectedFees >= reward, "invalid reward");
     uint256 ctnPayout = ctnAmount.add(reward);
-    _cherryToken.transferFrom(address(this), msg.sender, ctnPayout);
+    _cherryToken.transfer(msg.sender, ctnPayout);
     msg.sender.transfer(ethAmount);
     _balancesInEth[msg.sender] = _balancesInEth[msg.sender].sub(ethAmount);
     _balancesInCtn[msg.sender] = _balancesInCtn[msg.sender].sub(ctnAmount);
