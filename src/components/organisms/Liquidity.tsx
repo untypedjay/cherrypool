@@ -88,7 +88,7 @@ function Liquidity() {
           logo2={CtnIcon}
           abbreviation1="ETH"
           abbreviation2="CTN"
-          apy={-99.99}
+          apy={0}
           poolValue1={pooledEthBalance}
           poolValue2={pooledCtnBalance}
           poolShare={ pooledEthBalance / totalEtherPool * 100 }

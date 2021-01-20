@@ -16,22 +16,24 @@ contract('CherryPool', ([owner, user]) => {
     // load contracts
     cherryToken = await CherryToken.new();
     cherryPool = await CherryPool.new(cherryToken.address);
+    await cherryToken.transfer(cherryPool.address, '1000000000000000000000'); // 1000 CTN
+    await web3.eth.sendTransaction({ from: owner, to: cherryPool.address, value: web3.utils.toWei('1') });
   });
 
   describe('CherryPool deployment', async () => {
     it('has no collected fees yet', async () => {
       const collectedFees = await cherryPool.getCollectedFees();
-      assert.equal(collectedFees, 0);
+      assert.equal(web3.utils.fromWei(collectedFees), 0);
     });
 
-    it('has no Ether balance yet', async () => {
+    it('has initial Ether pool', async () => {
       const ethBalance = await cherryPool.getEthBalance();
-      assert.equal(ethBalance, 0);
+      assert.equal(web3.utils.fromWei(ethBalance), 1);
     });
 
-    it('has no CherryToken balance yet', async () => {
+    it('has initial CherryToken pool', async () => {
       const ctnBalance = await cherryPool.getCtnBalance();
-      assert.equal(ctnBalance, 0);
+      assert.equal(web3.utils.fromWei(ctnBalance), 1000);
     });
   });
 
@@ -84,6 +86,31 @@ contract('CherryPool', ([owner, user]) => {
 
       ctnBalance = await cherryToken.balanceOf(user);
       assert.equal(ctnBalance, tokens('19500'));
+    });
+  });
+
+  describe('CherryPool swapEthToCtn', async () => {
+    it('exchanges ETH to CTN', async () => {
+      let ctnBalance = await cherryToken.balanceOf(user);
+      assert.equal(ctnBalance.toString(), tokens('19500'));
+
+      await cherryPool.swapEthToCtn.sendTransaction({ from: user, gas: 4000000, value: tokens('1')});
+
+      ctnBalance = await cherryToken.balanceOf(user);
+      assert.equal(ctnBalance.toString(), tokens('20400'));
+    });
+  });
+
+  describe('CherryPool swapCtnToEth', async () => {
+    it('exchanges CTN to ETH', async () => {
+      let ctnBalance = await cherryToken.balanceOf(user);
+      assert.equal(ctnBalance, tokens('20400'));
+
+      await cherryToken.approve(cherryPool.address, tokens('1000'), { from: user });
+      await cherryPool.swapCtnToEth(tokens('1000'), { from: user });
+
+      ctnBalance = await cherryToken.balanceOf(user);
+      assert.equal(ctnBalance, tokens('19400'));
     });
   });
 });

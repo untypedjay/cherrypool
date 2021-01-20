@@ -20,9 +20,7 @@ contract CherryPool {
     _owner = msg.sender;
   }
 
-  function () external payable {
-    swapEthToCtn();
-  }
+  function () external payable {}
 
   function getEthBalance() public view returns (uint256 balance) {
     return address(this).balance;
@@ -43,8 +41,6 @@ contract CherryPool {
   function getPooledCtnFunds(address owner) public view returns (uint256 funds) {
     return _balancesInCtn[owner];
   }
-
-  //-------------------
 
   function addLiquidity(uint256 ctnAmount) public payable {
     require(msg.value > 0, "ETH amount cannot be 0");
@@ -73,20 +69,20 @@ contract CherryPool {
 
   function swapEthToCtn() public payable {
     require(msg.value > 0, "amount cannot be 0");
-    uint256 fees = msg.value.mul(10).div(10000); // 10%
+    uint256 fees = msg.value.mul(100).div(1); // 10%
     uint256 ctnAmount = msg.value.mul(1000).sub(fees); // TODO: refactor
-    require(getCtnBalance() >= ctnAmount, "not enough funds available");
     _addFees(fees);
+    require(getCtnBalance() >= ctnAmount, "not enough funds available");
     _cherryToken.transfer(msg.sender, ctnAmount);
   }
 
   function swapCtnToEth(uint256 amount) public {
     require(amount > 0, "amount cannot be 0");
-    uint256 fees = amount.mul(10).div(10000); // 10%
+    uint256 fees = amount.mul(100).div(1); // 10%
     uint256 ethAmount = amount.sub(fees).div(1000); // TODO: refactor
+    _addFees(fees);
     require(getEthBalance() >= ethAmount, "not enough funds available");
     _cherryToken.transferFrom(msg.sender, address(this), amount);
-    _addFees(fees);
     msg.sender.transfer(ethAmount);
   }
 
