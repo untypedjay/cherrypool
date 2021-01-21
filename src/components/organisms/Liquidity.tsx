@@ -38,10 +38,14 @@ function Liquidity() {
         }
       });
     }
-  }, []);
+  }, [isLoggedIn]);
 
   const addLiquidity = async (ethToSupply: number) => {
-    if (ethToSupply == 0) alert('ERROR: Amount cannot be 0!');
+    if (ethToSupply === 0) {
+      alert('ERROR: Amount cannot be 0!');
+      return;
+    }
+
     if (isLoggedIn) {
       loadBlockchainData().then((account) => {
 
@@ -60,7 +64,11 @@ function Liquidity() {
   };
 
   const removeLiquidity = (ethToRemove: number) => {
-    if (ethToRemove == 0) alert('ERROR: Amount cannot be 0!');
+    if (ethToRemove === 0) {
+      alert('ERROR: Amount cannot be 0!');
+      return;
+    }
+
     if (ethToRemove > pooledEthBalance) alert('ERROR: Amount is higher than pooled funds!');
 
     if (isLoggedIn) {

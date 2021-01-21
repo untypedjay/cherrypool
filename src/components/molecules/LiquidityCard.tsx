@@ -16,8 +16,8 @@ function LiquidityCard({ logo1, logo2, abbreviation1, abbreviation2, apy, poolVa
   return (
     <div className="liquidity-card">
       <div className="liquidity-card__pool">
-        <img className="liquidity-card__image" src={logo1}/>
-        <img className="liquidity-card__image" src={logo2}/>
+        <img className="liquidity-card__image" src={logo1} alt="Asset Icon"/>
+        <img className="liquidity-card__image" src={logo2} alt="Asset Icon"/>
         <p>{ abbreviation1 }-{ abbreviation2 }</p>
       </div>
       <p className="liquidity-card__apy">{ apy }% APY</p>

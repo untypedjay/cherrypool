@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Section from '../templates/Section';
 import InputCard from '../molecules/InputCard';
 import {useLoggedIn} from '../../context/LoggedInContext';
@@ -8,7 +8,11 @@ function Faucet() {
   const isLoggedIn = useLoggedIn();
 
   const requestCTN = (amount: number) => {
-    if (amount == 0) alert('ERROR: Amount cannot be 0!');
+    if (amount === 0) {
+      alert('ERROR: Amount cannot be 0!');
+      return;
+    }
+
     if (isLoggedIn) {
       loadBlockchainData().then((account) => {
         const web3 = (window as any).web3;
@@ -26,7 +30,11 @@ function Faucet() {
   };
 
   const donateCTN = (amount: number) => {
-    if (amount == 0) alert('ERROR: Amount cannot be 0!');
+    if (amount === 0) {
+      alert('ERROR: Amount cannot be 0!');
+      return;
+    }
+
     if (isLoggedIn) {
       loadBlockchainData().then((account) => {
         const web3 = (window as any).web3;

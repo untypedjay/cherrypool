@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
 import './AssetCard.css';
 
 interface Props {
@@ -13,7 +13,7 @@ function AssetCard({ icon, abbreviation, name, balance }: Props) {
     <div className="asset-card">
       <div className="asset-card__container">
         { icon ?
-          <img className="asset-card__icon" src={icon}/> :
+          <img className="asset-card__icon" src={icon} alt="Asset Icon"/> :
           <div className="asset-card__icon--alt"><p>{ abbreviation.charAt(0) }</p></div>
         }
         <div className="asset-card__name-container">

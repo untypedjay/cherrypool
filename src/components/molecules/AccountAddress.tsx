@@ -11,11 +11,10 @@ interface Account {
 }
 
 interface Props {
-    onClick: () => any;
     providerImg: string;
 };
 
-function AccountAddress({ onClick, providerImg }: Props) {
+function AccountAddress({ providerImg }: Props) {
   const isLoggedIn = useLoggedIn();
   const setIsLoggedIn = useLoggedInUpdate();
   const [address, setAddress] = useState('');
@@ -26,7 +25,7 @@ function AccountAddress({ onClick, providerImg }: Props) {
         if (blockchainData) setAddress(blockchainData.address);
       });
     }
-  }, []);
+  }, [isLoggedIn]);
 
   const disconnectWallet = () => {
     if (setIsLoggedIn) {

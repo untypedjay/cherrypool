@@ -18,10 +18,10 @@ function AddOrRemoveLiquidity({ action, buttonText }: Props) {
 
   return (
     <div className="add-or-remove-liquidity">
-      <img className="add-or-remove-liquidity__image" src={EthLogo}/>
+      <img className="add-or-remove-liquidity__image" src={EthLogo} alt="Ethereum Logo"/>
       <input className="add-or-remove-liquidity__input" type="number" value={inputValue} onChange={handleChange}/>
 
-      <img className="add-or-remove-liquidity__image" src={CtnLogo}/>
+      <img className="add-or-remove-liquidity__image" src={CtnLogo} alt="CherryToken Logo"/>
       <input className="add-or-remove-liquidity__input" type="number" value={inputValue * 1000} disabled/>
       <PrimaryButton onClick={() => { action(inputValue); setInputValue(0); }}>{ buttonText }</PrimaryButton>
     </div>

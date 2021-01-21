@@ -1,11 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import { Link } from 'react-router-dom';
 import { FaChartLine, FaExchangeAlt, FaChartPie, FaShower } from 'react-icons/fa';
+import { useLoggedIn } from '../../context/LoggedInContext';
 import MenuItem from '../molecules/MenuItem';
+import { loadBlockchainData } from '../../helper/web3Helper';
 import Logo from '../../images/logo.png';
 import './Menu.css';
-import {useLoggedIn} from '../../context/LoggedInContext';
-import {loadBlockchainData} from '../../helper/web3Helper';
 
 interface Props {
   selected: string;
@@ -28,7 +28,7 @@ function Menu({ selected }: Props) {
         }
       });
     }
-  }, []);
+  }, [isLoggedIn]);
 
   return (
     <div className="menu">

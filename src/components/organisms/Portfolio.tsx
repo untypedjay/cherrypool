@@ -12,7 +12,7 @@ function Portfolio({ onAccountAddressClick }: Props) {
   return (
     <div className="portfolio">
       <Section title="Address">
-        <AccountAddress onClick={onAccountAddressClick} providerImg={MetamaskLogo}/>
+        <AccountAddress providerImg={MetamaskLogo}/>
       </Section>
 
       <Section title="Assets">
