@@ -54,6 +54,7 @@ contract CherryPool {
     _cherryToken.transfer(msg.sender, ctnPayout);
     msg.sender.transfer(ethAmount);
     _liquidityTokenBalances[msg.sender] = _liquidityTokenBalances[msg.sender].sub(liquidityTokenAmount);
+    _collectedFees = _collectedFees.sub(reward);
   }
 
   function swapEthToCtn() public payable returns (uint256 receivedCtn) {

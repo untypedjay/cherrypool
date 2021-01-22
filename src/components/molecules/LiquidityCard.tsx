@@ -1,4 +1,5 @@
 import React from 'react';
+import { round } from '../../helper/converter';
 import './LiquidityCard.css';
 
 interface Props {
@@ -13,6 +14,8 @@ interface Props {
 }
 
 function LiquidityCard({ logo1, logo2, abbreviation1, abbreviation2, apy, poolValue1, poolValue2, poolShare }: Props) {
+  const realPoolSharePercentage = (poolShare * 100) > 100 ? 100 : (poolShare * 100) || 0;
+
   return (
     <div className="liquidity-card">
       <div className="liquidity-card__pool">
@@ -20,10 +23,10 @@ function LiquidityCard({ logo1, logo2, abbreviation1, abbreviation2, apy, poolVa
         <img className="liquidity-card__image" src={logo2} alt="Asset Icon"/>
         <p>{ abbreviation1 }-{ abbreviation2 }</p>
       </div>
-      <p className="liquidity-card__apy">{ apy }% APY</p>
-      <div className="liquidity-card__detail"><span>Pooled { abbreviation1 }</span><span>{ poolValue1 }</span></div>
-      <div className="liquidity-card__detail"><span>Pooled { abbreviation2 }</span><span>{ poolValue2 }</span></div>
-      <div className="liquidity-card__detail"><span>Pool share</span><span>{ poolShare }%</span></div>
+      <p className="liquidity-card__detail"><span>Possible Reward</span><span>{ realPoolSharePercentage / apy * 100 }</span></p>
+      <div className="liquidity-card__detail"><span>Pooled { abbreviation1 }</span><span>{ poolValue1 || '0' }</span></div>
+      <div className="liquidity-card__detail"><span>Pooled { abbreviation2 }</span><span>{ poolValue2 || '0' }</span></div>
+      <div className="liquidity-card__detail"><span>Pool share</span><span>{ realPoolSharePercentage }%</span></div>
     </div>
   );
 }

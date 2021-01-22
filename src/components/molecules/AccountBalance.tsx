@@ -14,6 +14,8 @@ function AccountBalance() {
   const [liquidityTokenBalance, setLiquidityTokenBalance] = useState(0);
   const [pooledEthBalance, setPooledEthBalance] = useState(0);
   const [pooledCtnBalance, setPooledCtnBalance] = useState(0);
+  const [totalEtherPool, setTotalEtherPool] = useState(0);
+  const [totalCherryTokenPool, setTotalCherryTokenPool] = useState(0);
 
   useEffect(() => {
     if (isLoggedIn) {
@@ -21,8 +23,6 @@ function AccountBalance() {
         const web3 = (window as any).web3;
 
         if (account) {
-          let pooledEthBalance = 0;
-          let pooledCtnBalance = 0;
           web3.eth.getBalance(account.address, (err: any, balance: any) => {
             setEtherBalance(web3.utils.fromWei(balance, 'ether'));
           });
@@ -31,23 +31,27 @@ function AccountBalance() {
             setCherryTokenBalance(web3.utils.fromWei(ctnBalance.toString()));
           });
 
-          account.cherryPool.methods.getPooledEthFunds(account.address).call().then((value: number) => {
-            setPooledEthBalance(parseFloat(web3.utils.fromWei(value.toString())));
+          account.cherryPool.methods.getLiquidityTokenBalances(account.address).call().then((value: number) => {
+            setLiquidityTokenBalance(web3.utils.fromWei(value.toString()));
           });
 
-          account.cherryPool.methods.getPooledCtnFunds(account.address).call().then((value: number) => {
-            setPooledCtnBalance(parseFloat(web3.utils.fromWei(value.toString())));
+          account.cherryPool.methods.getEthBalance().call().then((value: number) => {
+            setTotalEtherPool(parseFloat(web3.utils.fromWei(value.toString())));
+          });
+
+          account.cherryPool.methods.getCtnBalance().call().then((value: number) => {
+            setTotalCherryTokenPool(parseFloat(web3.utils.fromWei(value.toString())));
           });
         }
-
-
       });
     }
   }, [isLoggedIn]);
 
   useEffect(() => {
-    setLiquidityTokenBalance(round(Math.sqrt(pooledEthBalance * pooledCtnBalance), 8));
-  }, [pooledEthBalance, pooledCtnBalance]);
+    const poolPercentage = liquidityTokenBalance / Math.sqrt(totalEtherPool * totalCherryTokenPool);
+    setPooledEthBalance(poolPercentage * totalEtherPool);
+    setPooledCtnBalance(poolPercentage * totalCherryTokenPool);
+  }, [totalEtherPool, totalCherryTokenPool]);
 
 
   return (
