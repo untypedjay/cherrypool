@@ -11356,12 +11356,12 @@
         }
       },
       "links": {},
-      "address": "0x8D8f4ABc92DBeB8fcd025E2fC9d172F2704fDEc4",
-      "transactionHash": "0xfbb348f72fa41debf19e4b4ebfe5da9f0bfee1737c44ece879cc1054ea8d0423"
+      "address": "0x8F2C550d3e0ffeA758D88387adbB154e30906D92",
+      "transactionHash": "0xfcd6c61f5cbea47b3717a60a300518daa828fa6e7f7d5098f1c006f53f9722e5"
     }
   },
   "schemaVersion": "3.2.3",
-  "updatedAt": "2021-01-22T09:11:23.293Z",
+  "updatedAt": "2021-01-22T09:50:05.107Z",
   "networkType": "ethereum",
   "devdoc": {
     "methods": {}
