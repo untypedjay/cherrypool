@@ -17,8 +17,8 @@ function LandingPage() {
         <h1 className="landing-page__heading">Finance, but</h1>
         <h1 className="landing-page__heading">sweet as cherries</h1>
         <div className="landing-page__paragraph-container">
-          <p className="landing-page__paragraph">A decentralized, open source DeFi platform.</p>
-          <p className="landing-page__paragraph">Exchange ETH for CTN or start earning passive income by providing liquidity.</p>
+          <p className="landing-page__paragraph">A decentralized, open source DeFi testing platform.</p>
+          <p className="landing-page__paragraph">Learn more about Decentralized Finance by using Liquidity Pools and a Decentralized Exchange.</p>
         </div>
         <div className="landing-page__cta">
           <PrimaryButton onClick={() => serviceRef.current.scrollIntoView()}>Get Started</PrimaryButton>
@@ -26,14 +26,14 @@ function LandingPage() {
       </div>
 
       <div className="landing-page__services" ref={serviceRef}>
-        <Card heading="Borrow Crypto" button={<PrimaryButton onClick={() => history.push('/borrow')}>Borrow</PrimaryButton>}>
-          <p className="landing-page__paragraph--card">Borrow cryptocurrencies and ERC20 tokens without the bureaucracy of a centralized agency.</p>
+        <Card heading="Liquidity Pool" button={<PrimaryButton onClick={() => history.push('/lending')}>Borrow</PrimaryButton>}>
+          <p className="landing-page__paragraph--card">Provide liquidity and earn passive income.</p>
         </Card>
-        <Card heading="Exchange Crypto" button={<PrimaryButton onClick={() => history.push('/exchange')}>Exchange</PrimaryButton>}>
-          <p className="landing-page__paragraph--card">Exchange your cryptocurrencies and ERC20 tokens in a decentralized way.</p>
+        <Card heading="DEX" button={<PrimaryButton onClick={() => history.push('/swap')}>Exchange</PrimaryButton>}>
+          <p className="landing-page__paragraph--card">Exchange your Ether for CherryTokens and vice versa completely decentralized.</p>
         </Card>
-        <Card heading="Stake Crypto" button={<PrimaryButton onClick={() => history.push('/stake')}>Stake</PrimaryButton>}>
-          <p className="landing-page__paragraph--card">Do more with your crypto assets. Invest them and earn passive income.</p>
+        <Card heading="Token Faucet" button={<PrimaryButton onClick={() => history.push('/faucet')}>Stake</PrimaryButton>}>
+          <p className="landing-page__paragraph--card">Request CherryTokens from the faucet for testing purposes.</p>
         </Card>
       </div>
 

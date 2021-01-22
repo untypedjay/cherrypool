@@ -9,8 +9,9 @@
 }
 
 .menu__logo {
-  width: 100%;
+  width: 10em;
   object-fit: contain;
+  padding: 1em;
 }
 
 .menu__icon {
