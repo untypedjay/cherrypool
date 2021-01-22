@@ -34,9 +34,9 @@ function AccountAddress({ providerImg }: Props) {
   };
 
   return (
-    <div className="account-details">
-      <img className="account-details__img" src={providerImg} alt="Wallet Provider"/>
-      <p className="account-details__text">
+    <div className="account-address">
+      <img className="account-address__img" src={providerImg} alt="Wallet Provider"/>
+      <p className="account-address__text">
         { address }
       </p>
       <PrimaryButton onClick={disconnectWallet}>Disconnect</PrimaryButton>

@@ -1,4 +1,4 @@
-.account-address {
+.network-card {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -9,11 +9,11 @@
   border-radius: var(--rds-card);
 }
 
-.account-address__img {
-  width: 2.5em;
-  padding-right: 1em;
+.network-card__text {
+  font-size: 1.1rem;
 }
 
-.account-address__text {
+.network-card__text--bold {
   font-size: 1.1rem;
+  font-weight: bold;
 }

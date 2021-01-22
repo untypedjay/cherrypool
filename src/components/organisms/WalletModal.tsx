@@ -18,11 +18,11 @@ function WalletModal({ closeModal }: Props) {
   const [isLoading, setIsLoading] = useState(false);
 
   const connectToCoinbase = () => {
-    alert('Not yet implemented!');
+    alert('Coming soon...');
   };
 
   const connectToLedger = () => {
-    alert('Not yet implemented!');
+    alert('Coming soon...');
   };
 
   const connectToMetamask = async () => {

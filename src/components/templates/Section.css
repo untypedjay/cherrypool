@@ -2,3 +2,9 @@
   font-size: 1.5rem;
   padding: 1em 0 0.5em 0;
 }
+
+.section__container {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}

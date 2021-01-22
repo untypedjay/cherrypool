@@ -2,6 +2,7 @@ import React from 'react';
 import Section from '../templates/Section';
 import AccountAddress from '../molecules/AccountAddress';
 import AccountBalance from '../molecules/AccountBalance';
+import NetworkCard from '../molecules/NetworkCard';
 import MetamaskLogo from '../../images/icn-metamask.svg';
 
 function Portfolio() {
@@ -9,6 +10,7 @@ function Portfolio() {
     <div className="portfolio">
       <Section title="Address">
         <AccountAddress providerImg={MetamaskLogo}/>
+        <NetworkCard/>
       </Section>
 
       <Section title="Assets">
