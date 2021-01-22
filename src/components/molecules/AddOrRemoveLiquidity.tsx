@@ -5,7 +5,7 @@ import EthLogo from '../../images/icn-eth.png';
 import CtnLogo from '../../images/logo-small.png';
 
 interface Props {
-  action: (ethSupply: number) => any,
+  action: (ethSupply: number) => void,
   buttonText: string
 }
 

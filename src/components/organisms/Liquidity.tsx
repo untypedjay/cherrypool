@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useLoggedIn } from '../../context/LoggedInContext';
 import Section from '../templates/Section';
-import AddLiquidity from '../molecules/AddOrRemoveLiquidity';
+import AddOrRemoveLiquidity from '../molecules/AddOrRemoveLiquidity';
 import LiquidityCard from '../molecules/LiquidityCard';
 import { loadBlockchainData } from '../../helper/web3Helper';
 import EthIcon from '../../images/icn-eth.png';
@@ -109,10 +109,10 @@ function Liquidity() {
         </>
       </Section>
       <Section title="Add Liquidity">
-        <AddLiquidity action={addLiquidity} buttonText="Supply"/>
+        <AddOrRemoveLiquidity action={addLiquidity} buttonText="Supply"/>
       </Section>
       <Section title="Remove Liquidity">
-        <AddLiquidity action={removeLiquidity} buttonText="Confirm"/>
+        <AddOrRemoveLiquidity action={removeLiquidity} buttonText="Confirm"/>
       </Section>
     </div>
   );

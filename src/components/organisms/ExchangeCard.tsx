@@ -1,11 +1,26 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, {useState} from 'react';
+import PrimaryButton from '../atoms/PrimaryButton';
 import './ExchangeCard.css';
 
-function ExchangeCard() {
+interface Props {
+  logo: string,
+  action: (ethSupply: number) => void,
+  buttonText: string
+}
+
+function ExchangeCard({ logo, action, buttonText }: Props) {
+  const [inputValue, setInputValue] = useState(0);
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setInputValue((event as any).target.value);
+  };
+
   return (
     <div className="exchange-card">
+      <img className="exchange-card__image" src={logo} alt="Ethereum Logo"/>
+      <input className="exchange-card__input" type="number" value={inputValue} onChange={handleChange}/>
 
+      <PrimaryButton onClick={() => { action(inputValue); setInputValue(0); }}>{ buttonText }</PrimaryButton>
     </div>
   );
 }

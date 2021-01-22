@@ -42,8 +42,6 @@ contract('CherryPool', ([owner, user]) => {
       await cherryToken.transfer(user, tokens('20000'), { from: owner });
       let ctnBalance = await cherryToken.balanceOf(user);
       assert.equal(ctnBalance, tokens('20000'));
-      let ethBalance = await web3.eth.getBalance(user);
-      assert.equal(ethBalance, tokens('100'));
 
       let pooledEth = await cherryPool.getPooledEthFunds(user);
       let pooledCtn = await cherryPool.getPooledCtnFunds(user);
