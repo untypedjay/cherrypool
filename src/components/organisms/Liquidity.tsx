@@ -7,6 +7,7 @@ import { loadBlockchainData } from '../../helper/web3Helper';
 import { round } from '../../helper/converter';
 import EthIcon from '../../images/icn-eth.png';
 import CtnIcon from '../../images/logo-small.png';
+import './Liquidity.css';
 
 function Liquidity() {
   const isLoggedIn = useLoggedIn();
@@ -14,6 +15,7 @@ function Liquidity() {
   const [pooledCtnBalance, setPooledCtnBalance] = useState(0);
   const [totalEtherPool, setTotalEtherPool] = useState(0);
   const [totalCherryTokenPool, setTotalCherryTokenPool] = useState(0);
+  const [pooledRewards, setPooledRewards] = useState(0);
 
   useEffect(() => {
     if (isLoggedIn) {
@@ -35,6 +37,10 @@ function Liquidity() {
 
           account.cherryPool.methods.getCtnBalance().call().then((value: number) => {
             setTotalCherryTokenPool(parseFloat(web3.utils.fromWei(value.toString())));
+          });
+
+          account.cherryPool.methods.getCollectedFees().call().then((value: number) => {
+            setPooledRewards(parseFloat(web3.utils.fromWei(value.toString())));
           });
         }
       });
@@ -94,24 +100,28 @@ function Liquidity() {
 
   return (
     <div className="liquidity">
-      <Section title="Your Liquidity">
-        <LiquidityCard
-          logo1={EthIcon}
-          logo2={CtnIcon}
-          abbreviation1="ETH"
-          abbreviation2="CTN"
-          apy={0}
-          poolValue1={pooledEthBalance}
-          poolValue2={pooledCtnBalance}
-          poolShare={ round(pooledEthBalance / totalEtherPool * 100, 2) }
-        />
-      </Section>
-      <Section title="Total Liquidity">
-        <>
-          <p>Total Pooled ETH: { totalEtherPool }</p>
-          <p>Total Pooled CTN: { totalCherryTokenPool }</p>
-        </>
-      </Section>
+      <div className="liquidity__container">
+        <Section title="Your Liquidity">
+          <LiquidityCard
+            logo1={EthIcon}
+            logo2={CtnIcon}
+            abbreviation1="ETH"
+            abbreviation2="CTN"
+            apy={0}
+            poolValue1={pooledEthBalance}
+            poolValue2={pooledCtnBalance}
+            poolShare={ round(pooledEthBalance / totalEtherPool * 100, 2) }
+          />
+        </Section>
+        <Section title="Total Liquidity">
+          <div className="liquidity__info-card">
+            <p>Total Pooled ETH: { totalEtherPool }</p>
+            <p>Total Pooled CTN: { totalCherryTokenPool }</p>
+            <p>Total Pooled Rewards (in CTN): { pooledRewards }</p>
+          </div>
+        </Section>
+      </div>
+
       <Section title="Add Liquidity">
         <AddOrRemoveLiquidity action={addLiquidity} buttonText="Supply"/>
       </Section>

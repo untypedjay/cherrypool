@@ -1,0 +1,11 @@
+.liquidity__container {
+  display: flex;
+  justify-content: space-between;
+  gap: 1em;
+}
+
+.liquidity__info-card {
+  background-color: var(--clr-primary);
+  padding: 2em;
+  border-radius: var(--rds-card);
+}
