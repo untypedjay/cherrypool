@@ -4,11 +4,7 @@ import AccountAddress from '../molecules/AccountAddress';
 import AccountBalance from '../molecules/AccountBalance';
 import MetamaskLogo from '../../images/icn-metamask.svg';
 
-interface Props {
-  onAccountAddressClick: () => void;
-}
-
-function Portfolio({ onAccountAddressClick }: Props) {
+function Portfolio() {
   return (
     <div className="portfolio">
       <Section title="Address">

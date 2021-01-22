@@ -6,15 +6,14 @@ import Faucet from './Faucet';
 import './Main.css';
 
 interface Props {
-  onAccountAddressClick: () => any;
   section: string;
 }
 
-function Main({ onAccountAddressClick, section }: Props) {
+function Main({ section }: Props) {
 
   return (
     <main className="main">
-      { section === '/portfolio' && <Portfolio onAccountAddressClick={onAccountAddressClick}/> }
+      { section === '/portfolio' && <Portfolio/> }
       { section === '/swap' && <Swap/> }
       { section === '/liquidity' && <Liquidity/> }
       { section === '/faucet' && <Faucet/> }

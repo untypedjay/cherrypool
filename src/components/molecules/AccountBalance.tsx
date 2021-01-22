@@ -31,8 +31,8 @@ function AccountBalance() {
 
   return (
     <div className="account-balance">
-      { etherBalance !== 0 && <AssetCard icon={EthLogo} abbreviation="ETH" name="Ether" balance={etherBalance}/> }
-      { cherryTokenBalance !== 0 && <AssetCard icon={CtnLogo} abbreviation="CTN" name="CherryToken" balance={cherryTokenBalance}/> }
+      { etherBalance > 0 && <AssetCard icon={EthLogo} abbreviation="ETH" name="Ether" balance={etherBalance}/> }
+      { cherryTokenBalance > 0 && <AssetCard icon={CtnLogo} abbreviation="CTN" name="CherryToken" balance={cherryTokenBalance}/> }
       { 0 !== 0 && <AssetCard abbreviation="ETH-CTN" name="Liquidity Token for ETH-CTN" balance={0}/> }
     </div>
   );

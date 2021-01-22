@@ -69,7 +69,10 @@ function Liquidity() {
       return;
     }
 
-    if (ethToRemove > pooledEthBalance) alert('ERROR: Amount is higher than pooled funds!');
+    if (ethToRemove > pooledEthBalance) {
+      alert('ERROR: Amount is higher than pooled funds!');
+      return;
+    }
 
     if (isLoggedIn) {
       loadBlockchainData().then((account) => {

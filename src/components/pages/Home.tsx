@@ -17,7 +17,7 @@ function Home() {
       { walletModal && <WalletModal closeModal={() => setWalletModal(false)}/> }
       <Menu selected={location.pathname}/>
       { isLoggedIn
-        ? <Main onAccountAddressClick={() => setWalletModal(true)} section={location.pathname}/>
+        ? <Main section={location.pathname}/>
         : <main className="home__main"><NoWallet onClick={() => setWalletModal(true)}/></main>
       }
     </div>
