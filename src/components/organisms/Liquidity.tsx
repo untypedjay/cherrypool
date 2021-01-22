@@ -4,6 +4,7 @@ import Section from '../templates/Section';
 import AddOrRemoveLiquidity from '../molecules/AddOrRemoveLiquidity';
 import LiquidityCard from '../molecules/LiquidityCard';
 import { loadBlockchainData } from '../../helper/web3Helper';
+import { round } from '../../helper/converter';
 import EthIcon from '../../images/icn-eth.png';
 import CtnIcon from '../../images/logo-small.png';
 
@@ -102,7 +103,7 @@ function Liquidity() {
           apy={0}
           poolValue1={pooledEthBalance}
           poolValue2={pooledCtnBalance}
-          poolShare={ pooledEthBalance / totalEtherPool * 100 }
+          poolShare={ round(pooledEthBalance / totalEtherPool * 100, 2) }
         />
       </Section>
       <Section title="Total Liquidity">
