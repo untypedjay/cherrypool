@@ -43,18 +43,14 @@ contract('CherryPool', ([owner, user]) => {
       let ctnBalance = await cherryToken.balanceOf(user);
       assert.equal(ctnBalance, tokens('20000'));
 
-      let pooledEth = await cherryPool.getPooledEthFunds(user);
-      let pooledCtn = await cherryPool.getPooledCtnFunds(user);
-      assert.equal(pooledEth, 0);
-      assert.equal(pooledCtn, 0);
+      let liquidityTokenBalance = await cherryPool.getLiquidityTokenBalances(user);
+      assert.equal(liquidityTokenBalance, 0);
 
       await cherryToken.approve(cherryPool.address, tokens('1000'), { from: user });
-      await cherryPool.addLiquidity.sendTransaction(tokens('1000'), { from: user, gas: 4000000, value: tokens('1')});
+      await cherryPool.addLiquidity.sendTransaction(tokens('1000'), Math.sqrt(tokens('1'), tokens('1000')), { from: user, gas: 4000000, value: tokens('1')});
 
-      pooledEth = await cherryPool.getPooledEthFunds(user);
-      pooledCtn = await cherryPool.getPooledCtnFunds(user);
-      assert.equal(pooledEth, tokens('1'));
-      assert.equal(pooledCtn, tokens('1000'));
+      liquidityTokenBalance = await cherryPool.getLiquidityTokenBalances(user);
+      assert.equal(liquidityTokenBalance, Math.sqrt(tokens('1'), tokens('1000')));
 
       ctnBalance = await cherryToken.balanceOf(user);
       assert.equal(ctnBalance, tokens('19000'));
@@ -70,17 +66,14 @@ contract('CherryPool', ([owner, user]) => {
       let ctnBalance = await cherryToken.balanceOf(user);
       assert.equal(ctnBalance, tokens('19000'));
 
-      let pooledEth = await cherryPool.getPooledEthFunds(user);
-      let pooledCtn = await cherryPool.getPooledCtnFunds(user);
-      assert.equal(pooledEth, tokens('1'));
-      assert.equal(pooledCtn, tokens('1000'));
+      let liquidityTokenBalance = await cherryPool.getLiquidityTokenBalances(user);
+      assert.equal(liquidityTokenBalance, Math.sqrt(tokens('1'), tokens('1000')));
 
-      await cherryPool.removeLiquidity(tokens('0.5'), tokens('500'), 0, { from: user });
+      await cherryPool.removeLiquidity(tokens('0.5'), tokens('500'), Math.round(Math.sqrt(tokens('0.5'), tokens('500'))), 0, { from: user });
 
-      pooledEth = await cherryPool.getPooledEthFunds(user);
-      pooledCtn = await cherryPool.getPooledCtnFunds(user);
-      assert.equal(pooledEth, tokens('0.5'));
-      assert.equal(pooledCtn, tokens('500'));
+      liquidityTokenBalance = await cherryPool.getLiquidityTokenBalances(user);
+      const expectedLiquidityTokenBalance = Math.sqrt(tokens('1'), tokens('1000')) - Math.round(Math.sqrt(tokens('0.5'), tokens('500')));
+      assert.equal(liquidityTokenBalance.toString(), expectedLiquidityTokenBalance);
 
       ctnBalance = await cherryToken.balanceOf(user);
       assert.equal(ctnBalance, tokens('19500'));
