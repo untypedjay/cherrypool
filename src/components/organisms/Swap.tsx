@@ -35,6 +35,22 @@ function Swap() {
       alert('ERROR: Amount cannot be 0!');
       return;
     }
+
+    if (isLoggedIn) {
+      loadBlockchainData().then((account) => {
+        const web3 = (window as any).web3;
+
+        if (account) {
+          account.cherryToken.methods.approve(account.cherryPool._address, web3.utils.toWei(ctnAmount.toString())).send({ from: account.address }).then();
+
+          account.cherryPool.methods.swapCtnToEth(web3.utils.toWei(ctnAmount.toString()))
+            .send({ from: account.address }).then((response: any) => {
+            const decoded = web3.utils.hexToNumberString(response.events[0].raw.data);
+            alert(`Changed ${ctnAmount} CTN to ${web3.utils.fromWei(decoded) / 1000} ETH.`);
+          });
+        }
+      });
+    }
   };
 
   return (
