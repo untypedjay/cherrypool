@@ -12,9 +12,7 @@ function MenuItem({ selected, route, icon }: Props) {
   const history = useHistory();
 
   const calculateStyling = () => {
-    if (selected) {
-      return 'menu-item menu-item--selected';
-    }
+    if (selected) return 'menu-item menu-item--selected';
     return 'menu-item';
   };
 
@@ -24,6 +22,6 @@ function MenuItem({ selected, route, icon }: Props) {
       <p className="menu-item__text">{ `${route.charAt(1).toUpperCase()}${route.substring(2, route.length)}` }</p>
     </button>
   );
-};
+}
 
 export default MenuItem;
