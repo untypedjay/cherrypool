@@ -41,6 +41,6 @@ function Menu({ selected }: Props) {
       />
     </div>
   );
-};
+}
 
 export default Menu;
