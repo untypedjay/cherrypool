@@ -1,15 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { Web3Provider } from './context/Web3Context';
+import {CherryTokenProvider} from './context/CherryTokenContext';
+import {CherryLiquidityProvider} from './context/CherryLiquidityContext';
 import { AccountProvider } from './context/LoggedInContext';
 import LandingPage from './components/pages/LandingPage';
 import Home from './components/pages/Home';
 import TermsOfUse from './components/pages/TermsOfUse';
 import NotFound from './components/pages/NotFound';
 import './index.css';
-import { Web3Provider } from './context/Web3Context';
-import {CherryTokenProvider} from './context/CherryTokenContext';
-import {CherryLiquidityProvider} from './context/CherryLiquidityContext';
 
 ReactDOM.render(<App/>, document.querySelector('#root'));
 
