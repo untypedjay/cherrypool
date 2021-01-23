@@ -31,4 +31,4 @@ export function CherryTokenProvider({ children }: Props) {
       </CherryTokenUpdateContext.Provider>
     </CherryTokenContext.Provider>
   );
-};
+}
