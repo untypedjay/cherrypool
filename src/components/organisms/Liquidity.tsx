@@ -24,7 +24,7 @@ function Liquidity() {
         const web3 = (window as any).web3;
 
         if (account) {
-          account.cherryPool.methods.getLiquidityTokenBalances(account.address).call().then((value: number) => {
+          account.cherryPool.methods.getLiquidityTokenBalance(account.address).call().then((value: number) => {
 
             setLiquidityTokenBalance(web3.utils.fromWei(value.toString()));
           });
@@ -37,7 +37,7 @@ function Liquidity() {
             setTotalCherryTokenPool(parseFloat(web3.utils.fromWei(value.toString())));
           });
 
-          account.cherryPool.methods.getCollectedFees().call().then((value: number) => {
+          account.cherryPool.methods.getAvailableRewards().call().then((value: number) => {
             setPooledRewards(parseFloat(web3.utils.fromWei(value.toString())));
           });
         }

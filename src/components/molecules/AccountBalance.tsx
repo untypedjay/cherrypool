@@ -31,7 +31,7 @@ function AccountBalance() {
             setCherryTokenBalance(web3.utils.fromWei(ctnBalance.toString()));
           });
 
-          account.cherryPool.methods.getLiquidityTokenBalances(account.address).call().then((value: number) => {
+          account.cherryPool.methods.getLiquidityTokenBalance(account.address).call().then((value: number) => {
             setLiquidityTokenBalance(web3.utils.fromWei(value.toString()));
           });
 
