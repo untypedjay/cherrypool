@@ -19,6 +19,6 @@ function Main({ section }: Props) {
       { section === '/faucet' && <Faucet/> }
     </main>
   );
-};
+}
 
 export default Main;
