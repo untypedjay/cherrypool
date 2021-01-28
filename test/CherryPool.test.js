@@ -47,7 +47,11 @@ contract('CherryPool', ([owner, user]) => {
       assert.equal(liquidityTokenBalance, 0);
 
       await cherryToken.approve(cherryPool.address, tokens('1000'), { from: user });
-      await cherryPool.addLiquidity.sendTransaction(tokens('1000'), Math.sqrt(tokens('1'), tokens('1000')), { from: user, gas: 4000000, value: tokens('1')});
+      await cherryPool.addLiquidity.sendTransaction(
+        tokens('1000'),
+        Math.sqrt(tokens('1'), tokens('1000')),
+        { from: user, gas: 4000000, value: tokens('1')}
+      );
 
       liquidityTokenBalance = await cherryPool.getLiquidityTokenBalance(user);
       assert.equal(liquidityTokenBalance, Math.sqrt(tokens('1'), tokens('1000')));
@@ -59,7 +63,12 @@ contract('CherryPool', ([owner, user]) => {
 
   describe('CherryPool removeLiquidity', async () => {
     it('rejects removal due to invalid reward', async () => {
-      await cherryPool.removeLiquidity(tokens('1'), tokens('1000'), tokens('1'), { from: user }).should.be.rejected;
+      await cherryPool.removeLiquidity(
+        tokens('1'),
+        tokens('1000'),
+        tokens('1'),
+        { from: user }
+      ).should.be.rejected;
     });
 
     it('removes liquidity', async () => {
@@ -72,10 +81,18 @@ contract('CherryPool', ([owner, user]) => {
       const totalEthPool = await cherryPool.getEthBalance();
       const totalCtnPool = await cherryPool.getCtnBalance();
 
-      await cherryPool.removeLiquidity(tokens('0.5'), tokens('500'), Math.round(Math.sqrt(tokens('0.5'), tokens('500'))), Math.round(Math.sqrt(totalEthPool, totalCtnPool)), { from: user });
+      await cherryPool.removeLiquidity(
+        tokens('0.5'),
+        tokens('500'),
+        Math.round(Math.sqrt(tokens('0.5'), tokens('500'))),
+        Math.round(Math.sqrt(totalEthPool, totalCtnPool)),
+        { from: user }
+      );
 
       liquidityTokenBalance = await cherryPool.getLiquidityTokenBalance(user);
-      const expectedLiquidityTokenBalance = Math.sqrt(tokens('1'), tokens('1000')) - Math.round(Math.sqrt(tokens('0.5'), tokens('500')));
+      const expectedLiquidityTokenBalance = Math.sqrt(tokens('1'), tokens('1000'))
+        - Math.round(Math.sqrt(tokens('0.5'), tokens('500'))
+      );
       assert.equal(liquidityTokenBalance.toString(), expectedLiquidityTokenBalance);
 
       ctnBalance = await cherryToken.balanceOf(user);
@@ -92,7 +109,11 @@ contract('CherryPool', ([owner, user]) => {
       const ethPool = await cherryPool.getEthBalance();
       const ctnOutput = Math.round((web3.utils.fromWei(ctnPool) / web3.utils.fromWei(ethPool)));
 
-      await cherryPool.swapEthToCtn.sendTransaction(tokens(ctnOutput.toString()), tokens('10'), { from: user, gas: 4000000, value: tokens('1')});
+      await cherryPool.swapEthToCtn.sendTransaction(
+        tokens(ctnOutput.toString()),
+        tokens('10'),
+        { from: user, gas: 4000000, value: tokens('1')}
+      );
 
       ctnBalance = await cherryToken.balanceOf(user);
       assert.equal(ctnBalance.toString(), tokens('20500'));

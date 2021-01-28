@@ -22,7 +22,7 @@ function AccountBalance() {
       loadBlockchainData().then((account) => {
         const web3 = (window as any).web3;
 
-        if (account) {
+        if (account?.address) {
           web3.eth.getBalance(account.address, (err: any, balance: any) => {
             setEtherBalance(web3.utils.fromWei(balance, 'ether'));
           });

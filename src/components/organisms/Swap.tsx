@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLoggedIn } from '../../context/LoggedInContext';
 import Section from '../templates/Section';
 import ExchangeCard from './ExchangeCard';
@@ -8,6 +8,34 @@ import CtnLogo from '../../images/logo-small.png';
 
 function Swap() {
   const isLoggedIn = useLoggedIn();
+  const [totalEtherPool, setTotalEtherPool] = useState(0);
+  const [totalCherryTokenPool, setTotalCherryTokenPool] = useState(0);
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      loadBlockchainData().then((account) => {
+        const web3 = (window as any).web3;
+
+        if (account) {
+          account.cherryPool.methods.getEthBalance().call().then((value: number) => {
+            setTotalEtherPool(parseFloat(web3.utils.fromWei(value.toString())));
+          });
+
+          account.cherryPool.methods.getCtnBalance().call().then((value: number) => {
+            setTotalCherryTokenPool(parseFloat(web3.utils.fromWei(value.toString())));
+          });
+        }
+      });
+    }
+  }, [isLoggedIn]);
+
+  const calculateFees = (ctnAmount: number) => {
+    return ctnAmount * 0.01;
+  }
+
+  const calculateAssetPair = (pool1: number, pool2: number, assetAmount2: number) => {
+    return (pool1 / pool2) * assetAmount2;
+  }
 
   const swapEthToCtn = (ethAmount: number) => {
     if (ethAmount === 0) {
@@ -19,12 +47,20 @@ function Swap() {
       loadBlockchainData().then((account) => {
         const web3 = (window as any).web3;
 
+        const toWei = (amountInTokens: number) => {
+          return web3.utils.toWei(amountInTokens.toString());
+        }
+
         if (account) {
-          account.cherryPool.methods.swapEthToCtn()
-            .send({ from: account.address, value: web3.utils.toWei(ethAmount.toString()) }).then((response: any) => {
-              const decoded = web3.utils.hexToNumberString(response.events[0].raw.data);
-              alert(`Changed ${ethAmount} ETH to ${web3.utils.fromWei(decoded)} CTN.`);
-          });
+          const ctnAmount = calculateAssetPair(totalCherryTokenPool, totalEtherPool, ethAmount);
+          const fees = calculateFees(ctnAmount);
+          const ctnOutput = ctnAmount - fees;
+
+          account.cherryPool.methods.swapEthToCtn(toWei(ctnOutput), toWei(fees))
+            .send({ from: account.address, value: toWei(ethAmount) }).then(() => {
+              alert(`Changed ${ethAmount} ETH to ${ctnOutput} CTN.`);
+            }
+          );
         }
       });
     }
@@ -40,14 +76,24 @@ function Swap() {
       loadBlockchainData().then((account) => {
         const web3 = (window as any).web3;
 
-        if (account) {
-          account.cherryToken.methods.approve(account.cherryPool._address, web3.utils.toWei(ctnAmount.toString())).send({ from: account.address }).then();
+        const toWei = (amountInTokens: number) => {
+          return web3.utils.toWei(amountInTokens.toString());
+        }
 
-          account.cherryPool.methods.swapCtnToEth(web3.utils.toWei(ctnAmount.toString()))
-            .send({ from: account.address }).then((response: any) => {
-            const decoded = web3.utils.hexToNumberString(response.events[0].raw.data);
-            alert(`Changed ${ctnAmount} CTN to ${web3.utils.fromWei(decoded) / 1000} ETH.`);
-          });
+        if (account) {
+          const fees = calculateFees(ctnAmount);
+          const ethOutput = calculateAssetPair(totalEtherPool, totalCherryTokenPool, ctnAmount - fees);
+
+          account.cherryToken.methods.approve(
+            account.cherryPool._address,
+            toWei(ctnAmount)).send({ from: account.address }
+          ).then();
+
+          account.cherryPool.methods.swapCtnToEth(toWei(ctnAmount), toWei(ethOutput), toWei(fees))
+            .send({ from: account.address }).then(() => {
+              alert(`Changed ${ctnAmount} CTN to ${ethOutput} ETH.`);
+            }
+          );
         }
       });
     }
