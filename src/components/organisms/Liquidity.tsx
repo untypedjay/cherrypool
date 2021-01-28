@@ -123,7 +123,7 @@ function Liquidity() {
             abbreviation2="CTN"
             apy={pooledRewards}
             poolValue1={round(pooledEthBalance, 8)}
-            poolValue2={round(pooledCtnBalance - pooledRewards, 8)}
+            poolValue2={round(pooledCtnBalance, 8)}
             poolShare={ (liquidityTokenBalance / Math.sqrt(totalEtherPool * totalCherryTokenPool)) }
           />
         </Section>
@@ -137,10 +137,18 @@ function Liquidity() {
       </div>
 
       <Section title="Add Liquidity">
-        <AddOrRemoveLiquidity action={addLiquidity} buttonText="Supply"/>
+        <AddOrRemoveLiquidity
+          action={addLiquidity}
+          buttonText="Supply"
+          exchangeRate={totalCherryTokenPool / totalEtherPool}
+        />
       </Section>
       <Section title="Remove Liquidity">
-        <AddOrRemoveLiquidity action={removeLiquidity} buttonText="Confirm"/>
+        <AddOrRemoveLiquidity
+          action={removeLiquidity}
+          buttonText="Confirm"
+          exchangeRate={totalCherryTokenPool / totalEtherPool}
+        />
       </Section>
     </div>
   );
