@@ -21,9 +21,9 @@ contract('CherryPool', ([owner, user]) => {
   });
 
   describe('CherryPool deployment', async () => {
-    it('has no collected fees yet', async () => {
-      const collectedFees = await cherryPool.getCollectedFees();
-      assert.equal(web3.utils.fromWei(collectedFees), 0);
+    it('has no rewards yet', async () => {
+      const rewards = await cherryPool.getAvailableRewards();
+      assert.equal(web3.utils.fromWei(rewards), 0);
     });
 
     it('has initial Ether pool', async () => {
@@ -43,13 +43,13 @@ contract('CherryPool', ([owner, user]) => {
       let ctnBalance = await cherryToken.balanceOf(user);
       assert.equal(ctnBalance, tokens('20000'));
 
-      let liquidityTokenBalance = await cherryPool.getLiquidityTokenBalances(user);
+      let liquidityTokenBalance = await cherryPool.getLiquidityTokenBalance(user);
       assert.equal(liquidityTokenBalance, 0);
 
       await cherryToken.approve(cherryPool.address, tokens('1000'), { from: user });
       await cherryPool.addLiquidity.sendTransaction(tokens('1000'), Math.sqrt(tokens('1'), tokens('1000')), { from: user, gas: 4000000, value: tokens('1')});
 
-      liquidityTokenBalance = await cherryPool.getLiquidityTokenBalances(user);
+      liquidityTokenBalance = await cherryPool.getLiquidityTokenBalance(user);
       assert.equal(liquidityTokenBalance, Math.sqrt(tokens('1'), tokens('1000')));
 
       ctnBalance = await cherryToken.balanceOf(user);
@@ -66,12 +66,15 @@ contract('CherryPool', ([owner, user]) => {
       let ctnBalance = await cherryToken.balanceOf(user);
       assert.equal(ctnBalance, tokens('19000'));
 
-      let liquidityTokenBalance = await cherryPool.getLiquidityTokenBalances(user);
+      let liquidityTokenBalance = await cherryPool.getLiquidityTokenBalance(user);
       assert.equal(liquidityTokenBalance, Math.sqrt(tokens('1'), tokens('1000')));
 
-      await cherryPool.removeLiquidity(tokens('0.5'), tokens('500'), Math.round(Math.sqrt(tokens('0.5'), tokens('500'))), 0, { from: user });
+      const totalEthPool = await cherryPool.getEthBalance();
+      const totalCtnPool = await cherryPool.getCtnBalance();
 
-      liquidityTokenBalance = await cherryPool.getLiquidityTokenBalances(user);
+      await cherryPool.removeLiquidity(tokens('0.5'), tokens('500'), Math.round(Math.sqrt(tokens('0.5'), tokens('500'))), Math.round(Math.sqrt(totalEthPool, totalCtnPool)), { from: user });
+
+      liquidityTokenBalance = await cherryPool.getLiquidityTokenBalance(user);
       const expectedLiquidityTokenBalance = Math.sqrt(tokens('1'), tokens('1000')) - Math.round(Math.sqrt(tokens('0.5'), tokens('500')));
       assert.equal(liquidityTokenBalance.toString(), expectedLiquidityTokenBalance);
 
@@ -85,23 +88,31 @@ contract('CherryPool', ([owner, user]) => {
       let ctnBalance = await cherryToken.balanceOf(user);
       assert.equal(ctnBalance.toString(), tokens('19500'));
 
-      await cherryPool.swapEthToCtn.sendTransaction({ from: user, gas: 4000000, value: tokens('1')});
+      const ctnPool = await cherryPool.getCtnBalance();
+      const ethPool = await cherryPool.getEthBalance();
+      const ctnOutput = Math.round((web3.utils.fromWei(ctnPool) / web3.utils.fromWei(ethPool)));
+
+      await cherryPool.swapEthToCtn.sendTransaction(tokens(ctnOutput.toString()), tokens('10'), { from: user, gas: 4000000, value: tokens('1')});
 
       ctnBalance = await cherryToken.balanceOf(user);
-      assert.equal(ctnBalance.toString(), tokens('20400'));
+      assert.equal(ctnBalance.toString(), tokens('20500'));
     });
   });
 
   describe('CherryPool swapCtnToEth', async () => {
     it('exchanges CTN to ETH', async () => {
       let ctnBalance = await cherryToken.balanceOf(user);
-      assert.equal(ctnBalance, tokens('20400'));
+      assert.equal(ctnBalance.toString(), tokens('20500'));
 
-      await cherryToken.approve(cherryPool.address, tokens('1000'), { from: user });
-      await cherryPool.swapCtnToEth(tokens('1000'), { from: user });
+      const ethPool = await cherryPool.getEthBalance();
+      const ctnPool = await cherryPool.getCtnBalance();
+      const ethOutput = Math.round((web3.utils.fromWei(ethPool) / web3.utils.fromWei(ctnPool)) * 50);
+
+      await cherryToken.approve(cherryPool.address, tokens('50'), { from: user });
+      await cherryPool.swapCtnToEth(tokens('50'), tokens(ethOutput.toString()), tokens('10'), { from: user });
 
       ctnBalance = await cherryToken.balanceOf(user);
-      assert.equal(ctnBalance, tokens('19400'));
+      assert.equal(ctnBalance.toString(), tokens('20450'));
     });
   });
 });
