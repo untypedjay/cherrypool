@@ -7,16 +7,13 @@ interface Props {
   logo2: string,
   abbreviation1: string,
   abbreviation2: string,
-  apy: number,
+  totalRewards: number,
   poolValue1: number,
   poolValue2: number,
   poolShare: number
 }
 
-function LiquidityCard({ logo1, logo2, abbreviation1, abbreviation2, apy, poolValue1, poolValue2, poolShare }: Props) {
-  const realPoolSharePercentage = (poolShare * 100) > 100 ? 100 : (poolShare * 100) || 0;
-  const possibleReward = realPoolSharePercentage / apy * 100
-
+function LiquidityCard({ logo1, logo2, abbreviation1, abbreviation2, totalRewards, poolValue1, poolValue2, poolShare }: Props) {
   return (
     <div className="liquidity-card">
       <div className="liquidity-card__pool">
@@ -24,10 +21,18 @@ function LiquidityCard({ logo1, logo2, abbreviation1, abbreviation2, apy, poolVa
         <img className="liquidity-card__image" src={logo2} alt="Asset Icon"/>
         <p>{ abbreviation1 }-{ abbreviation2 }</p>
       </div>
-      {/*<p className="liquidity-card__detail"><span>Possible Reward</span><span>{ (possibleReward === NaN || possibleReward === Infinity) ? 0 : possibleReward }</span></p>*/}
-      <div className="liquidity-card__detail"><span>Pooled { abbreviation1 }</span><span>{ poolValue1 || '0' }</span></div>
-      <div className="liquidity-card__detail"><span>Pooled { abbreviation2 }</span><span>{ poolValue2 || '0' }</span></div>
-      <div className="liquidity-card__detail"><span>Pool share</span><span>{ realPoolSharePercentage }%</span></div>
+      <p className="liquidity-card__detail">
+        <span>Earned Reward (in CTN)</span><span>{ round(totalRewards * poolShare, 8) }</span>
+      </p>
+      <div className="liquidity-card__detail">
+        <span>Pooled { abbreviation1 }</span><span>{ poolValue1 || '0' }</span>
+      </div>
+      <div className="liquidity-card__detail">
+        <span>Pooled { abbreviation2 }</span><span>{ poolValue2 || '0' }</span>
+      </div>
+      <div className="liquidity-card__detail">
+        <span>Pool share</span><span>{ round(poolShare * 100, 2) }%</span>
+      </div>
     </div>
   );
 }

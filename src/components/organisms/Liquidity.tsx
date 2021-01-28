@@ -4,7 +4,7 @@ import Section from '../templates/Section';
 import AddOrRemoveLiquidity from '../molecules/AddOrRemoveLiquidity';
 import LiquidityCard from '../molecules/LiquidityCard';
 import { loadBlockchainData } from '../../helper/web3Helper';
-import { round } from '../../helper/converter';
+import {calculateAssetPair, round} from '../../helper/converter';
 import EthIcon from '../../images/icn-eth.png';
 import CtnIcon from '../../images/logo-small.png';
 import './Liquidity.css';
@@ -25,7 +25,6 @@ function Liquidity() {
 
         if (account) {
           account.cherryPool.methods.getLiquidityTokenBalance(account.address).call().then((value: number) => {
-
             setLiquidityTokenBalance(web3.utils.fromWei(value.toString()));
           });
 
@@ -62,15 +61,21 @@ function Liquidity() {
 
         const web3 = (window as any).web3;
 
-        const ctnToSupply = ethToSupply * 1000;
+        const toWei = (amountInTokens: number) => {
+          return web3.utils.toWei(amountInTokens.toString());
+        }
+
+        const ctnToSupply = calculateAssetPair(totalCherryTokenPool, totalEtherPool, ethToSupply);
         const liquidityTokensToAdd = Math.sqrt(ethToSupply * ctnToSupply);
 
         if (account) {
+          account.cherryToken.methods.approve(
+            account.cherryPool._address,
+            toWei(ctnToSupply)
+          ).send({ from: account.address }).then();
 
-          account.cherryToken.methods.approve(account.cherryPool._address, web3.utils.toWei(ctnToSupply.toString())).send({ from: account.address }).then();
-
-          account.cherryPool.methods.addLiquidity(web3.utils.toWei(ctnToSupply.toString()), web3.utils.toWei(liquidityTokensToAdd.toString()))
-            .send({ from: account.address, value: web3.utils.toWei(ethToSupply.toString()) })
+          account.cherryPool.methods.addLiquidity(toWei(ctnToSupply), toWei(liquidityTokensToAdd))
+            .send({ from: account.address, value: toWei(ethToSupply) })
             .then();
         }
       });
@@ -88,25 +93,26 @@ function Liquidity() {
       return;
     }
 
-    const ctnToRemove = ethToRemove * 1000;
+    const ctnToRemove = calculateAssetPair(totalCherryTokenPool, totalEtherPool, ethToRemove);
     const liquidityTokensToRemove = Math.sqrt(ethToRemove * ctnToRemove);
-
-    const poolPercentage = liquidityTokensToRemove / Math.sqrt(totalEtherPool * totalCherryTokenPool);
-    const rewardsReceived = pooledRewards * poolPercentage;
 
     if (isLoggedIn) {
       loadBlockchainData().then((account) => {
 
         const web3 = (window as any).web3;
 
+        const toWei = (amountInTokens: number) => {
+          return web3.utils.toWei(amountInTokens.toString());
+        }
+
         if (account) {
 
           account.cherryPool.methods.removeLiquidity(
-            web3.utils.toWei(ethToRemove.toString()),
-            web3.utils.toWei(ctnToRemove.toString()),
-            web3.utils.toWei(liquidityTokensToRemove.toString()),
-            web3.utils.toWei(rewardsReceived.toString()))
-            .send({ from: account.address }).then();
+            toWei(ethToRemove),
+            toWei(ctnToRemove),
+            toWei(liquidityTokensToRemove),
+            toWei(Math.sqrt(totalEtherPool * totalCherryTokenPool))
+          ).send({ from: account.address }).then();
         }
       });
     }
@@ -121,7 +127,7 @@ function Liquidity() {
             logo2={CtnIcon}
             abbreviation1="ETH"
             abbreviation2="CTN"
-            apy={pooledRewards}
+            totalRewards={pooledRewards}
             poolValue1={round(pooledEthBalance, 8)}
             poolValue2={round(pooledCtnBalance, 8)}
             poolShare={ (liquidityTokenBalance / Math.sqrt(totalEtherPool * totalCherryTokenPool)) }

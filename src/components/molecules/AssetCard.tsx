@@ -1,5 +1,6 @@
 import React from 'react';
 import './AssetCard.css';
+import {round} from '../../helper/converter';
 
 interface Props {
   icon?: string,
@@ -21,7 +22,7 @@ function AssetCard({ icon, abbreviation, name, balance }: Props) {
           <p className="asset-card__name">{ name }</p>
         </div>
       </div>
-      <p><span className="asset-card__text--bold">{ balance }</span> <span>{ abbreviation }</span></p>
+      <p><span className="asset-card__text--bold">{ round(balance, 8) }</span> <span>{ abbreviation }</span></p>
     </div>
   );
 }

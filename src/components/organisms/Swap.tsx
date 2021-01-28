@@ -3,6 +3,7 @@ import { useLoggedIn } from '../../context/LoggedInContext';
 import Section from '../templates/Section';
 import ExchangeCard from './ExchangeCard';
 import { loadBlockchainData } from '../../helper/web3Helper';
+import { calculateAssetPair } from '../../helper/converter';
 import EthLogo from '../../images/icn-eth.png';
 import CtnLogo from '../../images/logo-small.png';
 
@@ -31,10 +32,6 @@ function Swap() {
 
   const calculateFees = (ctnAmount: number) => {
     return ctnAmount * 0.01;
-  }
-
-  const calculateAssetPair = (pool1: number, pool2: number, assetAmount2: number) => {
-    return (pool1 / pool2) * assetAmount2;
   }
 
   const swapEthToCtn = (ethAmount: number) => {
