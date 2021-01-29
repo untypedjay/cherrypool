@@ -26,7 +26,7 @@ function LandingPage() {
       </div>
 
       <div className="landing-page__services" ref={serviceRef}>
-        <Card heading="Liquidity Pool" button={<PrimaryButton onClick={() => history.push('/lending')}>Borrow</PrimaryButton>}>
+        <Card heading="Liquidity Pool" button={<PrimaryButton onClick={() => history.push('/liquidity')}>Borrow</PrimaryButton>}>
           <p className="landing-page__paragraph--card">Provide liquidity and earn passive income.</p>
         </Card>
         <Card heading="DEX" button={<PrimaryButton onClick={() => history.push('/swap')}>Exchange</PrimaryButton>}>
