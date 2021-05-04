@@ -1,5 +1,6 @@
-import React, { ReactNode } from 'react';
+import React, { ReactNode, useRef } from 'react';
 import { FaTimes } from 'react-icons/fa';
+import useClickOutside from '../../hooks/useClickOutside';
 import './Modal.css';
 
 interface Props {
@@ -7,15 +8,18 @@ interface Props {
   children: ReactNode;
 };
 
-function Modal({ close, children }: Props) {
+export default function Modal({ close, children }: Props) {
+  const clickRef = useRef<HTMLDivElement>(null);
+  useClickOutside(clickRef, close);
+
   return (
     <div className="modal">
-      <div className="modal__card">
-        <button className="modal__close-button" onClick={close}><FaTimes size="30px"/></button>
+      <div className="modal__card" ref={clickRef}>
+        <button className="modal__close-button" onClick={close}>
+          <FaTimes size="30px"/>
+        </button>
         { children }
       </div>
     </div>
   );
 };
-
-export default Modal;
