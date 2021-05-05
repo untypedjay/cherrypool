@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useLoggedInUpdate } from '../../context/LoggedInContext';
-import Modal from './Modal';
+import Modal from '../Modal/Modal';
 import WalletButton from '../molecules/WalletButton';
 import coinbaseLogo from '../../images/icn-coinbase-wallet.svg';
 import ledgerLogo from '../../images/icn-ledger.svg';
