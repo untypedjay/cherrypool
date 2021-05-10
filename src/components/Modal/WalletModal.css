@@ -14,7 +14,7 @@
   background-position: center;
   box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.07);
   border-radius: 100%;
-  background-image: url("../../images/logo-small.png");
+  background-image: url("src/images/logo-small.png");
   background-repeat: no-repeat;
 }
 

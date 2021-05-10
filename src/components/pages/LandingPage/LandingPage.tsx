@@ -1,16 +1,16 @@
 import React, { useRef } from 'react';
 import { useHistory } from 'react-router-dom';
-import Navbar from '../organisms/Navbar';
-import PrimaryButton from '../atoms/PrimaryButton';
-import Card from '../organisms/Card';
-import Footer from '../organisms/Footer';
+import Navbar from '../../Navbar/Navbar';
+import PrimaryButton from '../../Button/PrimaryButton';
+import Card from '../../Card/Card';
+import Footer from '../../Footer/Footer';
 import './LandingPage.css';
 
-function LandingPage() {
+export default function LandingPage() {
   const serviceRef = useRef<any>(null);
   const history = useHistory();
 
-    return (
+  return (
     <div className="landing-page">
       <Navbar/>
       <div className="landing-page__hero">
@@ -41,5 +41,3 @@ function LandingPage() {
     </div>
   );
 }
-
-export default LandingPage;

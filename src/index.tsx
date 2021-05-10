@@ -5,15 +5,15 @@ import { Web3Provider } from './context/Web3Context';
 import {CherryTokenProvider} from './context/CherryTokenContext';
 import {CherryLiquidityProvider} from './context/CherryLiquidityContext';
 import { AccountProvider } from './context/LoggedInContext';
-import LandingPage from './components/pages/LandingPage';
-import Home from './components/pages/Home';
-import TermsOfUse from './components/pages/TermsOfUse';
-import NotFound from './components/pages/NotFound';
+import LandingPage from './components/pages/LandingPage/LandingPage';
+import Home from './components/pages/Home/Home';
+import TermsOfUse from './components/pages/TermsOfUse/TermsOfUse';
+import NotFound from './components/pages/NotFound/NotFound';
 import './index.css';
 
 ReactDOM.render(<App/>, document.querySelector('#root'));
 
-function App() {
+export default function App() {
   return (
     <Web3Provider>
       <AccountProvider>
@@ -44,5 +44,3 @@ function App() {
     </Web3Provider>
   );
 }
-
-export default App;

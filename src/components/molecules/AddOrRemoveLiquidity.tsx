@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './AddOrRemoveLiquidity.css';
-import PrimaryButton from '../atoms/PrimaryButton';
+import PrimaryButton from '../Button/PrimaryButton';
 import EthLogo from '../../images/icn-eth.png';
 import CtnLogo from '../../images/logo-small.png';
 

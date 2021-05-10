@@ -1,9 +1,9 @@
 import React from 'react';
+import Navbar from '../../Navbar/Navbar';
+import Footer from '../../Footer/Footer';
 import './TermsOfUse.css';
-import Navbar from '../organisms/Navbar';
-import Footer from '../organisms/Footer';
 
-function TermsOfUse() {
+export default function TermsOfUse() {
   return (
     <div className="terms-of-use">
       <Navbar/>
@@ -35,5 +35,3 @@ function TermsOfUse() {
     </div>
   );
 }
-
-export default TermsOfUse;

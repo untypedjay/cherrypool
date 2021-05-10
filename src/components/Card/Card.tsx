@@ -7,7 +7,7 @@ interface Props {
   button: ReactNode;
 };
 
-function Card({ heading, children, button }: Props) {
+export default function Card({ heading, children, button }: Props) {
   return (
     <div className="card">
       <h3 className="card__heading">{ heading }</h3>
@@ -18,5 +18,3 @@ function Card({ heading, children, button }: Props) {
     </div>
   );
 };
-
-export default Card;

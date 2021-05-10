@@ -1,5 +1,5 @@
 import React from 'react';
-import PrimaryButton from '../atoms/PrimaryButton';
+import PrimaryButton from '../Button/PrimaryButton';
 import './NoWallet.css';
 
 interface Props {

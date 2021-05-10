@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import PrimaryButton from '../atoms/PrimaryButton';
+import PrimaryButton from '../Button/PrimaryButton';
 import './ExchangeCard.css';
 
 interface Props {
@@ -8,7 +8,7 @@ interface Props {
   buttonText: string
 }
 
-function ExchangeCard({ logo, action, buttonText }: Props) {
+export default function ExchangeCard({ logo, action, buttonText }: Props) {
   const [inputValue, setInputValue] = useState(0);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -24,5 +24,3 @@ function ExchangeCard({ logo, action, buttonText }: Props) {
     </div>
   );
 }
-
-export default ExchangeCard;

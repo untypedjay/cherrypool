@@ -1,5 +1,5 @@
 import React from 'react';
-import Section from '../templates/Section';
+import Section from '../Section/Section';
 import InputCard from '../molecules/InputCard';
 import {useLoggedIn} from '../../context/LoggedInContext';
 import {loadBlockchainData} from '../../helper/web3Helper';

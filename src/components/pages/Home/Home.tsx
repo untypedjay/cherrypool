@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { useLoggedIn } from '../../context/LoggedInContext';
-import Main from '../organisms/Main';
-import WalletModal from '../organisms/WalletModal';
-import Menu from '../organisms/Menu';
-import NoWallet from '../molecules/NoWallet';
+import { useLoggedIn } from '../../../context/LoggedInContext';
+import Main from '../../organisms/Main';
+import WalletModal from '../../Modal/WalletModal';
+import Menu from '../../organisms/Menu';
+import NoWallet from '../../molecules/NoWallet';
 import './Home.css';
 
-function Home() {
-  const [walletModal, setWalletModal] = useState(false);
+export default function Home() {
   const location = useLocation();
   const isLoggedIn = useLoggedIn();
+  const [walletModal, setWalletModal] = useState(false);
 
   return (
     <div className="home">
@@ -23,5 +23,3 @@ function Home() {
     </div>
   );
 }
-
-export default Home;

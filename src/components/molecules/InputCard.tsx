@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './InputCard.css';
-import PrimaryButton from '../atoms/PrimaryButton';
+import PrimaryButton from '../Button/PrimaryButton';
 
 interface Props {
   action: (inputValue: number) => any

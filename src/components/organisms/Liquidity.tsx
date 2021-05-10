@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useLoggedIn } from '../../context/LoggedInContext';
-import Section from '../templates/Section';
+import Section from '../Section/Section';
 import AddOrRemoveLiquidity from '../molecules/AddOrRemoveLiquidity';
 import LiquidityCard from '../molecules/LiquidityCard';
 import { loadBlockchainData } from '../../helper/web3Helper';

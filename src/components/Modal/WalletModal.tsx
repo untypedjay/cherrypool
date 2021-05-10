@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useLoggedInUpdate } from '../../context/LoggedInContext';
-import Modal from '../Modal/Modal';
-import WalletButton from '../molecules/WalletButton';
+import Modal from './Modal';
+import WalletButton from '../Button/WalletButton';
 import coinbaseLogo from '../../images/icn-coinbase-wallet.svg';
 import ledgerLogo from '../../images/icn-ledger.svg';
 import metamaskLogo from '../../images/icn-metamask.svg';
@@ -13,7 +13,7 @@ interface Props {
   closeModal: () => void;
 };
 
-function WalletModal({ closeModal }: Props) {
+export default function WalletModal({ closeModal }: Props) {
   const setIsLoggedIn = useLoggedInUpdate();
   const [isLoading, setIsLoading] = useState(false);
 
@@ -52,5 +52,3 @@ function WalletModal({ closeModal }: Props) {
     </Modal>
   );
 };
-
-export default WalletModal;

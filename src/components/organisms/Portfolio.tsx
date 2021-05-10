@@ -1,5 +1,5 @@
 import React from 'react';
-import Section from '../templates/Section';
+import Section from '../Section/Section';
 import AccountAddress from '../molecules/AccountAddress';
 import AccountBalance from '../molecules/AccountBalance';
 import NetworkCard from '../molecules/NetworkCard';
