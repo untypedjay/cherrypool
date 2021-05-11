@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { useLoggedIn } from '../../context/LoggedInContext';
-import Section from '../Section/Section';
-import AddOrRemoveLiquidity from '../molecules/AddOrRemoveLiquidity';
-import LiquidityCard from '../molecules/LiquidityCard';
-import { loadBlockchainData } from '../../helper/web3Helper';
-import {calculateAssetPair, round} from '../../helper/converter';
-import EthIcon from '../../images/icn-eth.png';
-import CtnIcon from '../../images/logo-small.png';
+import { useLoggedIn } from '../context/LoggedInContext';
+import Section from './Section/Section';
+import AddOrRemoveLiquidity from './AddOrRemoveLiquidity';
+import LiquidityCard from './Card/LiquidityCard';
+import { loadBlockchainData } from '../helper/web3Helper';
+import {calculateAssetPair, round} from '../helper/converter';
+import EthIcon from '../images/icn-eth.png';
+import CtnIcon from '../images/logo-small.png';
 import './Liquidity.css';
 
 function Liquidity() {

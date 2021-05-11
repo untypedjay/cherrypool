@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useLoggedIn } from '../../../context/LoggedInContext';
-import Main from '../../organisms/Main';
+import Main from '../../Main';
 import WalletModal from '../../Modal/WalletModal';
-import Menu from '../../organisms/Menu';
-import NoWallet from '../../molecules/NoWallet';
+import Menu from '../../Menu';
+import NoWallet from '../../NoWallet';
 import './Home.css';
 
 export default function Home() {

@@ -1,9 +1,9 @@
 import React from 'react';
-import Section from '../Section/Section';
-import AccountAddress from '../molecules/AccountAddress';
-import AccountBalance from '../molecules/AccountBalance';
-import NetworkCard from '../molecules/NetworkCard';
-import MetamaskLogo from '../../images/icn-metamask.svg';
+import Section from './Section/Section';
+import AccountAddress from './AccountAddress';
+import AccountBalance from './AccountBalance';
+import NetworkCard from './Card/NetworkCard';
+import MetamaskLogo from '../images/icn-metamask.svg';
 
 function Portfolio() {
   return (

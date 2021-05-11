@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { useLoggedIn } from '../../context/LoggedInContext';
-import Section from '../Section/Section';
-import ExchangeCard from './ExchangeCard';
-import { loadBlockchainData } from '../../helper/web3Helper';
-import { calculateAssetPair } from '../../helper/converter';
-import EthLogo from '../../images/icn-eth.png';
-import CtnLogo from '../../images/logo-small.png';
+import { useLoggedIn } from '../context/LoggedInContext';
+import Section from './Section/Section';
+import ExchangeCard from './Card/ExchangeCard';
+import { loadBlockchainData } from '../helper/web3Helper';
+import { calculateAssetPair } from '../helper/converter';
+import EthLogo from '../images/icn-eth.png';
+import CtnLogo from '../images/logo-small.png';
 
 function Swap() {
   const isLoggedIn = useLoggedIn();

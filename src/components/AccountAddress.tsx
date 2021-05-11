@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { loadBlockchainData} from '../../helper/web3Helper';
-import { useLoggedIn, useLoggedInUpdate } from '../../context/LoggedInContext';
-import PrimaryButton from '../Button/PrimaryButton';
+import { loadBlockchainData} from '../helper/web3Helper';
+import { useLoggedIn, useLoggedInUpdate } from '../context/LoggedInContext';
+import PrimaryButton from './Button/PrimaryButton';
 import './AccountAddress.css';
 
 interface Account {

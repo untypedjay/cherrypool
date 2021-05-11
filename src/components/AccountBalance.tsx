@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { useLoggedIn } from '../../context/LoggedInContext';
-import AssetCard from './AssetCard';
-import { loadBlockchainData } from '../../helper/web3Helper';
-import { round } from '../../helper/converter';
+import { useLoggedIn } from '../context/LoggedInContext';
+import AssetCard from './Card/AssetCard';
+import { loadBlockchainData } from '../helper/web3Helper';
+import { round } from '../helper/converter';
 import './AccountBalance.css';
-import EthLogo from '../../images/icn-eth.png';
-import CtnLogo from '../../images/logo-small.png';
+import EthLogo from '../images/icn-eth.png';
+import CtnLogo from '../images/logo-small.png';
 
 function AccountBalance() {
   const isLoggedIn = useLoggedIn();

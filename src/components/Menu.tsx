@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { FaChartLine, FaExchangeAlt, FaChartPie, FaShower } from 'react-icons/fa';
-import MenuItem from '../molecules/MenuItem';
-import Logo from '../../images/logo.png';
+import MenuItem from './MenuItem';
+import Logo from '../images/logo.png';
 import './Menu.css';
 
 interface Props {
